@@ -1,0 +1,651 @@
+/* =========================================================
+   HELP SECTION
+========================================================= */
+
+.help-section {
+  position: relative;
+
+  width: 100%;
+  min-height: 760px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 80px 20px;
+
+  box-sizing: border-box;
+
+  background-image: url("/src/assets/cause-05-1024x575.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   BACKGROUND OVERLAY
+========================================================= */
+
+.help-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(20, 25, 20, 0.32);
+
+  z-index: 1;
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.help-container {
+  position: relative;
+  z-index: 2;
+
+  width: min(900px, 100%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.help-title {
+  position: relative;
+  z-index: 3;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(65px, 8vw, 108px);
+  line-height: 0.82;
+
+  font-weight: 800;
+  letter-spacing: 2px;
+
+  text-align: center;
+}
+
+/* =========================================================
+   DONATION BOX
+========================================================= */
+
+.help-box {
+  position: relative;
+
+  width: min(540px, 100%);
+
+  margin-top: 0;
+
+  background-color: rgba(255, 255, 255, 0.96);
+
+  padding: 42px 48px 60px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   FAINT BACKGROUND
+========================================================= */
+
+.help-box::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)),
+    url("/images/environment-pattern.jpg");
+
+  background-size: cover;
+  background-position: center;
+
+  opacity: 0.75;
+
+  z-index: 0;
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.help-box-content {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.help-eyebrow {
+  display: block;
+
+  margin-bottom: 15px;
+
+  color: #287f34;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+
+  text-align: center;
+}
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.help-box h3 {
+  margin: 0 0 25px;
+
+  color: #292929;
+
+  font-size: clamp(24px, 3vw, 29px);
+  line-height: 1.2;
+
+  font-weight: 800;
+
+  text-align: center;
+}
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.help-description {
+  margin: 0 auto 28px;
+
+  max-width: 470px;
+
+  color: #5f5f5f;
+
+  font-size: 16px;
+  line-height: 1.8;
+  font-weight: 400;
+
+  text-align: center;
+}
+
+/* =========================================================
+   AMOUNT INPUT
+========================================================= */
+
+.amount-input-wrapper {
+  width: 100%;
+  height: 90px;
+
+  display: flex;
+  align-items: stretch;
+
+  border: 1px solid #cccccc;
+
+  background: #ffffff;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   CURRENCY
+========================================================= */
+
+.currency-symbol {
+  width: 58px;
+  min-width: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #292929;
+  color: #ffffff;
+
+  font-size: 38px;
+  font-weight: 800;
+}
+
+/* =========================================================
+   AMOUNT INPUT
+========================================================= */
+
+.amount-input-wrapper input {
+  flex: 1;
+
+  min-width: 0;
+  width: 100%;
+
+  border: none;
+  outline: none;
+
+  padding: 0 15px;
+
+  background: #ffffff;
+
+  color: #606060;
+
+  font-family: inherit;
+
+  font-size: clamp(35px, 5vw, 58px);
+  line-height: 1;
+
+  font-weight: 800;
+
+  text-align: center;
+
+  box-sizing: border-box;
+}
+
+.amount-input-wrapper input:focus {
+  outline: none;
+}
+
+/* =========================================================
+   PRESET AMOUNTS
+========================================================= */
+
+.amount-options {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 6px;
+
+  margin-top: 18px;
+}
+
+.amount-options button {
+  min-width: 0;
+
+  min-height: 43px;
+
+  border: none;
+  outline: none;
+
+  padding: 0 10px;
+
+  background: #287f34;
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 0.3px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.amount-options button:hover {
+  background: #216a2b;
+
+  transform: translateY(-1px);
+}
+
+.amount-options .custom-amount {
+  grid-column: 1 / -1;
+
+  width: 100%;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   DONATE NOW
+========================================================= */
+
+.donate-now-btn {
+  width: 100%;
+
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 35px;
+
+  padding: 0 20px;
+
+  box-sizing: border-box;
+
+  border: none;
+  outline: none;
+
+  background: #287f34;
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  letter-spacing: 0.8px;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.donate-now-btn:hover {
+  background: #216a2b;
+
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   LARGE DESKTOP
+   1200px+
+========================================================= */
+
+@media (min-width: 1200px) {
+  .help-section {
+    padding-top: 90px;
+    padding-bottom: 90px;
+  }
+}
+
+/* =========================================================
+   TABLET
+   769px - 1000px
+========================================================= */
+
+@media (max-width: 1000px) and (min-width: 769px) {
+  .help-section {
+    min-height: 700px;
+
+    padding: 70px 25px;
+  }
+
+  .help-container {
+    width: min(850px, 100%);
+  }
+
+  .help-title {
+    font-size: clamp(70px, 10vw, 90px);
+  }
+
+  .help-box {
+    width: min(540px, 100%);
+
+    padding: 40px 38px 50px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   <= 768px
+========================================================= */
+
+@media (max-width: 768px) {
+  .help-section {
+    min-height: auto;
+
+    padding: 65px 18px 70px;
+
+    background-position: center center;
+  }
+
+  .help-container {
+    width: 100%;
+  }
+
+  .help-title {
+    font-size: clamp(58px, 15vw, 80px);
+
+    letter-spacing: 1px;
+  }
+
+  .help-box {
+    width: 100%;
+
+    padding: 35px 28px 45px;
+  }
+
+  .help-box h3 {
+    font-size: 26px;
+
+    margin-bottom: 20px;
+  }
+
+  .help-description {
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    margin-bottom: 25px;
+  }
+
+  .amount-input-wrapper {
+    height: 78px;
+  }
+
+  .currency-symbol {
+    width: 52px;
+    min-width: 52px;
+
+    font-size: 32px;
+  }
+
+  .amount-input-wrapper input {
+    font-size: clamp(32px, 9vw, 46px);
+
+    padding: 0 10px;
+  }
+
+  .amount-options {
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 6px;
+  }
+
+  .amount-options button {
+    min-height: 42px;
+
+    font-size: 12px;
+
+    padding: 0 7px;
+  }
+
+  .amount-options .custom-amount {
+    grid-column: 1 / -1;
+  }
+
+  .donate-now-btn {
+    min-height: 46px;
+
+    margin-top: 30px;
+
+    font-size: 13px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   <= 480px
+========================================================= */
+
+@media (max-width: 480px) {
+  .help-section {
+    padding: 55px 14px 60px;
+  }
+
+  .help-title {
+    font-size: 58px;
+
+    letter-spacing: 0.5px;
+  }
+
+  .help-box {
+    padding: 30px 20px 40px;
+  }
+
+  .help-eyebrow {
+    font-size: 10px;
+
+    letter-spacing: 1.2px;
+
+    margin-bottom: 12px;
+  }
+
+  .help-box h3 {
+    font-size: 23px;
+
+    margin-bottom: 17px;
+  }
+
+  .help-description {
+    font-size: 14px;
+
+    line-height: 1.65;
+  }
+
+  /*
+     Prevent the hard-coded <br> from
+     creating awkward spacing.
+  */
+
+  .help-description br {
+    display: none;
+  }
+
+  .amount-input-wrapper {
+    height: 70px;
+  }
+
+  .currency-symbol {
+    width: 47px;
+    min-width: 47px;
+
+    font-size: 29px;
+  }
+
+  .amount-input-wrapper input {
+    font-size: clamp(27px, 9vw, 40px);
+
+    padding: 0 6px;
+  }
+
+  .amount-options {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 6px;
+  }
+
+  .amount-options button {
+    min-height: 40px;
+
+    font-size: 11px;
+  }
+
+  /*
+     Custom amount gets the full row.
+  */
+
+  .amount-options .custom-amount {
+    grid-column: 1 / -1;
+  }
+
+  .donate-now-btn {
+    min-height: 44px;
+
+    margin-top: 27px;
+
+    font-size: 12px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL PHONES
+   <= 360px
+========================================================= */
+
+@media (max-width: 360px) {
+  .help-section {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .help-title {
+    font-size: 52px;
+  }
+
+  .help-box {
+    padding: 27px 15px 35px;
+  }
+
+  .help-box h3 {
+    font-size: 21px;
+  }
+
+  .help-description {
+    font-size: 13px;
+  }
+
+  .amount-input-wrapper {
+    height: 64px;
+  }
+
+  .currency-symbol {
+    width: 42px;
+    min-width: 42px;
+
+    font-size: 25px;
+  }
+
+  .amount-input-wrapper input {
+    font-size: 25px;
+  }
+
+  .amount-options button {
+    font-size: 10px;
+
+    min-height: 38px;
+  }
+
+  .donate-now-btn {
+    min-height: 42px;
+
+    font-size: 11px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .amount-options button,
+  .donate-now-btn {
+    transition: none;
+  }
+}

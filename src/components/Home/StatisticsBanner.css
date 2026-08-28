@@ -1,0 +1,331 @@
+/* =========================================
+   STATISTICS BANNER
+========================================= */
+
+.statistics-banner {
+  position: relative;
+
+  width: 100%;
+  min-height: 330px;
+
+  display: flex;
+  align-items: center;
+
+  background-image: url("https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=2000&q=85");
+
+  background-size: cover;
+  background-position: center;
+
+  overflow: hidden;
+}
+
+/* =========================================
+   OVERLAY
+========================================= */
+
+.statistics-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(24, 45, 25, 0.58);
+
+  z-index: 1;
+}
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.statistics-container {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(1400px, 90%);
+  min-height: 330px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  align-items: center;
+
+  gap: 0;
+}
+
+/* =========================================
+   STAT ITEM
+========================================= */
+
+.stat-item {
+  min-width: 0;
+
+  min-height: 150px;
+
+  padding: 20px 55px;
+
+  display: flex;
+  align-items: center;
+
+  position: relative;
+}
+
+/* Vertical separators */
+
+.stat-item + .stat-item {
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* =========================================
+   NUMBER
+========================================= */
+
+.stat-number {
+  flex-shrink: 0;
+
+  margin-right: 28px;
+
+  color: #ffffff;
+
+  font-size: clamp(50px, 5vw, 76px);
+
+  line-height: 0.9;
+
+  font-weight: 800;
+
+  letter-spacing: -3px;
+}
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+.stat-content h3 {
+  margin: 0 0 10px;
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  line-height: 1.25;
+
+  font-weight: 800;
+
+  letter-spacing: 1.2px;
+}
+
+.stat-content p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.85);
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  font-weight: 400;
+}
+
+/* =========================================
+   ACCENT
+========================================= */
+
+.stat-content::before {
+  content: "";
+
+  width: 28px;
+  height: 3px;
+
+  margin-bottom: 13px;
+
+  display: block;
+
+  background: #f3a719;
+}
+
+/* =========================================
+   LARGE TABLET
+========================================= */
+
+@media (max-width: 1200px) {
+  .statistics-container {
+    width: 94%;
+  }
+
+  .stat-item {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .stat-number {
+    margin-right: 20px;
+
+    font-size: 60px;
+  }
+
+  .stat-content h3 {
+    font-size: 13px;
+  }
+
+  .stat-content p {
+    font-size: 13px;
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .statistics-banner {
+    min-height: 430px;
+  }
+
+  .statistics-container {
+    min-height: 430px;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    row-gap: 0;
+  }
+
+  .stat-item {
+    min-height: 150px;
+
+    padding: 25px 30px;
+  }
+
+  /*
+    Remove separator from the
+    first item in each row.
+  */
+
+  .stat-item:nth-child(3) {
+    border-left: none;
+  }
+
+  .stat-number {
+    font-size: 58px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+  .statistics-banner {
+    min-height: auto;
+
+    padding: 20px 0;
+  }
+
+  .statistics-container {
+    width: 90%;
+
+    min-height: auto;
+
+    display: flex;
+
+    flex-direction: column;
+  }
+
+  .stat-item {
+    width: 100%;
+
+    min-height: 145px;
+
+    padding: 30px 10px;
+
+    justify-content: flex-start;
+  }
+
+  /*
+    Horizontal separators on mobile.
+  */
+
+  .stat-item + .stat-item {
+    border-left: none;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.28);
+  }
+
+  .stat-number {
+    min-width: 125px;
+
+    margin-right: 20px;
+
+    font-size: 55px;
+
+    letter-spacing: -2px;
+  }
+
+  .stat-content h3 {
+    font-size: 13px;
+
+    letter-spacing: 1px;
+  }
+
+  .stat-content p {
+    font-size: 13px;
+  }
+}
+
+/* =========================================
+   SMALL PHONES
+========================================= */
+
+@media (max-width: 400px) {
+  .statistics-container {
+    width: 92%;
+  }
+
+  .stat-item {
+    min-height: 130px;
+
+    padding: 25px 5px;
+  }
+
+  .stat-number {
+    min-width: 105px;
+
+    margin-right: 15px;
+
+    font-size: 43px;
+
+    letter-spacing: -1.5px;
+  }
+
+  .stat-content::before {
+    width: 22px;
+
+    margin-bottom: 10px;
+  }
+
+  .stat-content h3 {
+    font-size: 11px;
+  }
+
+  .stat-content p {
+    font-size: 11px;
+  }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .statistics-banner {
+    scroll-behavior: auto;
+  }
+}

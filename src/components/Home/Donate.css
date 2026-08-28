@@ -1,0 +1,1043 @@
+/* =========================================================
+   DONATE SECTION
+========================================================= */
+
+.donate-section {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 850px;
+
+  padding: 0 0 100px;
+
+  overflow: hidden;
+
+  background: #ffffff;
+}
+
+/* =========================================================
+   MAIN BACKGROUND
+========================================================= */
+
+.donate-bg {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 0;
+
+  background-image:
+    linear-gradient(rgba(30, 70, 30, 0.18), rgba(30, 70, 30, 0.18)),
+    var(--donate-background);
+
+  background-size: cover;
+
+  background-position: center;
+
+  background-repeat: no-repeat;
+}
+
+/* =========================================================
+   DONATE HEADING
+========================================================= */
+
+.donate-heading {
+  position: relative;
+
+  z-index: 3;
+
+  width: 100%;
+
+  height: 330px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: center;
+
+  padding-bottom: 0;
+}
+
+.donate-heading h2 {
+  position: relative;
+
+  z-index: 4;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(70px, 8vw, 120px);
+
+  line-height: 0.85;
+
+  font-weight: 900;
+
+  letter-spacing: -5px;
+
+  text-align: center;
+}
+
+/* =========================================================
+   MAIN WHITE PANEL
+========================================================= */
+
+.donate-panel {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(1400px, 92%);
+
+  min-height: 590px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: 2fr 1fr;
+
+  background: #ffffff;
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   FADED PANEL BACKGROUND
+========================================================= */
+
+.donate-panel::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 0;
+
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.91), rgba(255, 255, 255, 0.91)),
+    var(--donate-panel-background);
+
+  background-size: cover;
+
+  background-position: center;
+
+  background-repeat: no-repeat;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   PANEL CONTENT LAYERS
+========================================================= */
+
+.donate-form,
+.donate-information {
+  position: relative;
+
+  z-index: 1;
+}
+
+/* =========================================================
+   LEFT FORM
+========================================================= */
+
+.donate-form {
+  padding: 60px 60px 45px;
+}
+
+/* =========================================================
+   TOP SLIDERS
+========================================================= */
+
+.donate-top-fields {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 35px;
+}
+
+.donate-slider-field {
+  width: 100%;
+}
+
+.donate-slider-field label,
+.donate-input-group label,
+.donate-people > label {
+  display: block;
+
+  margin-bottom: 17px;
+
+  color: #292929;
+
+  font-size: 16px;
+
+  line-height: 1.3;
+
+  font-weight: 500;
+}
+
+/* =========================================================
+   SLIDER
+========================================================= */
+
+.donate-slider {
+  position: relative;
+
+  width: 100%;
+
+  height: 45px;
+
+  display: flex;
+
+  align-items: center;
+}
+
+.donate-slider input {
+  appearance: none;
+
+  width: 100%;
+
+  height: 6px;
+
+  margin: 0;
+
+  outline: none;
+
+  border: none;
+
+  background: #eeeeee;
+
+  cursor: pointer;
+}
+
+/* Chrome / Safari */
+
+.donate-slider input::-webkit-slider-thumb {
+  appearance: none;
+
+  width: 0;
+  height: 0;
+
+  border: none;
+}
+
+/* Firefox */
+
+.donate-slider input::-moz-range-thumb {
+  width: 0;
+  height: 0;
+
+  border: none;
+
+  background: transparent;
+}
+
+/* =========================================================
+   SLIDER VALUE
+========================================================= */
+
+.slider-number {
+  position: absolute;
+
+  top: 2px;
+
+  transform: translateX(-50%);
+
+  width: 62px;
+
+  height: 37px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: #2d8334;
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   OPTIONS ROW
+========================================================= */
+
+.donate-options-row {
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1fr
+    1fr;
+
+  gap: 35px;
+
+  margin-top: 35px;
+}
+
+/* =========================================================
+   INPUT GROUP
+========================================================= */
+
+.donate-input-group {
+  min-width: 0;
+}
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper select {
+  appearance: none;
+
+  width: 100%;
+
+  height: 54px;
+
+  padding: 0 45px 0 20px;
+
+  border: 1px solid #eeeeee;
+
+  border-radius: 0;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #555555;
+
+  font-family: inherit;
+
+  font-size: 15px;
+
+  cursor: pointer;
+}
+
+.select-wrapper select:focus {
+  border-color: #2d8334;
+}
+
+.select-wrapper i {
+  position: absolute;
+
+  top: 50%;
+
+  right: 18px;
+
+  transform: translateY(-50%);
+
+  color: #777777;
+
+  font-size: 12px;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   RECURRING PAYMENT
+========================================================= */
+
+.recurring-payment {
+  width: 100%;
+
+  height: 54px;
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 5px;
+
+  background: #eeeeee;
+}
+
+.recurring-payment button {
+  flex: 1;
+
+  height: 44px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #444444;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.recurring-payment button.active {
+  background: #ffffff;
+
+  color: #444444;
+}
+
+/* =========================================================
+   PEOPLE
+========================================================= */
+
+.donate-people {
+  margin-top: 35px;
+}
+
+.people-list {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 15px;
+}
+
+.people-list button {
+  height: 54px;
+
+  padding: 0 12px;
+
+  border: 1px solid #eeeeee;
+
+  background: rgba(255, 255, 255, 0.9);
+
+  color: #555555;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.25s ease,
+    color 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.people-list button:hover,
+.people-list button.selected {
+  border-color: #2d8334;
+
+  color: #2d8334;
+
+  background: #ffffff;
+}
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+.donate-result {
+  min-height: 130px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-top: 15px;
+
+  padding-top: 20px;
+}
+
+/* =========================================================
+   EARTH ICON
+========================================================= */
+
+.donate-earth-icon {
+  width: 100px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-start;
+
+  color: #299331;
+
+  font-size: 72px;
+}
+
+/* =========================================================
+   RECOMMENDED AMOUNT
+========================================================= */
+
+.recommended-amount {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-right: 70px;
+}
+
+.amount {
+  color: #2d8334;
+
+  font-size: clamp(48px, 5vw, 66px);
+
+  line-height: 1;
+
+  font-weight: 400;
+
+  white-space: nowrap;
+}
+
+.recommended-text {
+  margin-top: 8px;
+
+  color: #666666;
+
+  font-size: 13px;
+
+  line-height: 1;
+
+  letter-spacing: 2px;
+}
+
+/* =========================================================
+   RIGHT INFORMATION
+========================================================= */
+
+.donate-information {
+  padding: 55px 55px 45px;
+
+  border-left: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.donate-information h3 {
+  margin: 0 0 25px;
+
+  color: #292929;
+
+  font-size: clamp(25px, 2.2vw, 34px);
+
+  line-height: 1.15;
+
+  font-weight: 800;
+}
+
+.donate-information > p {
+  margin: 0 0 28px;
+
+  color: #555555;
+
+  font-size: 16px;
+
+  line-height: 1.8;
+}
+
+/* =========================================================
+   ACCORDION
+========================================================= */
+
+.donate-accordion {
+  width: 100%;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.donate-accordion-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.donate-accordion-item > button {
+  width: 100%;
+
+  min-height: 62px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: #333333;
+
+  font-family: inherit;
+
+  font-size: 17px;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.accordion-plus {
+  width: 20px;
+  height: 20px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #2d9638;
+
+  color: #ffffff;
+
+  font-size: 17px;
+
+  line-height: 1;
+}
+
+.accordion-plus.orange {
+  background: #f0a51c;
+}
+
+/* =========================================================
+   ACCORDION CONTENT
+========================================================= */
+
+.accordion-content {
+  padding: 0 10px 18px 35px;
+}
+
+.accordion-content p {
+  margin: 0;
+
+  color: #666666;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+/* =========================================================
+   MORE INFO
+========================================================= */
+
+.donate-more-button {
+  width: 100%;
+
+  height: 48px;
+
+  margin-top: 28px;
+
+  border: none;
+
+  background: #61bd00;
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+
+  cursor: pointer;
+
+  transition: background-color 0.3s ease;
+}
+
+.donate-more-button:hover {
+  background: #2d8334;
+}
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1440px) {
+  .donate-panel {
+    width: min(1400px, 90%);
+  }
+
+  .donate-heading {
+    height: 330px;
+  }
+}
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media (max-width: 1200px) {
+  .donate-panel {
+    width: 94%;
+  }
+
+  .donate-form {
+    padding: 55px 40px 40px;
+  }
+
+  .donate-information {
+    padding: 50px 35px 40px;
+  }
+
+  .donate-options-row {
+    gap: 20px;
+  }
+
+  .people-list {
+    gap: 10px;
+  }
+
+  .people-list button {
+    font-size: 12px;
+  }
+
+  .recommended-amount {
+    margin-right: 20px;
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .donate-section {
+    min-height: auto;
+
+    padding-bottom: 70px;
+  }
+
+  .donate-heading {
+    height: 260px;
+  }
+
+  .donate-heading h2 {
+    font-size: 82px;
+
+    letter-spacing: -3px;
+  }
+
+  .donate-panel {
+    grid-template-columns: 1fr;
+
+    width: 92%;
+  }
+
+  .donate-form {
+    padding: 45px 35px 35px;
+  }
+
+  .donate-information {
+    padding: 40px 35px 40px;
+
+    border-left: none;
+  }
+
+  .donate-options-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .donate-input-group:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .people-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .donate-result {
+    margin-top: 20px;
+  }
+
+  .recommended-amount {
+    margin-right: 0;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .donate-section {
+    min-height: auto;
+
+    padding-bottom: 45px;
+  }
+
+  .donate-bg {
+    background-position: center;
+  }
+
+  /* -----------------------------------------------
+     HEADING
+  ------------------------------------------------ */
+
+  .donate-heading {
+    height: 205px;
+
+    align-items: flex-end;
+  }
+
+  .donate-heading h2 {
+    font-size: clamp(58px, 18vw, 82px);
+
+    letter-spacing: -3px;
+
+    line-height: 0.82;
+  }
+
+  /* -----------------------------------------------
+     PANEL
+  ------------------------------------------------ */
+
+  .donate-panel {
+    width: 94%;
+
+    display: flex;
+
+    flex-direction: column;
+  }
+
+  /* -----------------------------------------------
+     FORM
+  ------------------------------------------------ */
+
+  .donate-form {
+    padding: 32px 20px 25px;
+  }
+
+  /* -----------------------------------------------
+     SLIDERS
+  ------------------------------------------------ */
+
+  .donate-top-fields {
+    grid-template-columns: 1fr;
+
+    gap: 25px;
+  }
+
+  .donate-slider-field label,
+  .donate-input-group label,
+  .donate-people > label {
+    margin-bottom: 12px;
+
+    font-size: 14px;
+  }
+
+  .slider-number {
+    width: 50px;
+
+    height: 32px;
+
+    font-size: 12px;
+  }
+
+  /* -----------------------------------------------
+     OPTIONS
+  ------------------------------------------------ */
+
+  .donate-options-row {
+    grid-template-columns: 1fr;
+
+    gap: 0;
+
+    margin-top: 25px;
+  }
+
+  .donate-input-group:last-child {
+    grid-column: auto;
+  }
+
+  .donate-input-group {
+    margin-bottom: 22px;
+  }
+
+  .select-wrapper select,
+  .recurring-payment {
+    height: 50px;
+  }
+
+  .recurring-payment button {
+    height: 40px;
+  }
+
+  /* -----------------------------------------------
+     PEOPLE
+  ------------------------------------------------ */
+
+  .donate-people {
+    margin-top: 5px;
+  }
+
+  .people-list {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 8px;
+  }
+
+  .people-list button {
+    min-height: 48px;
+
+    height: auto;
+
+    padding: 8px;
+
+    font-size: 11px;
+
+    line-height: 1.25;
+  }
+
+  /* -----------------------------------------------
+     RESULT
+  ------------------------------------------------ */
+
+  .donate-result {
+    min-height: 100px;
+
+    margin-top: 15px;
+
+    padding-top: 10px;
+  }
+
+  .donate-earth-icon {
+    width: 65px;
+
+    font-size: 48px;
+  }
+
+  .recommended-amount {
+    margin-right: 0;
+  }
+
+  .amount {
+    font-size: clamp(32px, 10vw, 45px);
+  }
+
+  .recommended-text {
+    font-size: 9px;
+
+    letter-spacing: 1.5px;
+  }
+
+  /* -----------------------------------------------
+     INFORMATION
+  ------------------------------------------------ */
+
+  .donate-information {
+    padding: 32px 20px 30px;
+  }
+
+  .donate-information h3 {
+    margin-bottom: 18px;
+
+    font-size: 25px;
+  }
+
+  .donate-information > p {
+    font-size: 14px;
+
+    line-height: 1.7;
+  }
+
+  .donate-accordion-item > button {
+    min-height: 55px;
+
+    font-size: 14px;
+  }
+
+  .donate-more-button {
+    height: 45px;
+
+    font-size: 12px;
+  }
+}
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 390px) {
+  .donate-heading {
+    height: 180px;
+  }
+
+  .donate-heading h2 {
+    font-size: 55px;
+
+    letter-spacing: -2px;
+  }
+
+  .donate-panel {
+    width: 95%;
+  }
+
+  .donate-form {
+    padding: 27px 15px 22px;
+  }
+
+  .donate-information {
+    padding: 28px 15px;
+  }
+
+  .donate-slider-field label,
+  .donate-input-group label,
+  .donate-people > label {
+    font-size: 13px;
+  }
+
+  .people-list button {
+    font-size: 10px;
+  }
+
+  .donate-earth-icon {
+    font-size: 42px;
+  }
+
+  .amount {
+    font-size: 29px;
+  }
+
+  .recommended-text {
+    font-size: 8px;
+  }
+
+  .donate-information h3 {
+    font-size: 22px;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .donate-more-button,
+  .people-list button,
+  .recurring-payment button {
+    transition: none;
+  }
+}

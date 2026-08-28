@@ -1,0 +1,1354 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&display=swap");
+
+/* =========================================================
+   HERO COLOR SYSTEM
+========================================================= */
+
+.hero {
+  --green: #63b900;
+  --green-deep: #287e32;
+  --green-dark: #174d24;
+  --gold: #f5a719;
+  --gold-hover: #e89a0c;
+  --gold-soft: #ffd477;
+
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 128px);
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(23, 77, 36, 0.9) 0%,
+      rgba(23, 77, 36, 0.72) 38%,
+      rgba(23, 77, 36, 0.25) 68%,
+      rgba(23, 77, 36, 0.12) 100%
+    ),
+    var(--hero-bg);
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  color: #ffffff;
+}
+
+/* =========================================================
+   SUBTLE TEXTURE
+========================================================= */
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+  pointer-events: none;
+
+  opacity: 0.25;
+
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.08) 1px,
+    transparent 1px
+  );
+
+  background-size: 4px 4px;
+}
+
+/* =========================================================
+   DARK ANGLED PANEL
+========================================================= */
+
+.hero-dark-panel {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 38%;
+  height: 100%;
+
+  background: linear-gradient(145deg, #174d24 0%, #287e32 100%);
+
+  clip-path: polygon(0 0, 100% 0, 78% 100%, 0 100%);
+
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+.hero-dark-panel::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  width: 3px;
+  height: 100%;
+
+  background: linear-gradient(180deg, transparent, #f5a719, transparent);
+
+  opacity: 0.7;
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.hero-container {
+  position: relative;
+  z-index: 2;
+
+  width: min(1380px, 92%);
+  min-height: calc(100vh - 128px);
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: clamp(35px, 5vw, 80px);
+}
+
+/* =========================================================
+   DESKTOP CONTENT
+========================================================= */
+
+.hero-content {
+  width: 42%;
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  padding: 50px 0 50px 25px;
+
+  animation: heroContentIn 1s ease both;
+}
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.hero-title {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 0 28px;
+
+  font-family: "Fraunces", Georgia, serif;
+
+  font-size: clamp(55px, 6vw, 88px);
+
+  font-weight: 700;
+
+  line-height: 0.88;
+
+  letter-spacing: -1.5px;
+}
+
+.hero-title span {
+  display: block;
+}
+
+.hero-title span:nth-child(2),
+.hero-title span:nth-child(3) {
+  color: #ffffff;
+}
+
+.hero-title span:nth-child(2) {
+  color: var(--gold-soft);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* =========================================================
+   SMALL TEXT
+========================================================= */
+
+.hero-small-text {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin: 0 0 12px;
+
+  font-size: 13px;
+  line-height: 1;
+
+  font-weight: 800;
+
+  letter-spacing: 2.5px;
+
+  color: var(--gold-soft);
+}
+
+.hero-small-text::before {
+  content: "";
+
+  width: 25px;
+  height: 2px;
+
+  background: var(--gold);
+
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.hero-description {
+  margin: 0;
+
+  font-size: clamp(14px, 1.15vw, 17px);
+
+  line-height: 1.5;
+
+  font-weight: 600;
+
+  letter-spacing: 0.3px;
+
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* =========================================================
+   GROWTH INDICATOR
+========================================================= */
+
+.hero-zigzag {
+  display: flex;
+  align-items: flex-end;
+
+  gap: 6px;
+
+  margin-top: 35px;
+
+  height: 27px;
+}
+
+.hero-zigzag span {
+  width: 6px;
+
+  border-radius: 2px;
+
+  background: var(--gold);
+
+  opacity: 0.45;
+}
+
+.hero-zigzag span:nth-child(1) {
+  height: 40%;
+}
+
+.hero-zigzag span:nth-child(2) {
+  height: 60%;
+}
+
+.hero-zigzag span:nth-child(3) {
+  height: 78%;
+}
+
+.hero-zigzag span:nth-child(4) {
+  height: 92%;
+}
+
+.hero-zigzag span:nth-child(5) {
+  height: 100%;
+
+  opacity: 1;
+
+  background: var(--gold);
+}
+
+/* =========================================================
+   SOCIALS
+========================================================= */
+
+.hero-socials {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 55px;
+}
+
+.hero-socials a {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+
+  border-radius: 50%;
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 15px;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.hero-socials a:hover {
+  background: var(--gold);
+
+  border-color: var(--gold);
+
+  color: #174d24;
+
+  transform: translateY(-3px);
+}
+
+/* =========================================================
+   HERO CARDS
+========================================================= */
+
+.hero-cards {
+  width: 51%;
+  max-width: 630px;
+
+  flex-shrink: 1;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  grid-template-rows:
+    clamp(210px, 27vh, 270px)
+    clamp(210px, 27vh, 270px);
+
+  gap: 14px;
+
+  animation: heroCardsIn 1.1s ease 0.15s both;
+}
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.hero-card {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  border-radius: 4px;
+}
+
+/* =========================================================
+   IMAGE CARDS
+========================================================= */
+
+.hero-card img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 0.7s ease;
+}
+
+.hero-person-card::after,
+.hero-plant-card::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(0deg, rgba(23, 77, 36, 0.6), transparent 60%);
+}
+
+.hero-person-card:hover img,
+.hero-plant-card:hover img {
+  transform: scale(1.05);
+}
+
+/* =========================================================
+   GREEN CARDS
+========================================================= */
+
+.hero-info-card {
+  background: linear-gradient(145deg, #63b900 0%, #4f9d00 100%);
+}
+
+.hero-contact-card {
+  background: linear-gradient(145deg, #287e32 0%, #174d24 100%);
+}
+
+/* =========================================================
+   CARD PATTERN
+========================================================= */
+
+.card-pattern {
+  position: absolute;
+
+  inset: 0;
+
+  opacity: 0.12;
+
+  background-image: linear-gradient(
+    135deg,
+    transparent 0 45%,
+    rgba(255, 255, 255, 0.2) 45% 46%,
+    transparent 46% 100%
+  );
+
+  background-size: 55px 55px;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.card-content {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 30px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.card-label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+  color: var(--gold-soft);
+}
+
+.card-content h3 {
+  margin: 0 0 15px;
+
+  font-family: "Fraunces", Georgia, serif;
+
+  font-size: clamp(16px, 1.35vw, 21px);
+
+  line-height: 1.15;
+
+  font-weight: 700;
+}
+
+.card-content p {
+  width: 100%;
+  max-width: 240px;
+
+  margin: 0 0 20px;
+
+  font-size: clamp(10px, 0.95vw, 13px);
+
+  line-height: 1.6;
+
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* =========================================================
+   CARD BUTTON
+========================================================= */
+
+.hero-card-button {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 115px;
+  height: 38px;
+
+  padding: 0 18px;
+
+  background: transparent;
+
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.hero-card-button:hover {
+  background: var(--gold);
+
+  border-color: var(--gold);
+
+  color: var(--green-dark);
+
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   SCROLL
+========================================================= */
+
+.hero-scroll {
+  position: absolute;
+
+  right: 35px;
+  bottom: 25px;
+
+  z-index: 5;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+
+  animation: scrollIndicator 2s ease-in-out infinite;
+}
+
+.hero-scroll span {
+  position: absolute;
+
+  width: 18px;
+  height: 18px;
+
+  border-right: 3px solid var(--gold);
+  border-bottom: 3px solid var(--gold);
+
+  transform: rotate(45deg);
+}
+
+.hero-scroll span:first-child {
+  margin-top: -11px;
+
+  opacity: 0.35;
+}
+
+.hero-scroll span:last-child {
+  margin-top: 3px;
+}
+
+/* =========================================================
+   MOBILE ELEMENTS
+========================================================= */
+
+.hero-mobile-intro,
+.hero-mobile-bottom,
+.hero-mobile-socials,
+.hero-mobile-dots {
+  display: none;
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes heroContentIn {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes heroCardsIn {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scrollIndicator {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(7px);
+  }
+}
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media (max-width: 1200px) {
+  .hero-container {
+    width: 94%;
+    gap: 30px;
+  }
+
+  .hero-content {
+    width: 40%;
+  }
+
+  .hero-cards {
+    width: 55%;
+  }
+
+  .hero-title {
+    font-size: clamp(48px, 6vw, 72px);
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) and (min-width: 769px) {
+  .hero {
+    min-height: 620px;
+  }
+
+  .hero-container {
+    min-height: 620px;
+
+    width: 94%;
+
+    gap: 20px;
+  }
+
+  .hero-dark-panel {
+    width: 40%;
+
+    clip-path: polygon(0 0, 100% 0, 74% 100%, 0 100%);
+  }
+
+  .hero-content {
+    width: 39%;
+
+    padding-left: 10px;
+  }
+
+  .hero-title {
+    font-size: clamp(43px, 6.5vw, 62px);
+  }
+
+  .hero-description {
+    font-size: 13px;
+  }
+
+  .hero-socials {
+    margin-top: 40px;
+  }
+
+  .hero-cards {
+    width: 58%;
+
+    grid-template-rows:
+      215px
+      215px;
+
+    gap: 10px;
+  }
+
+  .card-content {
+    padding: 18px 14px;
+  }
+
+  .card-content h3 {
+    font-size: 14px;
+  }
+
+  .card-content p {
+    font-size: 10px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 100svh;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(23, 77, 36, 0.35) 0%,
+        rgba(23, 77, 36, 0.2) 35%,
+        rgba(23, 77, 36, 0.78) 100%
+      ),
+      var(--hero-bg);
+
+    background-position: center;
+  }
+
+  .hero::after {
+    opacity: 0.15;
+  }
+
+  .hero-dark-panel {
+    display: none;
+  }
+
+  .hero-container {
+    width: 100%;
+
+    min-height: 100svh;
+
+    margin: 0;
+
+    display: block;
+  }
+
+  /* =======================================================
+     MOBILE INTRO
+  ======================================================= */
+
+  .hero-mobile-intro {
+    position: absolute;
+
+    top: 15%;
+    left: 0;
+
+    width: 100%;
+
+    padding: 0 25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    text-align: left;
+
+    z-index: 5;
+
+    animation: mobileIntroIn 0.8s ease both;
+  }
+
+  .hero-mobile-eyebrow {
+    position: relative;
+
+    margin: 0 0 13px;
+
+    padding-left: 28px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    color: var(--gold-soft);
+  }
+
+  .hero-mobile-eyebrow::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 20px;
+    height: 2px;
+
+    background: var(--gold);
+  }
+
+  .hero-mobile-intro h1 {
+    margin: 0;
+
+    font-family: "Fraunces", Georgia, serif;
+
+    font-size: clamp(48px, 14vw, 65px);
+
+    line-height: 0.9;
+
+    font-weight: 700;
+
+    letter-spacing: -1px;
+
+    text-shadow: 0 3px 14px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-mobile-intro h1 strong {
+    display: block;
+
+    color: var(--gold-soft);
+
+    font-style: italic;
+
+    font-weight: 400;
+  }
+
+  .hero-mobile-intro p {
+    max-width: 270px;
+
+    margin: 16px 0 0;
+
+    font-size: 12px;
+
+    line-height: 1.55;
+
+    font-weight: 500;
+
+    color: rgba(255, 255, 255, 0.94);
+  }
+
+  /* =======================================================
+     MOBILE CARDS
+     
+     No horizontal carousel.
+     Cards become a simple vertical story.
+  ======================================================= */
+
+  .hero-cards {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 105px;
+
+    width: 100%;
+
+    padding: 0 22px;
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    grid-template-rows: auto auto;
+
+    gap: 10px;
+
+    animation: mobileCardsIn 0.9s ease 0.15s both;
+
+    z-index: 4;
+  }
+
+  .hero-person-card,
+  .hero-plant-card {
+    display: none;
+  }
+
+  .hero-info-card,
+  .hero-contact-card {
+    display: block;
+
+    width: 100%;
+    max-width: none;
+
+    height: auto;
+
+    min-height: 135px;
+
+    border-radius: 12px;
+
+    box-shadow: none;
+  }
+
+  .card-content {
+    height: auto;
+
+    min-height: 135px;
+
+    padding: 20px;
+
+    align-items: flex-start;
+
+    justify-content: center;
+
+    text-align: left;
+  }
+
+  .card-label {
+    margin-bottom: 7px;
+
+    font-size: 8px;
+
+    letter-spacing: 1.7px;
+  }
+
+  .card-content h3 {
+    margin: 0 0 7px;
+
+    font-size: 15px;
+
+    line-height: 1.1;
+  }
+
+  .card-content p {
+    max-width: 100%;
+
+    margin: 0 0 10px;
+
+    font-size: 10px;
+
+    line-height: 1.45;
+  }
+
+  .hero-card-button {
+    min-width: 95px;
+
+    height: 30px;
+
+    padding: 0 13px;
+
+    font-size: 7px;
+
+    letter-spacing: 0.8px;
+  }
+
+  /* Hide dots because cards are no longer a carousel */
+  .hero-mobile-dots {
+    display: none;
+  }
+
+  /* =======================================================
+     MOBILE BOTTOM
+  ======================================================= */
+
+  .hero-mobile-bottom {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+
+    padding: 15px 22px calc(15px + env(safe-area-inset-bottom, 0px));
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    background: linear-gradient(
+      0deg,
+      rgba(23, 77, 36, 0.95),
+      rgba(23, 77, 36, 0.75)
+    );
+
+    z-index: 6;
+
+    animation: mobileBottomIn 0.8s ease 0.3s both;
+  }
+
+  .hero-mobile-bottom p {
+    max-width: 180px;
+
+    margin: 0;
+
+    font-size: 9px;
+
+    line-height: 1.4;
+
+    font-weight: 600;
+
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .hero-mobile-cta {
+    flex-shrink: 0;
+
+    min-width: 105px;
+    height: 35px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 15px;
+
+    border-radius: 0;
+
+    background: var(--gold);
+
+    color: var(--green-dark);
+
+    text-decoration: none;
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.8px;
+
+    text-transform: uppercase;
+  }
+
+  /* =======================================================
+     MOBILE SOCIALS
+  ======================================================= */
+
+  .hero-mobile-socials {
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    z-index: 7;
+
+    animation: mobileSocialsIn 0.8s ease 0.35s both;
+  }
+
+  .hero-mobile-socials a {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.55);
+
+    border-radius: 50%;
+
+    background: rgba(23, 77, 36, 0.3);
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 10px;
+  }
+
+  .hero-mobile-socials a:hover {
+    background: var(--gold);
+
+    border-color: var(--gold);
+
+    color: var(--green-dark);
+  }
+
+  .hero-scroll {
+    display: none;
+  }
+
+  .hero-content {
+    display: none;
+  }
+}
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 480px) {
+  .hero-mobile-intro {
+    top: 13%;
+
+    padding: 0 20px;
+  }
+
+  .hero-mobile-eyebrow {
+    font-size: 8px;
+
+    margin-bottom: 10px;
+  }
+
+  .hero-mobile-intro h1 {
+    font-size: 42px;
+
+    letter-spacing: -0.7px;
+  }
+
+  .hero-mobile-intro p {
+    max-width: 235px;
+
+    margin-top: 11px;
+
+    font-size: 10px;
+  }
+
+  .hero-cards {
+    bottom: 92px;
+
+    padding: 0 18px;
+
+    gap: 8px;
+  }
+
+  .hero-info-card,
+  .hero-contact-card {
+    min-height: 119px;
+
+    border-radius: 10px;
+  }
+
+  .card-content {
+    min-height: 119px;
+
+    padding: 16px;
+  }
+
+  .card-label {
+    font-size: 7px;
+
+    margin-bottom: 5px;
+  }
+
+  .card-content h3 {
+    font-size: 13px;
+
+    margin-bottom: 5px;
+  }
+
+  .card-content p {
+    font-size: 8.5px;
+
+    line-height: 1.35;
+
+    margin-bottom: 7px;
+  }
+
+  .hero-card-button {
+    min-width: 83px;
+
+    height: 26px;
+
+    font-size: 6px;
+  }
+
+  .hero-mobile-bottom {
+    padding: 12px 17px calc(12px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .hero-mobile-bottom p {
+    max-width: 145px;
+
+    font-size: 8px;
+  }
+
+  .hero-mobile-cta {
+    min-width: 94px;
+
+    height: 31px;
+
+    font-size: 6.5px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+  .hero-mobile-intro {
+    top: 11%;
+  }
+
+  .hero-mobile-intro h1 {
+    font-size: 36px;
+  }
+
+  .hero-mobile-intro p {
+    max-width: 205px;
+
+    font-size: 9px;
+  }
+
+  .hero-cards {
+    bottom: 84px;
+
+    padding: 0 15px;
+  }
+
+  .hero-info-card,
+  .hero-contact-card {
+    min-height: 108px;
+  }
+
+  .card-content {
+    min-height: 108px;
+
+    padding: 13px;
+  }
+
+  .card-content h3 {
+    font-size: 11px;
+  }
+
+  .card-content p {
+    font-size: 7.5px;
+  }
+
+  .hero-card-button {
+    min-width: 75px;
+
+    height: 23px;
+
+    font-size: 5.5px;
+  }
+
+  .hero-mobile-bottom {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .hero-mobile-bottom p {
+    max-width: 125px;
+
+    font-size: 7px;
+  }
+
+  .hero-mobile-cta {
+    min-width: 86px;
+
+    height: 28px;
+
+    font-size: 6px;
+  }
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes mobileIntroIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mobileCardsIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mobileBottomIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mobileSocialsIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-content,
+  .hero-cards,
+  .hero-scroll,
+  .hero-mobile-intro,
+  .hero-mobile-bottom,
+  .hero-mobile-socials,
+  .hero-card img,
+  .hero-socials a,
+  .hero-mobile-socials a,
+  .hero-card-button,
+  .hero-mobile-cta {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.hero-card-button:focus-visible,
+.hero-mobile-cta:focus-visible,
+.hero-socials a:focus-visible,
+.hero-mobile-socials a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
