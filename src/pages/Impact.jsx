@@ -4,7 +4,6 @@ import "./Impact.css";
 const Impact = () => {
   return (
     <main className="impact-page">
-
       {/* Hero */}
       <section className="impact-hero">
         <div className="impact-hero-overlay"></div>
@@ -18,7 +17,7 @@ const Impact = () => {
       <section className="impact-intro section-padding">
         <div className="impact-intro-image">
           <img
-            src="/src/assets/sq-05.jpg"
+            src="/assets/sq-05.jpg"
             alt="Community members receiving support"
           />
 
@@ -38,9 +37,7 @@ const Impact = () => {
             Making a meaningful difference
           </div>
 
-          <h2>
-            Every act of compassion can change a life
-          </h2>
+          <h2>Every act of compassion can change a life</h2>
 
           <div className="impact-text-grid">
             <p>
@@ -56,9 +53,9 @@ const Impact = () => {
             </p>
 
             <p>
-              We believe that meaningful impact is created when people are
-              given the support they need to regain stability and move
-              forward with dignity.
+              We believe that meaningful impact is created when people are given
+              the support they need to regain stability and move forward with
+              dignity.
             </p>
 
             <p>
@@ -79,9 +76,7 @@ const Impact = () => {
               </div>
             </div>
 
-            <div className="impact-sign">
-              Mdeaver
-            </div>
+            <div className="impact-sign">Mdeaver</div>
           </div>
         </div>
       </section>
@@ -94,13 +89,10 @@ const Impact = () => {
             Our impact in numbers
           </div>
 
-          <h2>
-            Turning compassion into meaningful action
-          </h2>
+          <h2>Turning compassion into meaningful action</h2>
         </div>
 
         <div className="impact-number-grid">
-
           <div className="impact-number-item">
             <strong>2,000+</strong>
             <h3>People Supported</h3>
@@ -114,8 +106,8 @@ const Impact = () => {
             <strong>2020</strong>
             <h3>Year Founded</h3>
             <p>
-              Since our beginning, we have remained committed to helping
-              people facing hardship.
+              Since our beginning, we have remained committed to helping people
+              facing hardship.
             </p>
           </div>
 
@@ -132,11 +124,10 @@ const Impact = () => {
             <strong>∞</strong>
             <h3>Hope To Give</h3>
             <p>
-              Our commitment continues as we work to reach more people who
-              need a helping hand.
+              Our commitment continues as we work to reach more people who need
+              a helping hand.
             </p>
           </div>
-
         </div>
       </section>
 
@@ -148,9 +139,7 @@ const Impact = () => {
             Where your support makes a difference
           </div>
 
-          <h2>
-            Helping people move toward a better future
-          </h2>
+          <h2>Helping people move toward a better future</h2>
 
           <p>
             Our programs and assistance are focused on people experiencing
@@ -160,7 +149,6 @@ const Impact = () => {
         </div>
 
         <div className="impact-area-grid">
-
           <article className="impact-area-card">
             <div className="impact-area-number">01</div>
 
@@ -171,9 +159,8 @@ const Impact = () => {
             <h3>Housing Stability</h3>
 
             <p>
-              Supporting people experiencing homelessness or housing
-              instability as they work toward safer and more stable
-              circumstances.
+              Supporting people experiencing homelessness or housing instability
+              as they work toward safer and more stable circumstances.
             </p>
 
             <ul>
@@ -199,8 +186,8 @@ const Impact = () => {
 
             <p>
               Helping families and single mothers navigate difficult periods
-              while creating more stable circumstances for themselves and
-              their children.
+              while creating more stable circumstances for themselves and their
+              children.
             </p>
 
             <ul>
@@ -225,8 +212,8 @@ const Impact = () => {
             <h3>Financial Relief</h3>
 
             <p>
-              Providing meaningful assistance to individuals and families
-              facing unexpected expenses and financial difficulties.
+              Providing meaningful assistance to individuals and families facing
+              unexpected expenses and financial difficulties.
             </p>
 
             <ul>
@@ -267,7 +254,6 @@ const Impact = () => {
               </li>
             </ul>
           </article>
-
         </div>
       </section>
 
@@ -281,14 +267,12 @@ const Impact = () => {
             Every contribution matters
           </div>
 
-          <h2>
-            Together, we can reach more people who need a helping hand
-          </h2>
+          <h2>Together, we can reach more people who need a helping hand</h2>
 
           <p>
             Your support allows Mdeaver Charity Foundation Ltd. to continue
-            providing meaningful assistance to individuals and families
-            facing hardship.
+            providing meaningful assistance to individuals and families facing
+            hardship.
           </p>
 
           <a href="/donate" className="impact-btn">
@@ -305,13 +289,10 @@ const Impact = () => {
             How we create impact
           </div>
 
-          <h2>
-            A practical approach to helping people move forward
-          </h2>
+          <h2>A practical approach to helping people move forward</h2>
         </div>
 
         <div className="impact-approach-grid">
-
           <div className="impact-approach-item">
             <div className="approach-number">1</div>
 
@@ -329,8 +310,8 @@ const Impact = () => {
             <h3>Support</h3>
 
             <p>
-              We provide appropriate assistance based on available resources
-              and the circumstances presented.
+              We provide appropriate assistance based on available resources and
+              the circumstances presented.
             </p>
           </div>
 
@@ -340,8 +321,8 @@ const Impact = () => {
             <h3>Empower</h3>
 
             <p>
-              Wherever possible, we encourage pathways toward greater
-              financial, personal, and community stability.
+              Wherever possible, we encourage pathways toward greater financial,
+              personal, and community stability.
             </p>
           </div>
 
@@ -355,7 +336,6 @@ const Impact = () => {
               and focused on creating meaningful impact.
             </p>
           </div>
-
         </div>
       </section>
 
@@ -363,13 +343,10 @@ const Impact = () => {
       <section className="impact-closing">
         <div className="impact-closing-content">
           <div className="section-label light">
-            <span></span>
-            A future with more hope
+            <span></span>A future with more hope
           </div>
 
-          <h2>
-            The work continues
-          </h2>
+          <h2>The work continues</h2>
 
           <p>
             There are still families struggling to make ends meet, single
@@ -394,7 +371,6 @@ const Impact = () => {
           </div>
         </div>
       </section>
-
     </main>
   );
 };
