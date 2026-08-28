@@ -62,7 +62,7 @@ function Navbar() {
           {/* LOGO */}
           <Link to="/" className="navbar-logo" onClick={closeMenu}>
             <img
-              src="/public/assets/imagenav.png"
+              src="/assets/imagenav.png"
               alt="Mdeaver Charity Foundation Ltd."
             />
           </Link>
