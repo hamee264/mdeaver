@@ -11,13 +11,11 @@ function Home() {
   return (
     <>
       <Hero />
-      <Causes />
-      <DonationHighlights />
-      <Donate/>
-      <ImpactSection/>
-      <StatisticsBanner/>
-      <PlansSection/>
-      <HelpSection/>
+      <ImpactSection />
+      <Donate />
+      <StatisticsBanner />
+      <PlansSection />
+      <HelpSection />
     </>
   );
 }

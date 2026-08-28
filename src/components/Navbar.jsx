@@ -95,18 +95,13 @@ function Navbar() {
               About
             </Link>
 
-            <Link to="/causes" onClick={closeMenu}>
-              Who We Support
-            </Link>
+            
 
             <Link to="/impact" onClick={closeMenu}>
               Our Impact
             </Link>
 
-            <Link to="/support" onClick={closeMenu}>
-              Get Support
-            </Link>
-
+          
             <Link to="/contact" onClick={closeMenu}>
               Contact
             </Link>
