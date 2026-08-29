@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useDonation } from "../context/DonationContext";
 import "./About.css";
 
 const About = () => {
+  const { openDonateModal } = useDonation();
   const [openFaq, setOpenFaq] = useState(null);
 
   const faqs = [
@@ -102,14 +105,19 @@ const About = () => {
             </div>
 
             <div className="intro-buttons">
-              <a href="/contact" className="btn btn-green">
-                Get Support
+              <Link to="/contact" className="btn btn-green">
+                Get Assistance
                 <i className="fa-solid fa-arrow-right"></i>
-              </a>
+              </Link>
 
-              <a href="/donate" className="btn btn-outline">
-                Support Our Mission
-              </a>
+              <button
+                type="button"
+                className="btn btn-outline"
+                onClick={() => openDonateModal()}
+              >
+                Donate Now
+                <i className="fa-solid fa-heart"></i>
+              </button>
             </div>
           </div>
         </div>
@@ -271,10 +279,10 @@ const About = () => {
             independence.
           </p>
 
-          <a href="/donate" className="btn btn-white">
-            Support Our Work
+          <Link to="/donate" className="btn btn-white">
+            Support Our Mission
             <i className="fa-solid fa-arrow-right"></i>
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -485,10 +493,10 @@ const About = () => {
               ahead.
             </p>
 
-            <a href="/request-assistance" className="text-link">
-              Request Assistance
+            <Link to="/contact" className="text-link">
+              Submit a request for assistance
               <i className="fa-solid fa-arrow-right"></i>
-            </a>
+            </Link>
           </div>
 
           <div className="stories-images">
@@ -693,10 +701,10 @@ const About = () => {
               foundation and assistance programs.
             </p>
 
-            <a href="/contact" className="btn btn-green">
+            <Link to="/contact" className="btn btn-green">
               Contact Us
               <i className="fa-solid fa-arrow-right"></i>
-            </a>
+            </Link>
           </div>
 
           <div className="faq-list">
@@ -751,18 +759,24 @@ const About = () => {
           </p>
 
           <div className="final-cta-buttons">
-            <a href="/donate" className="btn btn-green">
-              Donate
+            <button
+              type="button"
+              className="difference-action"
+              onClick={() => openDonateModal()}
+            >
+              <span>Donate</span>
               <i className="fa-solid fa-arrow-right"></i>
-            </a>
+            </button>
 
-            <a href="/request-assistance" className="btn btn-white-outline">
-              Request Assistance
-            </a>
+            <Link to="/contact" className="difference-action">
+              <span>Request Assistance</span>
+              <i className="fa-solid fa-arrow-right"></i>
+            </Link>
 
-            <a href="/contact" className="btn btn-white-outline">
-              Contact Us
-            </a>
+            <Link to="/contact" className="difference-action">
+              <span>Get in Touch</span>
+              <i className="fa-solid fa-arrow-right"></i>
+            </Link>
           </div>
         </div>
       </section>

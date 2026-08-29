@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDonation } from "../../context/DonationContext";
 import "./HelpSection.css";
 
 function HelpSection() {
-  const [amount, setAmount] = useState("25000.00");
+  const { openDonateModal } = useDonation();
+  const [amount, setAmount] = useState("1000.00");
 
-  const presetAmounts = ["10000", "25000", "50000"];
+  const presetAmounts = ["250", "500", "1000", "2500", "5000"];
 
   const handlePreset = (value) => {
     setAmount(`${value}.00`);
@@ -64,7 +66,7 @@ function HelpSection() {
             <div className="amount-input-wrapper">
 
               <div className="currency-symbol">
-                ₦
+                $
               </div>
 
               <input
@@ -91,7 +93,7 @@ function HelpSection() {
                   type="button"
                   onClick={() => handlePreset(value)}
                 >
-                  ₦{Number(value).toLocaleString()}
+                  ${Number(value).toLocaleString()}
                 </button>
 
               ))}
@@ -111,12 +113,13 @@ function HelpSection() {
                 DONATE BUTTON
             ================================================= */}
 
-            <Link
-              to="/donate"
+            <button
+              type="button"
               className="donate-now-btn"
+              onClick={() => openDonateModal(amount)}
             >
               DONATE NOW
-            </Link>
+            </button>
 
           </div>
 

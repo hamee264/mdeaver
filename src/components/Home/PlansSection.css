@@ -87,6 +87,10 @@
 ========================================= */
 
 .plans-details-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
   min-width: 125px;
   height: 45px;
 
@@ -97,6 +101,7 @@
 
   background: #f3a719;
   color: #ffffff;
+  text-decoration: none;
 
   font-family: inherit;
 
@@ -309,6 +314,10 @@
 ========================================= */
 
 .plan-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
   margin-top: auto;
 
   min-width: 105px;
@@ -320,6 +329,7 @@
   outline: none;
 
   color: #ffffff;
+  text-decoration: none;
 
   font-family: inherit;
 

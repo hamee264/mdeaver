@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./PlansSection.css";
 
 const plans = [
@@ -54,9 +55,9 @@ function PlansSection() {
             and move forward with confidence.
           </p>
 
-          <button className="plans-details-btn">
+          <Link to="/about" className="plans-details-btn">
             LEARN MORE
-          </button>
+          </Link>
         </div>
 
         {/* APPROACH CARDS */}
@@ -87,9 +88,9 @@ function PlansSection() {
                   {plan.description}
                 </p>
 
-                <button className="plan-more-btn">
+                <Link to="/about" className="plan-more-btn">
                   READ MORE
-                </button>
+                </Link>
               </div>
             </div>
           ))}

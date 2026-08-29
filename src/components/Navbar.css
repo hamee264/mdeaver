@@ -189,6 +189,8 @@
 
   letter-spacing: 1px;
 
+  border-radius: 0;
+
   transition:
     background 0.25s ease,
     transform 0.25s ease;

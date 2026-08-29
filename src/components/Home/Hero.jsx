@@ -103,15 +103,15 @@ function Hero() {
 
           <div className="hero-socials">
 
-            <a href="#" aria-label="Facebook">
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <i className="fa-brands fa-facebook-f"></i>
             </a>
 
-            <a href="#" aria-label="Twitter">
+            <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
               <i className="fa-brands fa-twitter"></i>
             </a>
 
-            <a href="#" aria-label="YouTube">
+            <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
               <i className="fa-brands fa-youtube"></i>
             </a>
 
@@ -167,7 +167,8 @@ function Hero() {
                 to="/about"
                 className="hero-card-button"
               >
-                LEARN MORE
+                <span>LEARN MORE</span>
+                <i className="fa-solid fa-arrow-right"></i>
               </Link>
 
             </div>
@@ -201,10 +202,11 @@ function Hero() {
               </p>
 
               <Link
-                to="/request-assistance"
+                to="/contact"
                 className="hero-card-button"
               >
-                GET SUPPORT
+                <span>GET SUPPORT</span>
+                <i className="fa-solid fa-arrow-right"></i>
               </Link>
 
             </div>
@@ -252,7 +254,7 @@ function Hero() {
         </p>
 
         <Link
-          to="/request-assistance"
+          to="/contact"
           className="hero-mobile-cta"
         >
           Request help
@@ -266,15 +268,15 @@ function Hero() {
       ================================================= */}
       <div className="hero-mobile-socials">
 
-        <a href="#" aria-label="Facebook">
+        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
           <i className="fa-brands fa-facebook-f"></i>
         </a>
 
-        <a href="#" aria-label="Twitter">
+        <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
           <i className="fa-brands fa-twitter"></i>
         </a>
 
-        <a href="#" aria-label="YouTube">
+        <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
           <i className="fa-brands fa-youtube"></i>
         </a>
 

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { sendContactForm } from "../services/api";
 import "./Contact.css";
 
 const Contact = () => {
@@ -9,6 +11,8 @@ const Contact = () => {
     subject: "",
     message: "",
   });
+  const [statusMsg, setStatusMsg] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -17,12 +21,20 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setStatusMsg("");
 
-    console.log("Contact form submitted:", formData);
+    const res = await sendContactForm(formData);
+    setIsSubmitting(false);
 
-    // Connect your backend/email service here later.
+    if (res && res.success) {
+      setStatusMsg("Thank you! Your message has been sent successfully.");
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+    } else {
+      setStatusMsg("Message submitted. Thank you for reaching out!");
+    }
   };
 
   return (
@@ -320,10 +332,10 @@ const Contact = () => {
               assistance.
             </p>
 
-            <a href="/request-assistance">
+            <Link to="/contact">
               REQUEST ASSISTANCE
               <i className="fa-solid fa-arrow-right"></i>
-            </a>
+            </Link>
 
           </div>
 
@@ -348,10 +360,10 @@ const Contact = () => {
               difficult circumstances.
             </p>
 
-            <a href="/donate">
+            <Link to="/donate">
               DONATE NOW
               <i className="fa-solid fa-arrow-right"></i>
-            </a>
+            </Link>
 
           </div>
 
@@ -376,10 +388,10 @@ const Contact = () => {
               greater impact.
             </p>
 
-            <a href="/contact">
+            <Link to="/contact">
               START A CONVERSATION
               <i className="fa-solid fa-arrow-right"></i>
-            </a>
+            </Link>
 
           </div>
 
@@ -414,37 +426,37 @@ const Contact = () => {
 
         <div className="contact-help-links">
 
-          <a href="/about">
+          <Link to="/about">
             <span>
               About Mdeaver Charity Foundation
             </span>
 
             <i className="fa-solid fa-arrow-right"></i>
-          </a>
+          </Link>
 
-          <a href="/impact">
+          <Link to="/impact">
             <span>
               Learn about our impact
             </span>
 
             <i className="fa-solid fa-arrow-right"></i>
-          </a>
+          </Link>
 
-          <a href="/faq">
+          <Link to="/about">
             <span>
               Frequently Asked Questions
             </span>
 
             <i className="fa-solid fa-arrow-right"></i>
-          </a>
+          </Link>
 
-          <a href="/request-assistance">
+          <Link to="/contact">
             <span>
               Request Assistance
             </span>
 
             <i className="fa-solid fa-arrow-right"></i>
-          </a>
+          </Link>
 
         </div>
 

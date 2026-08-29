@@ -1,0 +1,418 @@
+/* =========================================================
+   DONATION MODAL STYLES (NO BORDER RADIUS DESIGN)
+========================================================= */
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-container {
+  background: #ffffff;
+  width: 100%;
+  max-width: 580px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  border-radius: 0 !important;
+  border: 3px solid #23933a;
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 36px;
+  height: 36px;
+  background: #eeeeee;
+  border: none;
+  font-size: 18px;
+  color: #333333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 !important;
+  transition: background 0.2s ease, color 0.2s ease;
+  z-index: 10;
+}
+
+.modal-close-btn:hover {
+  background: #e74c3c;
+  color: #ffffff;
+}
+
+/* =========================================================
+   HEADER & AMOUNT BANNER
+========================================================= */
+
+.modal-header-banner {
+  background: #23933a;
+  color: #ffffff;
+  padding: 30px 25px 25px;
+  text-align: center;
+}
+
+.modal-header-banner h2 {
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0 0 10px 0;
+  opacity: 0.9;
+  font-weight: 700;
+}
+
+.modal-amount-display {
+  font-size: 42px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  margin-bottom: 5px;
+  color: #ffffff;
+}
+
+.modal-amount-subtitle {
+  font-size: 13px;
+  opacity: 0.85;
+  margin: 0;
+}
+
+/* =========================================================
+   BODY CONTENT
+========================================================= */
+
+.modal-body {
+  padding: 30px 25px;
+}
+
+.modal-section-title {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #222222;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-section-title::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: #f2b52d;
+  border-radius: 0 !important;
+}
+
+/* Preset Buttons Grid */
+.modal-preset-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.modal-preset-btn {
+  height: 44px;
+  background: #f8f9fa;
+  border: 1px solid #dddddd;
+  border-radius: 0 !important;
+  font-weight: 700;
+  font-size: 14px;
+  color: #444444;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-preset-btn:hover,
+.modal-preset-btn.active {
+  background: #23933a;
+  border-color: #23933a;
+  color: #ffffff;
+}
+
+.modal-custom-input-group {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.modal-custom-input-group span {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 700;
+  color: #666666;
+  font-size: 16px;
+}
+
+.modal-custom-input-group input {
+  width: 100%;
+  height: 48px;
+  padding: 0 15px 0 35px;
+  border: 1px solid #cccccc;
+  border-radius: 0 !important;
+  font-size: 15px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.modal-custom-input-group input:focus {
+  border-color: #23933a;
+}
+
+/* Form Inputs */
+.modal-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 15px;
+}
+
+.modal-field label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #555555;
+  text-transform: uppercase;
+}
+
+.modal-field input {
+  height: 48px;
+  padding: 0 15px;
+  border: 1px solid #cccccc;
+  border-radius: 0 !important;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.modal-field input:focus {
+  border-color: #23933a;
+}
+
+/* Payment Box */
+.paypal-payment-box {
+  background: #f8f9fa;
+  border: 1px solid #e2e8f0;
+  border-radius: 0 !important;
+  padding: 20px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.paypal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 800;
+  color: #003087;
+  margin-bottom: 12px;
+}
+
+.paypal-badge i {
+  font-size: 22px;
+  color: #0079c1;
+}
+
+.paypal-pay-btn {
+  width: 100%;
+  height: 52px;
+  background: #ffc439;
+  color: #003087;
+  border: none;
+  border-radius: 0 !important;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 4px 12px rgba(255, 196, 57, 0.3);
+}
+
+.paypal-pay-btn:hover {
+  background: #f2ba31;
+  transform: translateY(-1px);
+}
+
+.paypal-pay-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   RECEIPT / INVOICE DISPLAY (MODAL CONFIRMATION VIEW)
+========================================================= */
+
+.receipt-container {
+  padding: 35px 25px;
+}
+
+.receipt-status-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.receipt-success-icon {
+  width: 64px;
+  height: 64px;
+  background: #e8f5e9;
+  color: #23933a;
+  border-radius: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin: 0 auto 15px;
+  border: 2px solid #23933a;
+}
+
+.receipt-status-header h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #111111;
+  margin: 0 0 5px;
+}
+
+.receipt-status-header p {
+  color: #666666;
+  font-size: 14px;
+  margin: 0;
+}
+
+.receipt-card {
+  border: 1px dashed #23933a;
+  background: #f9fbf9;
+  padding: 25px;
+  border-radius: 0 !important;
+  margin-bottom: 25px;
+}
+
+.receipt-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 15px;
+}
+
+.receipt-number {
+  font-size: 13px;
+  font-weight: 700;
+  color: #555555;
+}
+
+.receipt-date {
+  font-size: 12px;
+  color: #777777;
+}
+
+.receipt-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.receipt-detail-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.receipt-detail-item span:first-child {
+  color: #666666;
+}
+
+.receipt-detail-item span:last-child {
+  font-weight: 700;
+  color: #222222;
+}
+
+.receipt-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 2px solid #23933a;
+  font-size: 18px;
+  font-weight: 800;
+  color: #23933a;
+}
+
+.receipt-ok-btn {
+  width: 100%;
+  height: 50px;
+  background: #23933a;
+  color: #ffffff;
+  border: none;
+  border-radius: 0 !important;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.receipt-ok-btn:hover {
+  background: #1b772e;
+}
+
+@media (max-width: 480px) {
+  .modal-preset-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .modal-form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

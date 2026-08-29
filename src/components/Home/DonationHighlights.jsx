@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./DonationHighlights.css";
 
 import solarImage from "../../assets/sq-02.jpg";
@@ -97,9 +98,9 @@ function DonationHighlights() {
                   and their children.
                 </p>
 
-                <button>
+                <Link to="/about" className="feature-item-button">
                   LEARN MORE
-                </button>
+                </Link>
 
               </div>
 
@@ -126,9 +127,9 @@ function DonationHighlights() {
                   experiencing genuine financial difficulties.
                 </p>
 
-                <button className="green-button">
+                <Link to="/about" className="feature-item-button green-button">
                   LEARN MORE
-                </button>
+                </Link>
 
               </div>
 
@@ -155,9 +156,9 @@ function DonationHighlights() {
                   that make it difficult to meet basic needs.
                 </p>
 
-                <button className="green-button">
+                <Link to="/about" className="feature-item-button green-button">
                   LEARN MORE
-                </button>
+                </Link>
 
               </div>
 
@@ -218,9 +219,9 @@ function DonationHighlights() {
                   access essential resources and opportunities.
                 </p>
 
-                <button>
+                <Link to="/impact" className="feature-item-button">
                   LEARN MORE
-                </button>
+                </Link>
 
               </div>
 
@@ -247,9 +248,9 @@ function DonationHighlights() {
                   unexpected challenges and financial pressure.
                 </p>
 
-                <button className="green-button">
+                <Link to="/impact" className="feature-item-button green-button">
                   LEARN MORE
-                </button>
+                </Link>
 
               </div>
 
@@ -276,9 +277,9 @@ function DonationHighlights() {
                   greater stability, dignity, and opportunity.
                 </p>
 
-                <button className="green-button">
+                <Link to="/impact" className="feature-item-button green-button">
                   LEARN MORE
-                </button>
+                </Link>
 
               </div>
 

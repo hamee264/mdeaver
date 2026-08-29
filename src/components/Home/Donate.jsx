@@ -1,13 +1,18 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useDonation } from "../../context/DonationContext";
 import "./Donate.css";
 
 import donateBackground from "../../assets/sq-03.jpg";
 import donatePanelBackground from "../../assets/sq-02.jpg";
 
 function Donate() {
-  const [days, setDays] = useState(100);
-  const [hours, setHours] = useState(3);
-  const [people, setPeople] = useState(1);
+  const { openDonateModal } = useDonation();
+
+  const presetAmounts = [250, 500, 1000, 2500, 5000];
+
+  const [selectedPreset, setSelectedPreset] = useState(1000);
+  const [customAmount, setCustomAmount] = useState("");
 
   const [aid, setAid] = useState("");
   const [payment, setPayment] = useState("");
@@ -16,12 +21,20 @@ function Donate() {
   const [openAccordion, setOpenAccordion] = useState(null);
 
   /*
-   * Simple donation calculation.
-   * You can replace this later with your actual pricing logic.
+   * Direct donation calculation:
+   * Uses custom input if provided, otherwise the selected preset amount.
    */
-  const recommendedAmount = Math.round(
-    250 + days * 1.5 + hours * 20 + people * 45
-  );
+  const directAmount = customAmount ? Number(customAmount) : selectedPreset;
+
+  const handlePresetSelect = (amount) => {
+    setSelectedPreset(amount);
+    setCustomAmount("");
+  };
+
+  const handleCustomChange = (e) => {
+    const val = e.target.value;
+    setCustomAmount(val);
+  };
 
   const toggleAccordion = (index) => {
     setOpenAccordion(openAccordion === index ? null : index);
@@ -63,63 +76,65 @@ function Donate() {
         <div className="donate-form">
 
           {/* -----------------------------------------------
-              TOP SLIDERS
+              DIRECT AMOUNT PRESETS
           ------------------------------------------------ */}
 
-          <div className="donate-top-fields">
+          <div className="donate-people">
 
-            {/* DAYS */}
-            <div className="donate-slider-field">
-              <label htmlFor="days">
-                Days you want to support
-              </label>
+            <label>
+              Select Direct Donation Amount
+            </label>
 
-              <div className="donate-slider">
-                <input
-                  id="days"
-                  type="range"
-                  min="1"
-                  max="200"
-                  value={days}
-                  onChange={(e) => setDays(Number(e.target.value))}
-                />
+            <div className="people-list">
 
-                <span
-                  className="slider-number"
-                  style={{
-                    left: `${((days - 1) / 199) * 100}%`,
-                  }}
+              {presetAmounts.map((amt) => (
+                <button
+                  key={amt}
+                  type="button"
+                  className={
+                    selectedPreset === amt && !customAmount
+                      ? "selected"
+                      : ""
+                  }
+                  onClick={() => handlePresetSelect(amt)}
                 >
-                  {days}
-                </span>
-              </div>
+                  ${amt.toLocaleString()}
+                </button>
+              ))}
+
             </div>
 
-            {/* HOURS */}
-            <div className="donate-slider-field">
-              <label htmlFor="hours">
-                Working hours of the volunteer
-              </label>
+          </div>
 
-              <div className="donate-slider">
-                <input
-                  id="hours"
-                  type="range"
-                  min="1"
-                  max="10"
-                  value={hours}
-                  onChange={(e) => setHours(Number(e.target.value))}
-                />
+          {/* -----------------------------------------------
+              CUSTOM DIRECT AMOUNT INPUT
+          ------------------------------------------------ */}
 
-                <span
-                  className="slider-number"
-                  style={{
-                    left: `${((hours - 1) / 9) * 100}%`,
-                  }}
-                >
-                  {hours}
-                </span>
-              </div>
+          <div className="donate-people" style={{ marginTop: "22px" }}>
+
+            <label htmlFor="directCustomAmount">
+              Or Enter Custom Amount ($)
+            </label>
+
+            <div className="select-wrapper">
+              <input
+                id="directCustomAmount"
+                type="number"
+                min="5"
+                placeholder="Enter custom amount (e.g. 150)"
+                value={customAmount}
+                onChange={handleCustomChange}
+                style={{
+                  width: "100%",
+                  height: "54px",
+                  padding: "0 20px",
+                  border: "1px solid #eeeeee",
+                  borderRadius: "0",
+                  outline: "none",
+                  fontSize: "15px",
+                  color: "#333333"
+                }}
+              />
             </div>
 
           </div>
@@ -203,54 +218,6 @@ function Donate() {
           </div>
 
           {/* -----------------------------------------------
-              PEOPLE
-          ------------------------------------------------ */}
-
-          <div className="donate-people">
-
-            <label>
-              Number of people you want to help
-            </label>
-
-            <div className="people-list">
-
-              <button
-                type="button"
-                className={people === 1 ? "selected" : ""}
-                onClick={() => setPeople(1)}
-              >
-                1 Person
-              </button>
-
-              <button
-                type="button"
-                className={people === 2 ? "selected" : ""}
-                onClick={() => setPeople(2)}
-              >
-                2 People
-              </button>
-
-              <button
-                type="button"
-                className={people === 3 ? "selected" : ""}
-                onClick={() => setPeople(3)}
-              >
-                3 People (Family)
-              </button>
-
-              <button
-                type="button"
-                className={people === 4 ? "selected" : ""}
-                onClick={() => setPeople(4)}
-              >
-                4 People (Family)
-              </button>
-
-            </div>
-
-          </div>
-
-          {/* -----------------------------------------------
               BOTTOM RESULT
           ------------------------------------------------ */}
 
@@ -262,13 +229,22 @@ function Donate() {
 
             <div className="recommended-amount">
               <span className="amount">
-                ₦ {recommendedAmount.toLocaleString()}
+                ${(directAmount || 0).toLocaleString()}
               </span>
 
               <span className="recommended-text">
-                RECOMMENDED
+                DIRECT DONATION
               </span>
             </div>
+
+            <button
+              type="button"
+              className="donate-now-action-btn"
+              onClick={() => openDonateModal(directAmount)}
+            >
+              DONATE NOW
+              <i className="fa-solid fa-arrow-right"></i>
+            </button>
 
           </div>
 
@@ -299,9 +275,8 @@ function Donate() {
 
             {/* ITEM 1 */}
             <div
-              className={`donate-accordion-item ${
-                openAccordion === 0 ? "open" : ""
-              }`}
+              className={`donate-accordion-item ${openAccordion === 0 ? "open" : ""
+                }`}
             >
               <button
                 type="button"
@@ -329,9 +304,8 @@ function Donate() {
 
             {/* ITEM 2 */}
             <div
-              className={`donate-accordion-item ${
-                openAccordion === 1 ? "open" : ""
-              }`}
+              className={`donate-accordion-item ${openAccordion === 1 ? "open" : ""
+                }`}
             >
               <button
                 type="button"
@@ -359,9 +333,8 @@ function Donate() {
 
             {/* ITEM 3 */}
             <div
-              className={`donate-accordion-item ${
-                openAccordion === 2 ? "open" : ""
-              }`}
+              className={`donate-accordion-item ${openAccordion === 2 ? "open" : ""
+                }`}
             >
               <button
                 type="button"
@@ -393,12 +366,12 @@ function Donate() {
               MORE INFO
           ------------------------------------------------ */}
 
-          <button
-            type="button"
+          <Link
+            to="/about"
             className="donate-more-button"
           >
             MORE INFO
-          </button>
+          </Link>
 
         </div>
 

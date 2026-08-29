@@ -1,0 +1,109 @@
+import express from 'express';
+import cors from 'cors';
+import {
+  sendVisitNotification,
+  sendContactEmail,
+  sendDonationEmail,
+} from './services/emailService.js';
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+// Healthcheck Route
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    service: 'Mdeaver Charity Express API on Vercel',
+  });
+});
+
+/**
+ * 1. Website Visit Notification Endpoint
+ */
+app.post('/api/notify/visit', async (req, res) => {
+  try {
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    const userAgent = req.headers['user-agent'];
+    const timestamp = new Date().toLocaleString('en-US', {
+      dateStyle: 'medium',
+      timeStyle: 'short',
+    });
+
+    const result = await sendVisitNotification({ ip, userAgent, timestamp });
+    res.json({ success: true, message: 'Visit notification processed', result });
+  } catch (error) {
+    console.error('Error handling visit notification:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+/**
+ * 2. Contact Form Submission Endpoint
+ */
+app.post('/api/contact', async (req, res) => {
+  try {
+    const { name, email, phone, subject, message } = req.body;
+
+    if (!name || !email || !message) {
+      return res.status(400).json({
+        success: false,
+        error: 'Name, email, and message are required fields.',
+      });
+    }
+
+    const result = await sendContactEmail({ name, email, phone, subject, message });
+    res.json({
+      success: true,
+      message: 'Contact form submitted and notification email dispatched.',
+      result,
+    });
+  } catch (error) {
+    console.error('Error handling contact submission:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+/**
+ * 3. Donation Payment & Invoice Notification Endpoint
+ */
+app.post('/api/donations/notify', async (req, res) => {
+  try {
+    const { invoiceNumber, donorName, email, amount, paymentMethod, timestamp } = req.body;
+
+    if (!donorName || !email || !amount) {
+      return res.status(400).json({
+        success: false,
+        error: 'Donor name, email, and amount are required.',
+      });
+    }
+
+    const formattedTime = timestamp || new Date().toLocaleString('en-US', {
+      dateStyle: 'medium',
+      timeStyle: 'short',
+    });
+
+    const result = await sendDonationEmail({
+      invoiceNumber: invoiceNumber || `MDF-2026-${Math.floor(10000 + Math.random() * 90000)}`,
+      donorName,
+      email,
+      amount,
+      paymentMethod: paymentMethod || 'PayPal',
+      timestamp: formattedTime,
+    });
+
+    res.json({
+      success: true,
+      message: 'Donation notification dispatched and receipt generated.',
+      result,
+    });
+  } catch (error) {
+    console.error('Error handling donation notification:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Export Express app as Vercel Serverless Function Handler
+export default app;

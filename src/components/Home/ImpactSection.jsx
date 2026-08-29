@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./ImpactSection.css";
+import commitmentBg from "../../assets/our-commitment-bg.jpg";
 
 const ProjectCard = ({
   category,
@@ -40,7 +41,15 @@ const ImpactSection = () => {
               FEATURED COMMITMENT
           ===================================== */}
 
-          <article className="impact-featured-news">
+          <article
+            className="impact-featured-news"
+            style={{
+              backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.75) 100%), url(${commitmentBg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
             <div className="impact-featured-overlay"></div>
 
             <div className="impact-featured-content">

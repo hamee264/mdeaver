@@ -1,7 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useDonation } from "../context/DonationContext";
 import "./Impact.css";
 
 const Impact = () => {
+  const { openDonateModal } = useDonation();
   return (
     <main className="impact-page">
 
@@ -291,9 +294,13 @@ const Impact = () => {
             facing hardship.
           </p>
 
-          <a href="/donate" className="impact-btn">
+          <button
+            type="button"
+            className="impact-btn"
+            onClick={() => openDonateModal()}
+          >
             DONATE NOW
-          </a>
+          </button>
         </div>
       </section>
 
@@ -383,14 +390,18 @@ const Impact = () => {
             assistance, and help create brighter possibilities for the future.
           </p>
 
-          <div className="impact-closing-buttons">
-            <a href="/donate" className="impact-btn">
-              DONATE
-            </a>
+          <div className="impact-cta-actions">
+            <button
+              type="button"
+              className="impact-btn"
+              onClick={() => openDonateModal()}
+            >
+              DONATE NOW
+            </button>
 
-            <a href="/request-assistance" className="impact-btn outline">
+            <Link to="/contact" className="impact-btn outline">
               REQUEST ASSISTANCE
-            </a>
+            </Link>
           </div>
         </div>
       </section>

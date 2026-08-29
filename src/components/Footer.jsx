@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { useDonation } from "../context/DonationContext";
 import "./Footer.css";
 
 import causeImage1 from "../assets/cause-06-1024x575.jpg";
@@ -9,6 +11,7 @@ import squareImage2 from "../assets/sq-02.jpg";
 import foundationImage from "../assets/image.png";
 
 function Footer() {
+  const { openDonateModal } = useDonation();
   return (
     <footer className="footer">
       <div className="footer-overlay">
@@ -32,7 +35,9 @@ function Footer() {
             <div className="footer-socials">
 
               <a
-                href="#"
+                href="https://www.facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="social facebook"
                 aria-label="Facebook"
               >
@@ -40,7 +45,9 @@ function Footer() {
               </a>
 
               <a
-                href="#"
+                href="https://www.twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="social twitter"
                 aria-label="Twitter"
               >
@@ -48,7 +55,9 @@ function Footer() {
               </a>
 
               <a
-                href="#"
+                href="https://www.youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="social youtube"
                 aria-label="YouTube"
               >
@@ -203,20 +212,35 @@ function Footer() {
 
           <div className="footer-emails">
 
-            <a href="/donate">
+            <button
+              type="button"
+              className="footer-donate-btn"
+              onClick={() => openDonateModal()}
+              style={{
+                background: "none",
+                border: "none",
+                color: "inherit",
+                font: "inherit",
+                cursor: "pointer",
+                padding: 0,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "5px"
+              }}
+            >
               <span>›</span>
               Donate
-            </a>
+            </button>
 
-            <a href="/request-assistance">
+            <Link to="/contact">
               <span>›</span>
               Request Assistance
-            </a>
+            </Link>
 
-            <a href="/contact">
+            <Link to="/contact">
               <span>›</span>
               Contact Us
-            </a>
+            </Link>
 
           </div>
 

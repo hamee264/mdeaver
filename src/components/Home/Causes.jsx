@@ -20,7 +20,7 @@ function CauseItem({ image, title, description, color = "green" }) {
         <p>{description}</p>
 
         <Link
-          to="/support"
+          to="/donate"
           className={`cause-button cause-button-${color}`}
         >
           VIEW DETAILS

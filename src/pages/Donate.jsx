@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDonation } from "../context/DonationContext";
 import "./Donate.css";
 
-const donationAmounts = [25, 50, 100, 250, 500];
+const donationAmounts = [250, 500, 1000, 2500, 5000];
 
 function Donate() {
-  const [amount, setAmount] = useState(100);
+  const { openDonateModal } = useDonation();
+  const [amount, setAmount] = useState(1000);
   const [customAmount, setCustomAmount] = useState("");
 
   const selectedAmount = customAmount || amount;
@@ -178,7 +180,11 @@ function Donate() {
             </div>
 
 
-            <button className="donate-submit">
+            <button
+              type="button"
+              className="donate-submit"
+              onClick={() => openDonateModal(selectedAmount)}
+            >
               DONATE NOW
               <span>→</span>
             </button>
@@ -366,7 +372,7 @@ function Donate() {
           </p>
 
           <Link
-            to="/request-assistance"
+            to="/contact"
             className="donate-final-btn"
           >
             REQUEST ASSISTANCE

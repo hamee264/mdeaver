@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDonation } from "../context/DonationContext";
 import "./Navbar.css";
 
 function Navbar() {
+  const { openDonateModal } = useDonation();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const closeMenu = () => {
@@ -40,19 +42,19 @@ function Navbar() {
 
             <div className="social-links">
 
-              <a href="#" aria-label="Facebook">
+              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <i className="fa-brands fa-facebook-f"></i>
               </a>
 
-              <a href="#" aria-label="YouTube">
+              <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
                 <i className="fa-brands fa-youtube"></i>
               </a>
 
-              <a href="#" aria-label="Twitter">
+              <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
                 <i className="fa-brands fa-twitter"></i>
               </a>
 
-              <a href="#" aria-label="Instagram">
+              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <i className="fa-brands fa-instagram"></i>
               </a>
 
@@ -110,12 +112,13 @@ function Navbar() {
 
 
           {/* DONATE BUTTON */}
-          <Link
-            to="/donate"
+          <button
+            type="button"
             className="donate-btn desktop-donate"
+            onClick={() => openDonateModal()}
           >
             DONATE
-          </Link>
+          </button>
 
 
           {/* MOBILE MENU BUTTON */}
@@ -146,7 +149,7 @@ function Navbar() {
             About
           </Link>
 
-          <Link to="/causes" onClick={closeMenu}>
+          <Link to="/impact" onClick={closeMenu}>
             Who We Support
           </Link>
 
@@ -154,7 +157,7 @@ function Navbar() {
             Our Impact
           </Link>
 
-          <Link to="/support" onClick={closeMenu}>
+          <Link to="/donate" onClick={closeMenu}>
             Get Support
           </Link>
 
@@ -162,13 +165,16 @@ function Navbar() {
             Contact
           </Link>
 
-          <Link
-            to="/donate"
+          <button
+            type="button"
             className="donate-btn mobile-donate"
-            onClick={closeMenu}
+            onClick={() => {
+              closeMenu();
+              openDonateModal();
+            }}
           >
             DONATE
-          </Link>
+          </button>
 
         </div>
 

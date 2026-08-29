@@ -458,6 +458,32 @@
   margin-top: 15px;
 
   padding-top: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.donate-now-action-btn {
+  height: 52px;
+  padding: 0 25px;
+  background: #23933a;
+  color: #ffffff;
+  border: none;
+  border-radius: 0 !important;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+  margin-left: auto;
+}
+
+.donate-now-action-btn:hover {
+  background: #1b772e;
+  transform: translateY(-2px);
 }
 
 /* =========================================================
@@ -648,11 +674,16 @@
 
   margin-top: 28px;
 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
   border: none;
 
   background: #61bd00;
 
   color: #ffffff;
+  text-decoration: none;
 
   font-family: inherit;
 
