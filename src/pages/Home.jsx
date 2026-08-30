@@ -14,7 +14,7 @@ function Home() {
       <ImpactSection />
       <Donate />
       <StatisticsBanner />
-      <PlansSection />
+      {/* <PlansSection /> */}
       <HelpSection />
     </>
   );

@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import "./Hero.css";
 
 import heroBackground from "../../assets/sq-02.jpg";
-import personImage from "../../assets/sq-02.jpg";
-import plantImage from "../../assets/sq-03.jpg";
+import personImage from "../../../public/images/WhatsApp Image 2026-08-30 at 04.15.06.jpeg";
+import plantImage from "../../../public/images/WhatsApp Image 2026-08-30 at 04.15.06 (2).jpeg";
 
 function Hero() {
   // Tracks which card is centered in the mobile swipe deck so the
@@ -39,51 +39,36 @@ function Hero() {
   }, []);
 
   return (
-    <section
-      className="hero"
-      style={{ "--hero-bg": `url(${heroBackground})` }}
-    >
+    <section className="hero" style={{ "--hero-bg": `url(${heroBackground})` }}>
       {/* Desktop angled panel */}
       <div className="hero-dark-panel"></div>
 
       <div className="hero-container">
-
         {/* =================================================
             MOBILE INTRO
         ================================================= */}
         <div className="hero-mobile-intro">
-
-          <span className="hero-mobile-eyebrow">
-            Together, we can
-          </span>
+          <span className="hero-mobile-eyebrow">Together, we can</span>
 
           <h1>
             Empowering
             <strong>Lives</strong>
           </h1>
 
-          <p>
-            Restoring hope and building
-            stronger communities.
-          </p>
-
+          <p>Restoring hope and building stronger communities.</p>
         </div>
-
 
         {/* =================================================
             DESKTOP LEFT CONTENT
         ================================================= */}
         <div className="hero-content">
-
           <div className="hero-title">
             <span>EMPOWERING</span>
             <span>LIVES</span>
             <span>TOGETHER</span>
           </div>
 
-          <p className="hero-small-text">
-            SINCE 2020
-          </p>
+          <p className="hero-small-text">SINCE 2020</p>
 
           <p className="hero-description">
             RESTORING HOPE
@@ -101,55 +86,58 @@ function Hero() {
             <span></span>
           </div>
 
-          <div className="hero-socials">
-
-            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          {/* <div className="hero-socials">
+            <a
+              href="https://www.facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+            >
               <i className="fa-brands fa-facebook-f"></i>
             </a>
 
-            <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+            <a
+              href="https://www.twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter"
+            >
               <i className="fa-brands fa-twitter"></i>
             </a>
 
-            <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <a
+              href="https://www.youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+            >
               <i className="fa-brands fa-youtube"></i>
             </a>
-
-          </div>
-
+          </div> */}
         </div>
-
 
         {/* =================================================
             CARDS
         ================================================= */}
         <div className="hero-cards" ref={cardsRef}>
-
           {/* =================================================
               SUPPORT / COMMUNITY IMAGE (desktop only)
           ================================================= */}
           <div className="hero-card hero-person-card">
-
             <img
               src={personImage}
               alt="Mdeaver Charity Foundation community support"
             />
-
           </div>
-
 
           {/* =================================================
               OUR MISSION
           ================================================= */}
           <div className="hero-card hero-info-card">
-
             <div className="card-pattern"></div>
 
             <div className="card-content">
-
-              <span className="card-label">
-                OUR MISSION
-              </span>
+              <span className="card-label">OUR MISSION</span>
 
               <h3>
                 MAKING A
@@ -158,36 +146,25 @@ function Hero() {
               </h3>
 
               <p>
-                We support individuals and families facing
-                hardship and help them move toward greater
-                stability, dignity, and opportunity.
+                We support individuals and families facing hardship and help
+                them move toward greater stability, dignity, and opportunity.
               </p>
 
-              <Link
-                to="/about"
-                className="hero-card-button"
-              >
+              <Link to="/about" className="hero-card-button">
                 <span>LEARN MORE</span>
                 <i className="fa-solid fa-arrow-right"></i>
               </Link>
-
             </div>
-
           </div>
-
 
           {/* =================================================
               WHO WE SUPPORT
           ================================================= */}
           <div className="hero-card hero-contact-card">
-
             <div className="card-pattern"></div>
 
             <div className="card-content">
-
-              <span className="card-label">
-                WHO WE SUPPORT
-              </span>
+              <span className="card-label">WHO WE SUPPORT</span>
 
               <h3>
                 HELPING PEOPLE
@@ -196,36 +173,27 @@ function Hero() {
               </h3>
 
               <p>
-                Single mothers, families facing financial
-                hardship, people experiencing homelessness,
-                and others going through difficult times.
+                Single mothers, families facing financial hardship, people
+                experiencing homelessness, and others going through difficult
+                times.
               </p>
 
-              <Link
-                to="/contact"
-                className="hero-card-button"
-              >
+              <Link to="/contact" className="hero-card-button">
                 <span>GET SUPPORT</span>
                 <i className="fa-solid fa-arrow-right"></i>
               </Link>
-
             </div>
-
           </div>
-
 
           {/* =================================================
               PLANT / HOPE IMAGE (desktop only)
           ================================================= */}
           <div className="hero-card hero-plant-card">
-
             <img
               src={plantImage}
               alt="New growth representing hope and a better future"
             />
-
           </div>
-
         </div>
 
         {/* =================================================
@@ -239,34 +207,26 @@ function Hero() {
             ></span>
           ))}
         </div>
-
       </div>
-
 
       {/* =================================================
           MOBILE BOTTOM MESSAGE
       ================================================= */}
       <div className="hero-mobile-bottom">
-
         <p>
-          A helping hand at the right time can give
-          someone hope for a better tomorrow.
+          A helping hand at the right time can give someone hope for a better
+          tomorrow.
         </p>
 
-        <Link
-          to="/contact"
-          className="hero-mobile-cta"
-        >
+        <Link to="/contact" className="hero-mobile-cta">
           Request help
         </Link>
-
       </div>
-
 
       {/* =================================================
           MOBILE SOCIALS
       ================================================= */}
-      <div className="hero-mobile-socials">
+      {/* <div className="hero-mobile-socials">
 
         <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
           <i className="fa-brands fa-facebook-f"></i>
@@ -280,8 +240,7 @@ function Hero() {
           <i className="fa-brands fa-youtube"></i>
         </a>
 
-      </div>
-
+      </div> */}
 
       {/* =================================================
           DESKTOP SCROLL
@@ -294,7 +253,6 @@ function Hero() {
         <span></span>
         <span></span>
       </a>
-
     </section>
   );
 }

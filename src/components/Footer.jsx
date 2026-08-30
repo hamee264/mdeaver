@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 import { useDonation } from "../context/DonationContext";
 import "./Footer.css";
 
-import causeImage1 from "../assets/cause-06-1024x575.jpg";
-import causeImage2 from "../assets/cause-05-1024x575.jpg";
-import causeImage3 from "../assets/cause-02-1024x575.jpg";
-import causeImage4 from "../assets/cause-04-1024x575.jpg";
-import squareImage1 from "../assets/sq-03.jpg";
-import squareImage2 from "../assets/sq-02.jpg";
-import foundationImage from "../assets/imagenav.png";
+import causeImage1 from "../../public/images/WhatsApp Image 2026-08-30 at 04.15.06.jpeg";
+import causeImage2 from "../../public/images/WhatsApp Image 2026-08-30 at 04.15.07.jpeg";
+import causeImage3 from "../../public/images/WhatsApp Image 2026-08-30 at 04.15.08 (1).jpeg";
+import causeImage4 from "../../public/images/WhatsApp Image 2026-08-30 at 04.15.10 (1).jpeg";
+import squareImage1 from "../../public/images/WhatsApp Image 2026-08-30 at 04.15.09 (3).jpeg";
+import squareImage2 from "../../public/images/WhatsApp Image 2026-08-30 at 04.15.09 (1).jpeg";
+import foundationImage from "../../public/images/WhatsApp Image 2026-08-30 at 04.15.11.jpeg";
 
 function Footer() {
   const { openDonateModal } = useDonation();
@@ -29,7 +29,7 @@ function Footer() {
               opportunity.
             </p>
 
-            <div className="footer-socials">
+            {/* <div className="footer-socials">
               <a
                 href="https://www.facebook.com"
                 target="_blank"
@@ -59,7 +59,7 @@ function Footer() {
               >
                 <i className="fab fa-youtube"></i>
               </a>
-            </div>
+            </div> */}
           </div>
 
           {/* =================================================
@@ -80,11 +80,11 @@ function Footer() {
               <span>Contact us for more information</span>
             </div>
 
-            <div className="contact-item">
+            {/* <div className="contact-item">
               <i className="far fa-envelope"></i>
 
               <span>info@mdeavercharityfoundation.org</span>
-            </div>
+            </div> */}
 
             <div className="contact-item">
               <i className="far fa-clock"></i>
@@ -148,7 +148,7 @@ function Footer() {
           </div>
 
           <div className="footer-emails">
-            <button
+            {/* <button
               type="button"
               className="footer-donate-btn"
               onClick={() => openDonateModal()}
@@ -176,7 +176,7 @@ function Footer() {
             <Link to="/contact">
               <span>›</span>
               Contact Us
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

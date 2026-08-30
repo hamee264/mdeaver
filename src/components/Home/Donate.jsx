@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useDonation } from "../../context/DonationContext";
 import "./Donate.css";
 
-import donateBackground from "../../assets/sq-03.jpg";
-import donatePanelBackground from "../../assets/sq-02.jpg";
+import donateBackground from "../../../public/images/WhatsApp Image 2026-08-30 at 04.15.09.jpeg";
+import donatePanelBackground from "../../../public/images/WhatsApp Image 2026-08-30 at 04.15.10 (2).jpeg";
 
 function Donate() {
   const { openDonateModal } = useDonation();
@@ -68,42 +68,32 @@ function Donate() {
       ===================================================== */}
 
       <div className="donate-panel">
-
         {/* ===================================================
             LEFT / FORM SIDE
         =================================================== */}
 
         <div className="donate-form">
-
           {/* -----------------------------------------------
               DIRECT AMOUNT PRESETS
           ------------------------------------------------ */}
 
           <div className="donate-people">
-
-            <label>
-              Select Direct Donation Amount
-            </label>
+            <label>Select Direct Donation Amount</label>
 
             <div className="people-list">
-
               {presetAmounts.map((amt) => (
                 <button
                   key={amt}
                   type="button"
                   className={
-                    selectedPreset === amt && !customAmount
-                      ? "selected"
-                      : ""
+                    selectedPreset === amt && !customAmount ? "selected" : ""
                   }
                   onClick={() => handlePresetSelect(amt)}
                 >
                   ${amt.toLocaleString()}
                 </button>
               ))}
-
             </div>
-
           </div>
 
           {/* -----------------------------------------------
@@ -111,7 +101,6 @@ function Donate() {
           ------------------------------------------------ */}
 
           <div className="donate-people" style={{ marginTop: "22px" }}>
-
             <label htmlFor="directCustomAmount">
               Or Enter Custom Amount ($)
             </label>
@@ -132,11 +121,10 @@ function Donate() {
                   borderRadius: "0",
                   outline: "none",
                   fontSize: "15px",
-                  color: "#333333"
+                  color: "#333333",
                 }}
               />
             </div>
-
           </div>
 
           {/* -----------------------------------------------
@@ -144,12 +132,9 @@ function Donate() {
           ------------------------------------------------ */}
 
           <div className="donate-options-row">
-
             {/* HUMANITARIAN AID */}
             <div className="donate-input-group">
-              <label htmlFor="aid">
-                Humanitarian Aid
-              </label>
+              <label htmlFor="aid">Humanitarian Aid</label>
 
               <div className="select-wrapper">
                 <select
@@ -161,9 +146,7 @@ function Donate() {
                   <option value="medical">Medical Aid</option>
                   <option value="education">Education</option>
                   <option value="food">Food Support</option>
-                  <option value="environment">
-                    Environmental Support
-                  </option>
+                  <option value="environment">Environmental Support</option>
                 </select>
 
                 <i className="fa-solid fa-chevron-down"></i>
@@ -172,9 +155,7 @@ function Donate() {
 
             {/* PAYMENT */}
             <div className="donate-input-group">
-              <label htmlFor="payment">
-                Type of payment
-              </label>
+              <label htmlFor="payment">Type of payment</label>
 
               <div className="select-wrapper">
                 <select
@@ -214,7 +195,6 @@ function Donate() {
                 </button>
               </div>
             </div>
-
           </div>
 
           {/* -----------------------------------------------
@@ -222,7 +202,6 @@ function Donate() {
           ------------------------------------------------ */}
 
           <div className="donate-result">
-
             <div className="donate-earth-icon">
               <i className="fa-solid fa-earth-americas"></i>
             </div>
@@ -232,9 +211,7 @@ function Donate() {
                 ${(directAmount || 0).toLocaleString()}
               </span>
 
-              <span className="recommended-text">
-                DIRECT DONATION
-              </span>
+              <span className="recommended-text">DIRECT DONATION</span>
             </div>
 
             <button
@@ -245,9 +222,7 @@ function Donate() {
               DONATE NOW
               <i className="fa-solid fa-arrow-right"></i>
             </button>
-
           </div>
-
         </div>
 
         {/* =================================================
@@ -255,16 +230,12 @@ function Donate() {
         ================================================= */}
 
         <div className="donate-information">
-
-          <h3>
-            Calculation of the donation
-          </h3>
+          <h3>Calculation of the donation</h3>
 
           <p>
-            Vestibulum ante ipsum primis in faucibus orci
-            luctus et ultrices posuere cubilia curae.
-            Phasel rhoncus, purus et consectetur volutpat,
-            turpis eros sodales orci, vel vulputate.
+            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+            posuere cubilia curae. Phasel rhoncus, purus et consectetur
+            volutpat, turpis eros sodales orci, vel vulputate.
           </p>
 
           {/* -----------------------------------------------
@@ -272,31 +243,23 @@ function Donate() {
           ------------------------------------------------ */}
 
           <div className="donate-accordion">
-
             {/* ITEM 1 */}
             <div
-              className={`donate-accordion-item ${openAccordion === 0 ? "open" : ""
-                }`}
+              className={`donate-accordion-item ${
+                openAccordion === 0 ? "open" : ""
+              }`}
             >
-              <button
-                type="button"
-                onClick={() => toggleAccordion(0)}
-              >
-                <span className="accordion-plus">
-                  +
-                </span>
+              <button type="button" onClick={() => toggleAccordion(0)}>
+                <span className="accordion-plus">+</span>
 
-                <span>
-                  Donation Info
-                </span>
+                <span>Donation Info</span>
               </button>
 
               {openAccordion === 0 && (
                 <div className="accordion-content">
                   <p>
-                    Your donation helps provide essential
-                    resources and support to communities
-                    that need them most.
+                    Your donation helps provide essential resources and support
+                    to communities that need them most.
                   </p>
                 </div>
               )}
@@ -304,28 +267,21 @@ function Donate() {
 
             {/* ITEM 2 */}
             <div
-              className={`donate-accordion-item ${openAccordion === 1 ? "open" : ""
-                }`}
+              className={`donate-accordion-item ${
+                openAccordion === 1 ? "open" : ""
+              }`}
             >
-              <button
-                type="button"
-                onClick={() => toggleAccordion(1)}
-              >
-                <span className="accordion-plus">
-                  +
-                </span>
+              <button type="button" onClick={() => toggleAccordion(1)}>
+                <span className="accordion-plus">+</span>
 
-                <span>
-                  Possibility of help
-                </span>
+                <span>Possibility of help</span>
               </button>
 
               {openAccordion === 1 && (
                 <div className="accordion-content">
                   <p>
-                    Your contribution can support medical
-                    care, environmental projects, education
-                    and humanitarian assistance.
+                    Your contribution can support medical care, environmental
+                    projects, education and humanitarian assistance.
                   </p>
                 </div>
               )}
@@ -333,48 +289,35 @@ function Donate() {
 
             {/* ITEM 3 */}
             <div
-              className={`donate-accordion-item ${openAccordion === 2 ? "open" : ""
-                }`}
+              className={`donate-accordion-item ${
+                openAccordion === 2 ? "open" : ""
+              }`}
             >
-              <button
-                type="button"
-                onClick={() => toggleAccordion(2)}
-              >
-                <span className="accordion-plus orange">
-                  +
-                </span>
+              <button type="button" onClick={() => toggleAccordion(2)}>
+                <span className="accordion-plus orange">+</span>
 
-                <span>
-                  How we work
-                </span>
+                <span>How we work</span>
               </button>
 
               {openAccordion === 2 && (
                 <div className="accordion-content">
                   <p>
-                    We direct donations toward practical
-                    projects designed to create measurable
-                    environmental and humanitarian impact.
+                    We direct donations toward practical projects designed to
+                    create measurable environmental and humanitarian impact.
                   </p>
                 </div>
               )}
             </div>
-
           </div>
 
           {/* -----------------------------------------------
               MORE INFO
           ------------------------------------------------ */}
 
-          <Link
-            to="/about"
-            className="donate-more-button"
-          >
+          <Link to="/about" className="donate-more-button">
             MORE INFO
           </Link>
-
         </div>
-
       </div>
     </section>
   );

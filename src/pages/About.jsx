@@ -51,7 +51,7 @@ const About = () => {
         <div className="about-container intro-grid">
           <div className="intro-image-wrap">
             <img
-              src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1000&q=85"
+              src="/public/images/WhatsApp Image 2026-08-30 at 04.15.07 (2).jpeg"
               alt="Children receiving community support"
             />
 
@@ -331,7 +331,7 @@ const About = () => {
         <div className="about-container why-grid">
           <div className="why-image">
             <img
-              src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=1100&q=85"
+              src="/public/images/WhatsApp Image 2026-08-30 at 04.15.09.jpeg"
               alt="Volunteers helping the community"
             />
 
@@ -502,13 +502,13 @@ const About = () => {
           <div className="stories-images">
             <img
               className="stories-main-image"
-              src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=900&q=85"
+              src="/public/images/WhatsApp Image 2026-08-30 at 04.15.11 (1).jpeg"
               alt="Community volunteers"
             />
 
             <div className="stories-small-image">
               <img
-                src="https://images.unsplash.com/photo-1593113630400-ea4288922497?auto=format&fit=crop&w=700&q=85"
+                src="/public/images/WhatsApp Image 2026-08-30 at 04.15.10.jpeg"
                 alt="Community support"
               />
             </div>

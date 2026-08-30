@@ -25,7 +25,7 @@
   background:
     linear-gradient(90deg, rgba(23, 77, 36, 0.96), rgba(23, 77, 36, 0.82)),
     var(--help-bg);
-  background-image: url(/public/assets/images0.jpeg);
+  background-image: url(/public/images/upscalemedia-transformed\ \(1\).jpeg);
   background-size: cover;
   background-position: center;
 
@@ -71,7 +71,7 @@
 
   margin: 0 0 45px;
 
-  color: rgba(255, 255, 255, 0.12);
+  /* color: rgba(255, 255, 255, 0.12); */
 
   font-family: "Fraunces", Georgia, serif;
 

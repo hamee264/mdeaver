@@ -35,7 +35,7 @@ function Navbar() {
               Empowering Lives. Restoring Hope.
             </span>
 
-            <div className="social-links">
+            {/* <div className="social-links">
               <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <i className="fa-brands fa-facebook-f"></i>
               </a>
@@ -51,7 +51,7 @@ function Navbar() {
               <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <i className="fa-brands fa-instagram"></i>
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
