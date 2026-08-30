@@ -13,15 +13,12 @@ function Navbar() {
 
   return (
     <header className="site-header">
-
       {/* =================================================
           TOP INFORMATION BAR
       ================================================= */}
       <div className="top-bar">
         <div className="top-bar-container">
-
           <div className="top-left">
-
             <span className="top-item">
               <i className="fa-regular fa-envelope"></i>
               Contact Mdeaver Charity Foundation
@@ -31,17 +28,14 @@ function Navbar() {
               <i className="fa-regular fa-clock"></i>
               Serving Communities Since 2020
             </span>
-
           </div>
 
           <div className="top-right">
-
             <span className="top-message">
               Empowering Lives. Restoring Hope.
             </span>
 
             <div className="social-links">
-
               <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <i className="fa-brands fa-facebook-f"></i>
               </a>
@@ -57,38 +51,26 @@ function Navbar() {
               <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <i className="fa-brands fa-instagram"></i>
               </a>
-
             </div>
-
           </div>
-
         </div>
       </div>
-
 
       {/* =================================================
           MAIN NAVIGATION
       ================================================= */}
       <nav className="main-navbar">
-
         <div className="navbar-container">
-
           {/* LOGO */}
-          <Link
-            to="/"
-            className="navbar-logo"
-            onClick={closeMenu}
-          >
+          <Link to="/" className="navbar-logo" onClick={closeMenu}>
             <img
-              src="/src/assets/image.png"
+              src="/assets/imagenav.png"
               alt="Mdeaver Charity Foundation Ltd."
             />
           </Link>
 
-
           {/* DESKTOP NAVIGATION */}
           <div className="desktop-nav">
-
             <Link to="/" onClick={closeMenu}>
               Home
             </Link>
@@ -97,19 +79,14 @@ function Navbar() {
               About
             </Link>
 
-            
-
             <Link to="/impact" onClick={closeMenu}>
               Our Impact
             </Link>
 
-          
             <Link to="/contact" onClick={closeMenu}>
               Contact
             </Link>
-
           </div>
-
 
           {/* DONATE BUTTON */}
           <button
@@ -119,7 +96,6 @@ function Navbar() {
           >
             DONATE
           </button>
-
 
           {/* MOBILE MENU BUTTON */}
           <button
@@ -132,15 +108,12 @@ function Navbar() {
             <span></span>
             <span></span>
           </button>
-
         </div>
-
 
         {/* =================================================
             MOBILE NAVIGATION
         ================================================= */}
         <div className={`mobile-nav ${menuOpen ? "open" : ""}`}>
-
           <Link to="/" onClick={closeMenu}>
             Home
           </Link>
@@ -175,11 +148,8 @@ function Navbar() {
           >
             DONATE
           </button>
-
         </div>
-
       </nav>
-
     </header>
   );
 }

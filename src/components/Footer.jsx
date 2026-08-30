@@ -8,32 +8,28 @@ import causeImage3 from "../assets/cause-02-1024x575.jpg";
 import causeImage4 from "../assets/cause-04-1024x575.jpg";
 import squareImage1 from "../assets/sq-03.jpg";
 import squareImage2 from "../assets/sq-02.jpg";
-import foundationImage from "../assets/image.png";
+import foundationImage from "../assets/imagenav.png";
 
 function Footer() {
   const { openDonateModal } = useDonation();
   return (
     <footer className="footer">
       <div className="footer-overlay">
-
         <div className="footer-container">
-
           {/* =================================================
               ABOUT US
           ================================================= */}
           <div className="footer-column about-column">
-
             <h3>ABOUT US</h3>
 
             <p>
-              Mdeaver Charity Foundation Ltd. is committed to
-              supporting individuals and families facing difficult
-              circumstances and helping them move toward greater
-              stability, dignity, and opportunity.
+              Mdeaver Charity Foundation Ltd. is committed to supporting
+              individuals and families facing difficult circumstances and
+              helping them move toward greater stability, dignity, and
+              opportunity.
             </p>
 
             <div className="footer-socials">
-
               <a
                 href="https://www.facebook.com"
                 target="_blank"
@@ -63,155 +59,95 @@ function Footer() {
               >
                 <i className="fab fa-youtube"></i>
               </a>
-
             </div>
-
           </div>
-
 
           {/* =================================================
               CONTACTS
           ================================================= */}
           <div className="footer-column">
-
             <h3>CONTACT US</h3>
 
             <div className="contact-item">
               <i className="fas fa-map-marker-alt"></i>
 
-              <span>
-                Mdeaver Charity Foundation Ltd.
-              </span>
+              <span>Mdeaver Charity Foundation Ltd.</span>
             </div>
 
             <div className="contact-item">
               <i className="fas fa-phone-alt"></i>
 
-              <span>
-                Contact us for more information
-              </span>
+              <span>Contact us for more information</span>
             </div>
 
             <div className="contact-item">
               <i className="far fa-envelope"></i>
 
-              <span>
-                info@mdeavercharityfoundation.org
-              </span>
+              <span>info@mdeavercharityfoundation.org</span>
             </div>
 
             <div className="contact-item">
               <i className="far fa-clock"></i>
 
-              <span>
-                Supporting communities since 2020
-              </span>
+              <span>Supporting communities since 2020</span>
             </div>
-
           </div>
-
 
           {/* =================================================
               OUR MISSION
           ================================================= */}
           <div className="footer-column subscribe-column">
-
             <h3>OUR MISSION</h3>
 
             <p>
-              To make a meaningful difference in the lives of
-              people who need support, with particular focus on
-              single mothers, people experiencing homelessness,
-              and individuals and families facing financial
-              hardship.
+              To make a meaningful difference in the lives of people who need
+              support, with particular focus on single mothers, people
+              experiencing homelessness, and individuals and families facing
+              financial hardship.
             </p>
 
-            <a
-              href="/request-assistance"
-              className="footer-action-button"
-            >
+            <a href="/request-assistance" className="footer-action-button">
               REQUEST ASSISTANCE
             </a>
-
           </div>
-
 
           {/* =================================================
               GALLERY
           ================================================= */}
           <div className="footer-column gallery-column">
-
             <h3>OUR WORK</h3>
 
             <div className="footer-gallery">
+              <img src={causeImage1} alt="Mdeaver Charity Foundation" />
 
-              <img
-                src={causeImage1}
-                alt="Mdeaver Charity Foundation"
-              />
+              <img src={causeImage2} alt="Community support" />
 
-              <img
-                src={causeImage2}
-                alt="Community support"
-              />
+              <img src={causeImage3} alt="Charity support" />
 
-              <img
-                src={causeImage3}
-                alt="Charity support"
-              />
+              <img src={causeImage4} alt="Helping communities" />
 
-              <img
-                src={causeImage4}
-                alt="Helping communities"
-              />
+              <img src={squareImage1} alt="Foundation activities" />
 
-              <img
-                src={squareImage1}
-                alt="Foundation activities"
-              />
+              <img src={squareImage2} alt="Community assistance" />
 
-              <img
-                src={squareImage2}
-                alt="Community assistance"
-              />
+              <img src={foundationImage} alt="Mdeaver Charity Foundation" />
 
-              <img
-                src={foundationImage}
-                alt="Mdeaver Charity Foundation"
-              />
-
-              <img
-                src={causeImage2}
-                alt="Supporting families"
-              />
-
+              <img src={causeImage2} alt="Supporting families" />
             </div>
-
           </div>
-
         </div>
-
 
         {/* =================================================
             BOTTOM FOOTER
         ================================================= */}
         <div className="footer-bottom">
-
           <div className="copyright">
+            <span className="copyright-icon">©</span>
 
-            <span className="copyright-icon">
-              ©
-            </span>
-
-            <span>
-              Mdeaver Charity Foundation Ltd. — Founded in 2020
-            </span>
-
+            <span>Mdeaver Charity Foundation Ltd. — Founded in 2020</span>
           </div>
 
-
           <div className="footer-emails">
-
             <button
               type="button"
               className="footer-donate-btn"
@@ -241,11 +177,8 @@ function Footer() {
               <span>›</span>
               Contact Us
             </Link>
-
           </div>
-
         </div>
-
       </div>
     </footer>
   );
