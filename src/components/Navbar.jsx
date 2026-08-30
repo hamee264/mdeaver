@@ -11,11 +11,17 @@ function Navbar() {
     setMenuOpen(false);
   };
 
+  const handleDonate = () => {
+    closeMenu();
+    openDonateModal();
+  };
+
   return (
     <header className="site-header">
       {/* =================================================
           TOP INFORMATION BAR
       ================================================= */}
+
       <div className="top-bar">
         <div className="top-bar-container">
           <div className="top-left">
@@ -34,24 +40,6 @@ function Navbar() {
             <span className="top-message">
               Empowering Lives. Restoring Hope.
             </span>
-
-            {/* <div className="social-links">
-              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                <i className="fa-brands fa-facebook-f"></i>
-              </a>
-
-              <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                <i className="fa-brands fa-youtube"></i>
-              </a>
-
-              <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                <i className="fa-brands fa-twitter"></i>
-              </a>
-
-              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <i className="fa-brands fa-instagram"></i>
-              </a>
-            </div> */}
           </div>
         </div>
       </div>
@@ -59,17 +47,24 @@ function Navbar() {
       {/* =================================================
           MAIN NAVIGATION
       ================================================= */}
+
       <nav className="main-navbar">
         <div className="navbar-container">
-          {/* LOGO */}
+          {/* =================================================
+              LOGO
+          ================================================= */}
+
           <Link to="/" className="navbar-logo" onClick={closeMenu}>
             <img
-              src="/assets/imagenav.png"
+              src="/public/images/imagenav.png"
               alt="Mdeaver Charity Foundation Ltd."
             />
           </Link>
 
-          {/* DESKTOP NAVIGATION */}
+          {/* =================================================
+              DESKTOP NAVIGATION
+          ================================================= */}
+
           <div className="desktop-nav">
             <Link to="/" onClick={closeMenu}>
               Home
@@ -88,17 +83,24 @@ function Navbar() {
             </Link>
           </div>
 
-          {/* DONATE BUTTON */}
+          {/* =================================================
+              DESKTOP DONATE BUTTON
+          ================================================= */}
+
           <button
             type="button"
             className="donate-btn desktop-donate"
-            onClick={() => openDonateModal()}
+            onClick={handleDonate}
           >
             DONATE
           </button>
 
-          {/* MOBILE MENU BUTTON */}
+          {/* =================================================
+              MOBILE MENU BUTTON
+          ================================================= */}
+
           <button
+            type="button"
             className={`menu-toggle ${menuOpen ? "active" : ""}`}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation"
@@ -113,6 +115,7 @@ function Navbar() {
         {/* =================================================
             MOBILE NAVIGATION
         ================================================= */}
+
         <div className={`mobile-nav ${menuOpen ? "open" : ""}`}>
           <Link to="/" onClick={closeMenu}>
             Home
@@ -138,13 +141,12 @@ function Navbar() {
             Contact
           </Link>
 
+          {/* MOBILE DONATE */}
+
           <button
             type="button"
             className="donate-btn mobile-donate"
-            onClick={() => {
-              closeMenu();
-              openDonateModal();
-            }}
+            onClick={handleDonate}
           >
             DONATE
           </button>

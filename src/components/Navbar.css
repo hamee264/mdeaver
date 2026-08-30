@@ -1,23 +1,59 @@
-/* ================================
+/* =========================================================
+   GLOBAL PAGE OFFSET
+   Fixed header needs space reserved above page content.
+========================================================= */
+
+body {
+  padding-top: 142px;
+}
+
+/* =========================================================
+   FIXED HEADER
+========================================================= */
+
+.site-header {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
+  z-index: 9999;
+
+  background: #ffffff;
+
+  animation: navbarAppear 0.7s ease both;
+}
+
+/* =========================================================
    TOP BAR
-================================ */
+========================================================= */
 
 .top-bar {
   width: 100%;
+
+  height: 46px;
+
   background: #278335;
+
   color: #ffffff;
+
   font-size: 14px;
 }
 
 .top-bar-container {
   width: 90%;
   max-width: 1400px;
+
+  height: 46px;
+
   margin: 0 auto;
 
-  min-height: 46px;
-
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
 
   gap: 30px;
@@ -26,6 +62,7 @@
 .top-left,
 .top-right {
   display: flex;
+
   align-items: center;
 }
 
@@ -39,7 +76,9 @@
 
 .top-item {
   display: flex;
+
   align-items: center;
+
   gap: 10px;
 
   white-space: nowrap;
@@ -51,84 +90,81 @@
 
 .top-message {
   white-space: nowrap;
+
+  font-weight: 500;
 }
 
-.social-links {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.social-links a {
-  color: #ffffff;
-  font-size: 14px;
-
-  transition:
-    transform 0.25s ease,
-    opacity 0.25s ease;
-}
-
-.social-links a:hover {
-  transform: translateY(-2px);
-  opacity: 0.75;
-}
-
-/* ================================
+/* =========================================================
    MAIN NAVBAR
-================================ */
+========================================================= */
 
 .main-navbar {
+  position: relative;
+
   width: 100%;
+
+  height: 96px;
+
   background: #ffffff;
 
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-
-  animation: navbarAppear 0.7s ease both;
+  border-bottom: 1px solid #eeeeee;
 }
+
+/* =========================================================
+   NAVBAR CONTAINER
+========================================================= */
 
 .navbar-container {
   width: 90%;
+
   max-width: 1400px;
-  min-height: 96px;
+
+  height: 96px;
 
   margin: 0 auto;
 
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
 }
 
-/* ================================
+/* =========================================================
    LOGO
-================================ */
+========================================================= */
 
 .navbar-logo {
   display: flex;
+
   align-items: center;
 
   flex-shrink: 0;
+
+  text-decoration: none;
 }
 
 .navbar-logo img {
   width: 190px;
+
   height: auto;
 
   display: block;
 }
 
-/* ================================
-   DESKTOP NAV
-================================ */
+/* =========================================================
+   DESKTOP NAVIGATION
+========================================================= */
 
 .desktop-nav {
   display: flex;
+
   align-items: center;
 
   gap: 38px;
 
   margin-left: auto;
+
   margin-right: 45px;
 }
 
@@ -136,9 +172,11 @@
   position: relative;
 
   color: #222222;
+
   text-decoration: none;
 
   font-size: 16px;
+
   font-weight: 500;
 
   padding: 38px 0;
@@ -152,9 +190,11 @@
   position: absolute;
 
   left: 0;
+
   bottom: 29px;
 
   width: 0;
+
   height: 2px;
 
   background: #278335;
@@ -170,26 +210,36 @@
   width: 100%;
 }
 
-/* ================================
+/* =========================================================
    DONATE BUTTON
-================================ */
+========================================================= */
 
 .donate-btn {
   display: inline-flex;
+
   align-items: center;
+
   justify-content: center;
 
   background: #278335;
+
   color: #ffffff;
 
   text-decoration: none;
 
+  font-family: inherit;
+
   font-size: 14px;
+
   font-weight: 700;
 
   letter-spacing: 1px;
 
+  border: none;
+
   border-radius: 0;
+
+  cursor: pointer;
 
   transition:
     background 0.25s ease,
@@ -198,33 +248,41 @@
 
 .donate-btn:hover {
   background: #1e6c2b;
+
   transform: translateY(-2px);
 }
 
 .desktop-donate {
   min-width: 120px;
+
   height: 40px;
+
+  flex-shrink: 0;
 }
 
-/* ================================
+/* =========================================================
    MOBILE MENU BUTTON
-================================ */
+========================================================= */
 
 .menu-toggle {
   display: none;
 
   width: 44px;
+
   height: 44px;
 
   padding: 0;
 
   border: none;
+
   background: transparent;
 
   cursor: pointer;
 
   flex-direction: column;
+
   justify-content: center;
+
   align-items: center;
 
   gap: 5px;
@@ -234,6 +292,7 @@
   display: block;
 
   width: 25px;
+
   height: 2px;
 
   background: #222222;
@@ -243,7 +302,9 @@
     opacity 0.3s ease;
 }
 
-/* Hamburger → X */
+/* =========================================================
+   HAMBURGER → X
+========================================================= */
 
 .menu-toggle.active span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
@@ -257,37 +318,40 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* ================================
+/* =========================================================
    MOBILE NAVIGATION
-================================ */
+========================================================= */
 
 .mobile-nav {
   display: none;
 }
 
-/* ================================
+/* =========================================================
    ANIMATION
-================================ */
+========================================================= */
 
 @keyframes navbarAppear {
   from {
     opacity: 0;
+
     transform: translateY(-15px);
   }
 
   to {
     opacity: 1;
+
     transform: translateY(0);
   }
 }
 
-/* ================================
-   TABLET
-================================ */
+/* =========================================================
+   LAPTOP
+========================================================= */
 
 @media (max-width: 1100px) {
   .desktop-nav {
     gap: 24px;
+
     margin-right: 25px;
   }
 
@@ -300,34 +364,69 @@
   }
 }
 
-/* ================================
+/* =========================================================
    MOBILE
-================================ */
+========================================================= */
 
 @media (max-width: 850px) {
+  /* -----------------------------------------
+     Remove top-bar space
+  ----------------------------------------- */
+
+  body {
+    padding-top: 78px;
+  }
+
+  /* -----------------------------------------
+     Hide top bar
+  ----------------------------------------- */
+
   .top-bar {
     display: none;
   }
 
+  /* -----------------------------------------
+     Main navbar
+  ----------------------------------------- */
+
+  .main-navbar {
+    height: 78px;
+  }
+
   .navbar-container {
     width: 92%;
-    min-height: 78px;
+
+    height: 78px;
   }
+
+  /* -----------------------------------------
+     Logo
+  ----------------------------------------- */
 
   .navbar-logo img {
     width: 160px;
   }
+
+  /* -----------------------------------------
+     Hide desktop navigation
+  ----------------------------------------- */
 
   .desktop-nav,
   .desktop-donate {
     display: none;
   }
 
+  /* -----------------------------------------
+     Mobile menu button
+  ----------------------------------------- */
+
   .menu-toggle {
     display: flex;
   }
 
-  /* Mobile dropdown */
+  /* -----------------------------------------
+     Mobile dropdown
+  ----------------------------------------- */
 
   .mobile-nav {
     display: flex;
@@ -335,6 +434,7 @@
     position: absolute;
 
     left: 0;
+
     top: 100%;
 
     width: 100%;
@@ -347,10 +447,15 @@
 
     border-top: 1px solid #eeeeee;
 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+
     transform: translateY(-15px);
 
     opacity: 0;
+
     visibility: hidden;
+
+    pointer-events: none;
 
     transition:
       opacity 0.3s ease,
@@ -358,12 +463,23 @@
       visibility 0.3s ease;
   }
 
+  /* -----------------------------------------
+     Open mobile menu
+  ----------------------------------------- */
+
   .mobile-nav.open {
     opacity: 1;
+
     visibility: visible;
+
+    pointer-events: auto;
 
     transform: translateY(0);
   }
+
+  /* -----------------------------------------
+     Mobile links
+  ----------------------------------------- */
 
   .mobile-nav a {
     color: #222222;
@@ -371,6 +487,7 @@
     text-decoration: none;
 
     font-size: 16px;
+
     font-weight: 500;
 
     padding: 15px 5px;
@@ -384,10 +501,17 @@
 
   .mobile-nav a:hover {
     color: #278335;
+
     padding-left: 10px;
   }
 
+  /* -----------------------------------------
+     Mobile donate
+  ----------------------------------------- */
+
   .mobile-nav .mobile-donate {
+    width: 100%;
+
     margin-top: 15px;
 
     height: 48px;
@@ -396,16 +520,57 @@
   }
 }
 
-/* ================================
+/* =========================================================
    SMALL PHONES
-================================ */
+========================================================= */
 
 @media (max-width: 480px) {
+  body {
+    padding-top: 70px;
+  }
+
+  .main-navbar {
+    height: 70px;
+  }
+
   .navbar-container {
-    min-height: 70px;
+    height: 70px;
   }
 
   .navbar-logo img {
     width: 140px;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.menu-toggle:focus-visible,
+.donate-btn:focus-visible,
+.navbar-logo:focus-visible,
+.desktop-nav a:focus-visible,
+.mobile-nav a:focus-visible {
+  outline: 2px solid #278335;
+
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header {
+    animation: none;
+  }
+
+  .desktop-nav a,
+  .desktop-nav a::after,
+  .donate-btn,
+  .menu-toggle span,
+  .mobile-nav,
+  .mobile-nav a {
+    transition: none;
   }
 }

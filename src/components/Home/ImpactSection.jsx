@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./ImpactSection.css";
-import commitmentBg from "../../assets/our-commitment-bg.jpg";
+import commitmentBg from "../../../public/images/upscalemedia-transformed (2).jpeg";
 
 const ProjectCard = ({
   category,
