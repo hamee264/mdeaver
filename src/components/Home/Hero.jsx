@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import "./Hero.css";
 
-const heroBackground = "/assets/mission-landscape.jpg";
+const heroBackground = "/assets/image-hero.jpeg";
 const personImage = "/assets/community-children.jpg";
 const plantImage = "/assets/children-support.jpg";
 
