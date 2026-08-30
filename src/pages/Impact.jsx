@@ -20,7 +20,7 @@ const Impact = () => {
       <section className="impact-intro section-padding">
         <div className="impact-intro-image">
           <img
-            src="/public/images/WhatsApp Image 2026-08-30 at 04.15.06 (2).jpeg"
+            src="/assets/children-support.jpg"
             alt="Community members receiving support"
           />
 

@@ -14,3 +14,21 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Netlify deployment
+
+This project is configured for Netlify.
+
+- Build command: `npm run build`
+- Publish directory: `dist`
+- React Router fallback is configured in `netlify.toml`.
+- `/api/*` is routed to the Netlify Function in `netlify/functions/api.js`.
+- Public images are stored in `public/assets/` and are referenced as `/assets/<filename>`.
+- Image filenames use URL-safe characters only (no spaces or parentheses).
+
+Before deploying, add the server-side email environment variables in Netlify when email notifications are required:
+
+- `RESEND_API_KEY`
+- `ADMIN_EMAIL`
+- `FROM_EMAIL`
+- Or the SMTP variables used by `api/services/emailService.js`.

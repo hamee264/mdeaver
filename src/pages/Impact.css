@@ -41,7 +41,7 @@
 .impact-hero {
   height: 335px;
   position: relative;
-  background-image: url("/public/images/WhatsApp\ Image\ 2026-08-30\ at\ 04.15.06.jpeg");
+  background-image: url("/assets/community-children.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -351,7 +351,7 @@
 .impact-cta {
   min-height: 520px;
   position: relative;
-  background-image: url("/public/images/WhatsApp\ Image\ 2026-08-30\ at\ 04.15.07\ \(2\).jpeg");
+  background-image: url("/assets/food-distribution.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -466,7 +466,7 @@
   min-height: 560px;
   padding: 100px 6%;
   position: relative;
-  background-image: url("/public/images/WhatsApp\ Image\ 2026-08-30\ at\ 04.15.11.jpeg");
+  background-image: url("/assets/community-outreach.jpg");
   background-size: cover;
   background-position: center;
   display: flex;

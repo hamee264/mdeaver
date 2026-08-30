@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useDonation } from "../../context/DonationContext";
 import "./Donate.css";
 
-import donateBackground from "../../../public/images/WhatsApp Image 2026-08-30 at 04.15.09.jpeg";
-import donatePanelBackground from "../../../public/images/WhatsApp Image 2026-08-30 at 04.15.10 (2).jpeg";
+const donateBackground = "/assets/community-meal.jpg";
+const donatePanelBackground = "/assets/family-support.jpg";
 
 function Donate() {
   const { openDonateModal } = useDonation();

@@ -60,7 +60,7 @@
   align-items: center;
   justify-content: center;
 
-  background-image: url("/public/images/WhatsApp\ Image\ 2026-08-30\ at\ 04.15.06\ \(1\).jpeg");
+  background-image: url("/assets/homeless-tents.jpg");
   background-size: cover;
   background-position: center;
 
@@ -661,7 +661,7 @@
 
   text-align: center;
 
-  background-image: url("/public/images//WhatsApp\ Image\ 2026-08-30\ at\ 04.15.10.jpeg");
+  background-image: url("/assets/family-support.jpg");
 
   background-size: cover;
 

@@ -51,7 +51,7 @@ const About = () => {
         <div className="about-container intro-grid">
           <div className="intro-image-wrap">
             <img
-              src="/public/images/WhatsApp Image 2026-08-30 at 04.15.07 (2).jpeg"
+              src="/assets/food-distribution.jpg"
               alt="Children receiving community support"
             />
 
@@ -331,7 +331,7 @@ const About = () => {
         <div className="about-container why-grid">
           <div className="why-image">
             <img
-              src="/public/images/WhatsApp Image 2026-08-30 at 04.15.09.jpeg"
+              src="/assets/community-meal.jpg"
               alt="Volunteers helping the community"
             />
 
@@ -502,13 +502,13 @@ const About = () => {
           <div className="stories-images">
             <img
               className="stories-main-image"
-              src="/public/images/WhatsApp Image 2026-08-30 at 04.15.11 (1).jpeg"
+              src="/assets/essential-supplies.jpg"
               alt="Community volunteers"
             />
 
             <div className="stories-small-image">
               <img
-                src="/public/images/WhatsApp Image 2026-08-30 at 04.15.10.jpeg"
+                src="/assets/children-relief.jpg"
                 alt="Community support"
               />
             </div>

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import "./DonationHighlights.css";
 
-import solarImage from "../../assets/sq-02.jpg";
-import plantImage from "../../assets/sq-03.jpg";
+const solarImage = "/assets/children-community.jpg";
+const plantImage = "/assets/food-distribution.jpg";
 
 function DonationHighlights() {
   const items = [

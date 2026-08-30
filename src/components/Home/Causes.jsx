@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import "./Causes.css";
 
-import supportImage from "../../assets/sq-02.jpg";
-import familyImage from "../../assets/sq-03.jpg";
-import communityImage from "../../assets/sq-02.jpg";
-import housingImage from "../../assets/sq-03.jpg";
-import hardshipImage from "../../assets/sq-02.jpg";
+const supportImage = "/assets/children-community.jpg";
+const familyImage = "/assets/community-children.jpg";
+const communityImage = "/assets/food-distribution.jpg";
+const housingImage = "/assets/homeless-tents.jpg";
+const hardshipImage = "/assets/individual-support.jpg";
 
 function CauseItem({ image, title, description, color = "green" }) {
   return (

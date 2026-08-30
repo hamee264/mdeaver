@@ -56,7 +56,7 @@ function Navbar() {
 
           <Link to="/" className="navbar-logo" onClick={closeMenu}>
             <img
-              src="/public/images/imagenav.png"
+              src="/assets/charity-logo.png"
               alt="Mdeaver Charity Foundation Ltd."
             />
           </Link>

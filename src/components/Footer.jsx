@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 import { useDonation } from "../context/DonationContext";
 import "./Footer.css";
 
-import causeImage1 from "../../public/images/WhatsApp Image 2026-08-30 at 04.15.06.jpeg";
-import causeImage2 from "../../public/images/WhatsApp Image 2026-08-30 at 04.15.07.jpeg";
-import causeImage3 from "../../public/images/WhatsApp Image 2026-08-30 at 04.15.08 (1).jpeg";
-import causeImage4 from "../../public/images/WhatsApp Image 2026-08-30 at 04.15.10 (1).jpeg";
-import squareImage1 from "../../public/images/WhatsApp Image 2026-08-30 at 04.15.09 (3).jpeg";
-import squareImage2 from "../../public/images/WhatsApp Image 2026-08-30 at 04.15.09 (1).jpeg";
-import foundationImage from "../../public/images/WhatsApp Image 2026-08-30 at 04.15.11.jpeg";
+const causeImage1 = "/assets/community-children.jpg";
+const causeImage2 = "/assets/homeless-community.jpg";
+const causeImage3 = "/assets/outreach-support.jpg";
+const causeImage4 = "/assets/children-donation.jpg";
+const squareImage1 = "/assets/individual-support.jpg";
+const squareImage2 = "/assets/street-assistance.jpg";
+const foundationImage = "/assets/community-outreach.jpg";
 
 function Footer() {
   const { openDonateModal } = useDonation();

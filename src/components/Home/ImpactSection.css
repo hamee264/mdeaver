@@ -214,7 +214,7 @@
 
   background-image:
     linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.7) 100%),
-    url("/images/impact.jpg");
+    url("/assets/impact-community.jpg");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
