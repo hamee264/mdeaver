@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import "./Hero.css";
 
-import heroBackground from "../../../public/images/WhatsApp Image 2026-08-30 at 04.15.10 (2).jpeg";
+import heroBackground from "../../../public/images/cause-02-1024x575.jpg";
 import personImage from "../../../public/images/WhatsApp Image 2026-08-30 at 04.15.06.jpeg";
 import plantImage from "../../../public/images/WhatsApp Image 2026-08-30 at 04.15.06 (2).jpeg";
 

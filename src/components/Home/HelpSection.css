@@ -25,7 +25,7 @@
   background:
     linear-gradient(90deg, rgba(23, 77, 36, 0.96), rgba(23, 77, 36, 0.82)),
     var(--help-bg);
-  background-image: url(/public/images/upscalemedia-transformed\ \(1\).jpeg);
+  background-image: url(/public/images/help-background.jpeg);
   background-size: cover;
   background-position: center;
 
