@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 // Healthcheck Route
-app.get('/api/health', (req, res) => {
+app.get(['/api/health', '/health'], (req, res) => {
   res.json({
     status: 'ok',
     timestamp: new Date().toISOString(),
@@ -24,7 +24,7 @@ app.get('/api/health', (req, res) => {
 /**
  * 1. Website Visit Notification Endpoint
  */
-app.post('/api/notify/visit', async (req, res) => {
+app.post(['/api/notify/visit', '/notify/visit'], async (req, res) => {
   try {
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
     const userAgent = req.headers['user-agent'];
@@ -44,7 +44,7 @@ app.post('/api/notify/visit', async (req, res) => {
 /**
  * 2. Contact Form Submission Endpoint
  */
-app.post('/api/contact', async (req, res) => {
+app.post(['/api/contact', '/contact'], async (req, res) => {
   try {
     const { name, email, phone, subject, message } = req.body;
 
@@ -70,7 +70,7 @@ app.post('/api/contact', async (req, res) => {
 /**
  * 3. Donation Payment & Invoice Notification Endpoint
  */
-app.post('/api/donations/notify', async (req, res) => {
+app.post(['/api/donations/notify', '/donations/notify'], async (req, res) => {
   try {
     const {
       invoiceNumber,
