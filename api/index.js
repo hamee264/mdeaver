@@ -1,72 +1,57 @@
 import express from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import {
   sendVisitNotification,
   sendContactEmail,
   sendDonationEmail,
 } from './services/emailService.js';
-import { saveDonationToSupabase, checkSupabaseHealth } from './services/supabaseService.js';
+import {
+  saveDonationToSupabase,
+  getDonationsFromSupabase,
+  saveContactToSupabase,
+  getContactsFromSupabase,
+  saveVisitToSupabase,
+  getStatsFromSupabase,
+  checkSupabaseHealth,
+} from './services/supabaseService.js';
+
+dotenv.config();
 
 const app = express();
 
+// Middlewares
 app.use(cors());
 app.use(express.json());
 
-// ─── Routes ─────────────────────────────────────────────────────────────────
-// Vercel passes the request with the full path e.g. /api/health
-// We register all routes with both /api/... and /... so it works in any context
+// ─── API Routes ─────────────────────────────────────────────────────────────
 
-// Healthcheck
+// 1. Healthcheck Endpoint
 app.get(['/api/health', '/health'], async (req, res) => {
-  const supabaseStatus = await checkSupabaseHealth();
-  res.json({
-    status: 'ok',
-    timestamp: new Date().toISOString(),
-    service: 'Mdeaver Charity Express API on Vercel',
-    supabase: supabaseStatus,
-  });
-});
-
-// 1. Visit Notification
-app.post(['/api/notify/visit', '/notify/visit'], async (req, res) => {
   try {
-    const ip = req.headers['x-forwarded-for'] || req.socket?.remoteAddress;
-    const userAgent = req.headers['user-agent'];
-    const timestamp = new Date().toLocaleString('en-US', {
-      dateStyle: 'medium',
-      timeStyle: 'short',
-    });
-    const result = await sendVisitNotification({ ip, userAgent, timestamp });
-    res.json({ success: true, message: 'Visit notification processed', result });
-  } catch (error) {
-    console.error('Error handling visit notification:', error);
-    res.status(500).json({ success: false, error: error.message });
-  }
-});
-
-// 2. Contact Form
-app.post(['/api/contact', '/contact'], async (req, res) => {
-  try {
-    const { name, email, phone, subject, message } = req.body;
-    if (!name || !email || !message) {
-      return res.status(400).json({
-        success: false,
-        error: 'Name, email, and message are required fields.',
-      });
-    }
-    const result = await sendContactEmail({ name, email, phone, subject, message });
+    const supabaseStatus = await checkSupabaseHealth();
     res.json({
-      success: true,
-      message: 'Contact form submitted and notification email dispatched.',
-      result,
+      status: 'ok',
+      service: 'Mdeaver Charity Foundation Express API',
+      timestamp: new Date().toISOString(),
+      supabase: supabaseStatus,
     });
   } catch (error) {
-    console.error('Error handling contact submission:', error);
+    res.status(500).json({ status: 'error', error: error.message });
+  }
+});
+
+// 2. Aggregate Statistics Endpoint
+app.get(['/api/stats', '/stats'], async (req, res) => {
+  try {
+    const statsResult = await getStatsFromSupabase();
+    res.json(statsResult);
+  } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
 });
 
-// 3. Donation Notification
+// 3. Donation Record & Email Notification
 app.post(['/api/donations/notify', '/donations/notify'], async (req, res) => {
   try {
     const {
@@ -110,38 +95,118 @@ app.post(['/api/donations/notify', '/donations/notify'], async (req, res) => {
       timestamp: formattedTime,
     };
 
+    // Store in Supabase database & send email receipt
     const dbResult = await saveDonationToSupabase(donationData);
     const emailResult = await sendDonationEmail(donationData);
 
     res.json({
       success: true,
-      message: 'Donation recorded to database and notification email dispatched via Resend.',
+      message: 'Donation recorded in Supabase and receipt dispatched via email.',
+      invoiceNumber: generatedInvoice,
       dbResult,
       emailResult,
     });
   } catch (error) {
-    console.error('Error handling donation notification:', error);
+    console.error('[EXPRESS DONATION ERROR]:', error);
     res.status(500).json({ success: false, error: error.message });
   }
 });
 
-// JSON 404 fallback
+// 4. Retrieve Recent Donations from Supabase
+app.get(['/api/donations', '/donations'], async (req, res) => {
+  try {
+    const limit = Number(req.query.limit) || 20;
+    const result = await getDonationsFromSupabase(limit);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// 5. Contact Form Submission
+app.post(['/api/contact', '/contact'], async (req, res) => {
+  try {
+    const { name, email, phone, subject, message } = req.body;
+    if (!name || !email || !message) {
+      return res.status(400).json({
+        success: false,
+        error: 'Name, email, and message are required fields.',
+      });
+    }
+
+    const contactData = { name, email, phone, subject, message };
+
+    // Save contact inquiry in Supabase & send notification email
+    const dbResult = await saveContactToSupabase(contactData);
+    const emailResult = await sendContactEmail(contactData);
+
+    res.json({
+      success: true,
+      message: 'Contact form recorded and notification emails sent.',
+      dbResult,
+      emailResult,
+    });
+  } catch (error) {
+    console.error('[EXPRESS CONTACT ERROR]:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// 6. Retrieve Contact Form Messages
+app.get(['/api/contact', '/contact'], async (req, res) => {
+  try {
+    const limit = Number(req.query.limit) || 20;
+    const result = await getContactsFromSupabase(limit);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// 7. Visit Tracker Notification
+app.post(['/api/notify/visit', '/notify/visit'], async (req, res) => {
+  try {
+    const ip = req.headers['x-forwarded-for'] || req.socket?.remoteAddress;
+    const userAgent = req.headers['user-agent'];
+    const timestamp = new Date().toLocaleString('en-US', {
+      dateStyle: 'medium',
+      timeStyle: 'short',
+    });
+
+    const visitData = { ip, userAgent, timestamp, url: req.body?.url || '/' };
+
+    // Log to Supabase & dispatch email
+    const dbResult = await saveVisitToSupabase(visitData);
+    const emailResult = await sendVisitNotification(visitData);
+
+    res.json({ success: true, message: 'Visit notification logged.', dbResult, emailResult });
+  } catch (error) {
+    console.error('[EXPRESS VISIT TRACKER ERROR]:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// 404 Fallback Handler
 app.use((req, res) => {
   res.status(404).json({
     success: false,
-    error: `API route not found: ${req.method} ${req.url}`,
+    error: `Route not found: ${req.method} ${req.url}`,
   });
 });
 
-// Local dev server (skipped on Vercel)
+// Local dev server execution
 if (!process.env.VERCEL) {
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
-    console.log(`[API DEV SERVER] Running at http://localhost:${PORT}`);
-    console.log(`  GET  http://localhost:${PORT}/api/health`);
-    console.log(`  POST http://localhost:${PORT}/api/donations/notify`);
-    console.log(`  POST http://localhost:${PORT}/api/contact`);
-    console.log(`  POST http://localhost:${PORT}/api/notify/visit`);
+    console.log(`\n=================================================`);
+    console.log(` MDEAVER CHARITY EXPRESS API SERVER STARTED `);
+    console.log(` Running locally at: http://localhost:${PORT}`);
+    console.log(`  - Healthcheck: GET  http://localhost:${PORT}/api/health`);
+    console.log(`  - Aggregate Stats: GET http://localhost:${PORT}/api/stats`);
+    console.log(`  - Donations API: POST http://localhost:${PORT}/api/donations/notify`);
+    console.log(`  - Contact API:   POST http://localhost:${PORT}/api/contact`);
+    console.log(`  - Visit Tracker: POST http://localhost:${PORT}/api/notify/visit`);
+    console.log(`=================================================\n`);
   });
 }
 
