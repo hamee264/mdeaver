@@ -20,8 +20,14 @@ dotenv.config();
 
 const app = express();
 
-// Middlewares
-app.use(cors());
+// Middlewares — Configure CORS for cross-origin production requests
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+}));
+app.options('*', cors());
+
 app.use(express.json());
 
 // ─── API Routes ─────────────────────────────────────────────────────────────

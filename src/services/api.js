@@ -1,9 +1,13 @@
-// Determine API URL base
-// In production or custom env, use VITE_API_URL if provided
-// In local dev, use relative /api which Vite proxies to http://localhost:3000
-const API_BASE = import.meta.env.VITE_API_URL
-  ? (import.meta.env.VITE_API_URL.endsWith('/api') ? import.meta.env.VITE_API_URL : `${import.meta.env.VITE_API_URL}/api`)
-  : '/api';
+// Robustly format API_BASE URL, eliminating trailing slashes and preventing double-slashes (//api)
+const getApiBase = () => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (!envUrl) return '/api';
+  // Strip trailing slashes
+  const cleanUrl = envUrl.trim().replace(/\/+$/, '');
+  return cleanUrl.endsWith('/api') ? cleanUrl : `${cleanUrl}/api`;
+};
+
+const API_BASE = getApiBase();
 
 const parseJsonResponse = async (res) => {
   const contentType = res.headers.get('content-type');
@@ -13,12 +17,12 @@ const parseJsonResponse = async (res) => {
     console.warn(`[API HTTP ${res.status} Warning]:`, text.slice(0, 150));
     return {
       success: false,
-      error: `API server returned HTTP ${res.status}. Ensure backend Express server is running (npm run server).`,
+      error: `API server returned HTTP ${res.status}. Ensure backend Express server is running.`,
       status: res.status,
     };
   }
 
-  // Verify that the response is actually JSON and not an HTML 404 page
+  // Verify that the response is actually JSON and not an HTML fallback page
   if (contentType && contentType.includes('application/json')) {
     try {
       return await res.json();
@@ -28,12 +32,11 @@ const parseJsonResponse = async (res) => {
     }
   }
 
-  // If response is HTML fallback (e.g. Vite SPA 404 fallback page)
   const text = await res.text().catch(() => '');
   console.warn('[API Non-JSON Response Received]:', text.slice(0, 150));
   return {
     success: false,
-    error: 'Backend Express API server is offline or unreachable. Please start it using "npm run server".',
+    error: 'Backend API server is offline or unreachable.',
   };
 };
 
