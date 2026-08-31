@@ -12,8 +12,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Path Normalization Middleware
+app.use((req, res, next) => {
+  if ((req.url === '/api/index.js' || req.url === '/api' || req.url === '/api/') && req.originalUrl) {
+    req.url = req.originalUrl;
+  }
+  next();
+});
+
 // Healthcheck Route
-app.get(['/api/health', '/health'], async (req, res) => {
+app.get(['/api/health', '/health', '/api/index.js/health'], async (req, res) => {
   const supabaseStatus = await checkSupabaseHealth();
   res.json({
     status: 'ok',
@@ -26,7 +34,7 @@ app.get(['/api/health', '/health'], async (req, res) => {
 /**
  * 1. Website Visit Notification Endpoint
  */
-app.post(['/api/notify/visit', '/notify/visit'], async (req, res) => {
+app.post(['/api/notify/visit', '/notify/visit', '/api/index.js/notify/visit'], async (req, res) => {
   try {
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
     const userAgent = req.headers['user-agent'];
@@ -46,7 +54,7 @@ app.post(['/api/notify/visit', '/notify/visit'], async (req, res) => {
 /**
  * 2. Contact Form Submission Endpoint
  */
-app.post(['/api/contact', '/contact'], async (req, res) => {
+app.post(['/api/contact', '/contact', '/api/index.js/contact'], async (req, res) => {
   try {
     const { name, email, phone, subject, message } = req.body;
 
@@ -72,7 +80,7 @@ app.post(['/api/contact', '/contact'], async (req, res) => {
 /**
  * 3. Donation Payment & Invoice Notification Endpoint
  */
-app.post(['/api/donations/notify', '/donations/notify'], async (req, res) => {
+app.post(['/api/donations/notify', '/donations/notify', '/api/index.js/donations/notify'], async (req, res) => {
   try {
     const {
       invoiceNumber,
@@ -131,6 +139,14 @@ app.post(['/api/donations/notify', '/donations/notify'], async (req, res) => {
     console.error('Error handling donation notification:', error);
     res.status(500).json({ success: false, error: error.message });
   }
+});
+
+// Fallback JSON 404 handler for API routes
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    error: `API route not found: ${req.method} ${req.url}`,
+  });
 });
 
 // Export Express app as Vercel Serverless Function Handler
