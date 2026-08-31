@@ -12,11 +12,24 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Path Normalization Middleware
+// Path Normalization Middleware for Vercel Express Serverless Functions
 app.use((req, res, next) => {
-  if ((req.url === '/api/index.js' || req.url === '/api' || req.url === '/api/') && req.originalUrl) {
-    req.url = req.originalUrl;
+  let targetPath = null;
+
+  if (req.query && req.query.path) {
+    targetPath = req.query.path.startsWith('/') ? req.query.path : '/' + req.query.path;
+  } else if (req.headers['x-matched-path']) {
+    targetPath = req.headers['x-matched-path'];
+  } else if (req.headers['x-invoke-path']) {
+    targetPath = req.headers['x-invoke-path'];
+  } else if (req.headers['x-forwarded-uri']) {
+    targetPath = req.headers['x-forwarded-uri'];
   }
+
+  if (targetPath) {
+    req.url = targetPath.startsWith('/api') ? targetPath : '/api' + targetPath;
+  }
+
   next();
 });
 
