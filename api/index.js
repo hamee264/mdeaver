@@ -12,29 +12,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Path Normalization Middleware for Vercel Express Serverless Functions
+// Path Normalization Middleware
 app.use((req, res, next) => {
-  let targetPath = null;
-
-  if (req.query && req.query.path) {
-    targetPath = req.query.path.startsWith('/') ? req.query.path : '/' + req.query.path;
-  } else if (req.headers['x-matched-path']) {
-    targetPath = req.headers['x-matched-path'];
-  } else if (req.headers['x-invoke-path']) {
-    targetPath = req.headers['x-invoke-path'];
-  } else if (req.headers['x-forwarded-uri']) {
-    targetPath = req.headers['x-forwarded-uri'];
+  if (req.url && !req.url.startsWith('/api')) {
+    req.url = '/api' + (req.url.startsWith('/') ? req.url : '/' + req.url);
   }
-
-  if (targetPath) {
-    req.url = targetPath.startsWith('/api') ? targetPath : '/api' + targetPath;
-  }
-
   next();
 });
 
 // Healthcheck Route
-app.get(['/api/health', '/health', '/api/index.js/health'], async (req, res) => {
+app.get(['/api/health', '/health'], async (req, res) => {
   const supabaseStatus = await checkSupabaseHealth();
   res.json({
     status: 'ok',
@@ -47,7 +34,7 @@ app.get(['/api/health', '/health', '/api/index.js/health'], async (req, res) => 
 /**
  * 1. Website Visit Notification Endpoint
  */
-app.post(['/api/notify/visit', '/notify/visit', '/api/index.js/notify/visit'], async (req, res) => {
+app.post(['/api/notify/visit', '/notify/visit'], async (req, res) => {
   try {
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
     const userAgent = req.headers['user-agent'];
@@ -67,7 +54,7 @@ app.post(['/api/notify/visit', '/notify/visit', '/api/index.js/notify/visit'], a
 /**
  * 2. Contact Form Submission Endpoint
  */
-app.post(['/api/contact', '/contact', '/api/index.js/contact'], async (req, res) => {
+app.post(['/api/contact', '/contact'], async (req, res) => {
   try {
     const { name, email, phone, subject, message } = req.body;
 
@@ -93,7 +80,7 @@ app.post(['/api/contact', '/contact', '/api/index.js/contact'], async (req, res)
 /**
  * 3. Donation Payment & Invoice Notification Endpoint
  */
-app.post(['/api/donations/notify', '/donations/notify', '/api/index.js/donations/notify'], async (req, res) => {
+app.post(['/api/donations/notify', '/donations/notify'], async (req, res) => {
   try {
     const {
       invoiceNumber,
