@@ -162,5 +162,13 @@ app.use((req, res) => {
   });
 });
 
+// Standalone Local Listener (Runs when executing directly with Node)
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`[API DEV SERVER] Express server running at http://localhost:${PORT}`);
+  });
+}
+
 // Export Express app as Vercel Serverless Function Handler
 export default app;
