@@ -23,7 +23,13 @@ body {
 
   background: #ffffff;
 
+  transition: box-shadow 0.35s ease;
+
   animation: navbarAppear 0.7s ease both;
+}
+
+.site-header.scrolled {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
 }
 
 /* =========================================================
@@ -33,6 +39,7 @@ body {
 .top-bar {
   width: 100%;
 
+  max-height: 46px;
   height: 46px;
 
   background: #278335;
@@ -40,7 +47,23 @@ body {
   color: #ffffff;
 
   font-size: 14px;
+
+  overflow: hidden;
+
+  opacity: 1;
+
+  transition:
+    max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.25s ease;
 }
+
+.site-header.scrolled .top-bar {
+  max-height: 0;
+  height: 0;
+  opacity: 0;
+}
+
 
 .top-bar-container {
   width: 90%;

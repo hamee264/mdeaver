@@ -192,13 +192,13 @@ Compassion in action.
               MAIN TITLE
           ================================================= */}
 
-          <h2 className="help-title">HELP</h2>
+          <h2 className="help-title" data-aos="fade-up">HELP</h2>
 
           {/* =================================================
               DONATION BOX
           ================================================= */}
 
-          <form className="help-box" onSubmit={handleDonate}>
+          <form className="help-box" onSubmit={handleDonate} data-aos="fade-up" data-aos-delay="100">
             <div className="help-box-content">
               <span className="help-eyebrow">SUPPORT OUR MISSION</span>
 

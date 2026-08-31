@@ -14,10 +14,6 @@ function Donate() {
   const [selectedPreset, setSelectedPreset] = useState(1000);
   const [customAmount, setCustomAmount] = useState("");
 
-  const [aid, setAid] = useState("");
-  const [payment, setPayment] = useState("");
-  const [recurring, setRecurring] = useState(false);
-
   const [openAccordion, setOpenAccordion] = useState(null);
 
   /*
@@ -59,7 +55,7 @@ function Donate() {
           DONATE TITLE
       ===================================================== */}
 
-      <div className="donate-heading">
+      <div className="donate-heading" data-aos="fade-up">
         <h2>DONATE</h2>
       </div>
 
@@ -67,7 +63,7 @@ function Donate() {
           DONATION PANEL
       ===================================================== */}
 
-      <div className="donate-panel">
+      <div className="donate-panel" data-aos="fade-up" data-aos-delay="100">
         {/* ===================================================
             LEFT / FORM SIDE
         =================================================== */}
@@ -124,76 +120,6 @@ function Donate() {
                   color: "#333333",
                 }}
               />
-            </div>
-          </div>
-
-          {/* -----------------------------------------------
-              SELECT / RECURRING ROW
-          ------------------------------------------------ */}
-
-          <div className="donate-options-row">
-            {/* HUMANITARIAN AID */}
-            <div className="donate-input-group">
-              <label htmlFor="aid">Humanitarian Aid</label>
-
-              <div className="select-wrapper">
-                <select
-                  id="aid"
-                  value={aid}
-                  onChange={(e) => setAid(e.target.value)}
-                >
-                  <option value="">Select Option</option>
-                  <option value="medical">Medical Aid</option>
-                  <option value="education">Education</option>
-                  <option value="food">Food Support</option>
-                  <option value="environment">Environmental Support</option>
-                </select>
-
-                <i className="fa-solid fa-chevron-down"></i>
-              </div>
-            </div>
-
-            {/* PAYMENT */}
-            <div className="donate-input-group">
-              <label htmlFor="payment">Type of payment</label>
-
-              <div className="select-wrapper">
-                <select
-                  id="payment"
-                  value={payment}
-                  onChange={(e) => setPayment(e.target.value)}
-                >
-                  <option value="">Select Option</option>
-                  <option value="card">Card</option>
-                  <option value="bank">Bank Transfer</option>
-                  <option value="paypal">PayPal</option>
-                </select>
-
-                <i className="fa-solid fa-chevron-down"></i>
-              </div>
-            </div>
-
-            {/* RECURRING */}
-            <div className="donate-input-group">
-              <label>Recurring payment</label>
-
-              <div className="recurring-payment">
-                <button
-                  type="button"
-                  className={!recurring ? "active" : ""}
-                  onClick={() => setRecurring(false)}
-                >
-                  Not
-                </button>
-
-                <button
-                  type="button"
-                  className={recurring ? "active" : ""}
-                  onClick={() => setRecurring(true)}
-                >
-                  Yes
-                </button>
-              </div>
             </div>
           </div>
 

@@ -1,4 +1,8 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 import { DonationProvider } from "./context/DonationContext";
 import DonationModal from "./components/DonationModal";
 import { useVisitTracker } from "./hooks/useVisitTracker";
@@ -12,11 +16,35 @@ import Impact from "./pages/Impact";
 import Donate from "./pages/Donate";
 import Contact from "./pages/Contact";
 
+function ScrollAndAOSRefresh() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const timer = setTimeout(() => {
+      AOS.refreshHard();
+    }, 150);
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
+
+  return null;
+}
+
 function AppContent() {
   useVisitTracker();
 
+  useEffect(() => {
+    AOS.init({
+      duration: 750,
+      easing: "ease-out-cubic",
+      once: false,
+      offset: 50,
+    });
+  }, []);
+
   return (
     <BrowserRouter>
+      <ScrollAndAOSRefresh />
       <Navbar />
 
       <Routes>
@@ -41,3 +69,4 @@ function App() {
 }
 
 export default App;
+

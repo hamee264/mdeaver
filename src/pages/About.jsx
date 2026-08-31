@@ -40,14 +40,14 @@ const About = () => {
       <section className="about-hero">
         <div className="about-hero-overlay"></div>
 
-        <div className="about-hero-content">
+        <div className="about-hero-content" data-aos="fade-down">
           {/* <span>HOME / ABOUT US</span> */}
           <h1>About Us</h1>
         </div>
       </section>
 
       {/* ================= INTRODUCTION ================= */}
-      <section className="about-intro section-padding">
+      <section className="about-intro section-padding" data-aos="fade-up">
         <div className="about-container intro-grid">
           <div className="intro-image-wrap">
             <img
@@ -124,7 +124,7 @@ const About = () => {
       </section>
 
       {/* ================= WHO WE SUPPORT ================= */}
-      <section className="support-section">
+      <section className="support-section" data-aos="fade-up">
         <div className="about-container">
           <div className="support-heading">
             <div className="section-label">
@@ -256,7 +256,7 @@ const About = () => {
       </section>
 
       {/* ================= IMPACT ================= */}
-      <section className="impact-section">
+      <section className="impact-section" data-aos="fade-up">
         <div className="impact-overlay"></div>
 
         <div className="about-container impact-content">
@@ -287,7 +287,7 @@ const About = () => {
       </section>
 
       {/* ================= STATISTICS ================= */}
-      <section className="statistics-section section-padding">
+      <section className="statistics-section section-padding" data-aos="zoom-in">
         <div className="about-container">
           <div className="statistics-heading">
             <div className="section-label">
