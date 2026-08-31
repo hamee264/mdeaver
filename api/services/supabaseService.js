@@ -3,17 +3,49 @@ import { createClient } from '@supabase/supabase-js';
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
 
+const isPlaceholder = (val) =>
+  !val ||
+  val.includes('your_supabase') ||
+  val.includes('your-supabase') ||
+  val === 'placeholder';
+
 let supabase = null;
-if (SUPABASE_URL && SUPABASE_KEY) {
+
+if (SUPABASE_URL && SUPABASE_KEY && !isPlaceholder(SUPABASE_KEY) && !isPlaceholder(SUPABASE_URL)) {
   try {
     supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-    console.log('[SUPABASE] Initialized successfully.');
+    console.log('[SUPABASE] Client initialized successfully.');
   } catch (err) {
     console.error('[SUPABASE] Failed to initialize client:', err.message);
   }
 } else {
-  console.warn('[SUPABASE] Credentials not provided (SUPABASE_URL / SUPABASE_ANON_KEY missing). Storage bypassed.');
+  console.warn('[SUPABASE] Live credentials not found or placeholder values in use. Database storage will be bypassed.');
 }
+
+/**
+ * Check Supabase Connection & Table Health
+ */
+export const checkSupabaseHealth = async () => {
+  if (!SUPABASE_URL || isPlaceholder(SUPABASE_URL)) {
+    return { status: 'disabled', reason: 'SUPABASE_URL environment variable is missing or placeholder.' };
+  }
+  if (!SUPABASE_KEY || isPlaceholder(SUPABASE_KEY)) {
+    return { status: 'disabled', reason: 'SUPABASE_ANON_KEY / SUPABASE_SERVICE_ROLE_KEY environment variable is missing or placeholder.' };
+  }
+  if (!supabase) {
+    return { status: 'error', reason: 'Supabase client failed to initialize.' };
+  }
+
+  try {
+    const { data, error } = await supabase.from('donations').select('id').limit(1);
+    if (error) {
+      return { status: 'error', table: 'donations', error: error.message, code: error.code };
+    }
+    return { status: 'connected', table: 'donations', reachable: true };
+  } catch (err) {
+    return { status: 'error', error: err.message };
+  }
+};
 
 /**
  * Save donation & payment record to Supabase "donations" table
@@ -21,7 +53,11 @@ if (SUPABASE_URL && SUPABASE_KEY) {
 export const saveDonationToSupabase = async (donationData) => {
   if (!supabase) {
     console.log(`[SUPABASE STORAGE BYPASS] Invoice #${donationData.invoiceNumber} — ${donationData.donorName} ($${donationData.amount})`);
-    return { success: true, bypassed: true };
+    return {
+      success: false,
+      bypassed: true,
+      reason: 'Supabase credentials missing or invalid on Vercel environment settings.',
+    };
   }
 
   try {
@@ -42,7 +78,7 @@ export const saveDonationToSupabase = async (donationData) => {
 
     if (error) {
       console.error('[SUPABASE INSERT ERROR]:', error);
-      return { success: false, error: error.message };
+      return { success: false, error: error.message, details: error };
     }
 
     console.log('[SUPABASE INSERT SUCCESS]:', data);

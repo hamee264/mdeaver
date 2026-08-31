@@ -3,7 +3,7 @@ import {
   sendContactEmail,
   sendDonationEmail,
 } from "../../api/services/emailService.js";
-import { saveDonationToSupabase } from "../../api/services/supabaseService.js";
+import { saveDonationToSupabase, checkSupabaseHealth } from "../../api/services/supabaseService.js";
 
 const json = (body, status = 200) =>
   new Response(JSON.stringify(body), {
@@ -24,10 +24,12 @@ export default async (request) => {
 
   try {
     if (request.method === "GET" && ["/api/health", "/health", "/"].includes(path)) {
+      const supabaseStatus = await checkSupabaseHealth();
       return json({
         status: "ok",
         timestamp: new Date().toISOString(),
         service: "Mdeaver Charity Netlify Function",
+        supabase: supabaseStatus,
       });
     }
 

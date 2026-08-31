@@ -5,7 +5,7 @@ import {
   sendContactEmail,
   sendDonationEmail,
 } from './services/emailService.js';
-import { saveDonationToSupabase } from './services/supabaseService.js';
+import { saveDonationToSupabase, checkSupabaseHealth } from './services/supabaseService.js';
 
 const app = express();
 
@@ -13,11 +13,13 @@ app.use(cors());
 app.use(express.json());
 
 // Healthcheck Route
-app.get(['/api/health', '/health'], (req, res) => {
+app.get(['/api/health', '/health'], async (req, res) => {
+  const supabaseStatus = await checkSupabaseHealth();
   res.json({
     status: 'ok',
     timestamp: new Date().toISOString(),
     service: 'Mdeaver Charity Express API on Vercel',
+    supabase: supabaseStatus,
   });
 });
 
