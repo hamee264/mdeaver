@@ -43,6 +43,7 @@ const ImpactSection = () => {
 
           <article
             className="impact-featured-news"
+            data-aos="fade-right"
             style={{
               backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.75) 100%), url(${commitmentBg})`,
               backgroundSize: "cover",
@@ -80,7 +81,7 @@ const ImpactSection = () => {
               COLUMN ONE
           ===================================== */}
 
-          <div className="impact-project-column">
+          <div className="impact-project-column" data-aos="fade-up" data-aos-delay="100">
             <ProjectCard
               category="OUR APPROACH"
               title="Listen"
@@ -104,7 +105,7 @@ const ImpactSection = () => {
               COLUMN TWO
           ===================================== */}
 
-          <div className="impact-project-column">
+          <div className="impact-project-column" data-aos="fade-up" data-aos-delay="200">
             <ProjectCard
               category="OUR APPROACH"
               title="Empower"

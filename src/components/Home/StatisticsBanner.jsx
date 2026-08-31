@@ -26,7 +26,12 @@ const StatisticsBanner = () => {
 
       <div className="statistics-container">
         {statistics.map((stat, index) => (
-          <div className="stat-item" key={index}>
+          <div
+            className="stat-item"
+            key={index}
+            data-aos="zoom-in"
+            data-aos-delay={(index + 1) * 100}
+          >
             <div className="stat-number">
               {stat.number}
             </div>

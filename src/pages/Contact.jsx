@@ -45,7 +45,7 @@ const Contact = () => {
       <section className="contact-hero">
         <div className="contact-hero-overlay"></div>
 
-        <div className="contact-hero-content">
+        <div className="contact-hero-content" data-aos="fade-down">
           <div className="contact-hero-label">
             <span></span>
             GET IN TOUCH
@@ -63,7 +63,7 @@ const Contact = () => {
       {/* =================================================
           INTRO + FORM
       ================================================= */}
-      <section className="contact-main">
+      <section className="contact-main" data-aos="fade-up">
         <div className="contact-intro">
           <div className="contact-section-label">
             <span></span>
@@ -89,19 +89,6 @@ const Contact = () => {
 
           {/* CONTACT DETAILS */}
           <div className="contact-details">
-            {/* <div className="contact-detail">
-              <div className="contact-detail-icon">
-                <i className="fa-solid fa-envelope"></i>
-              </div>
-
-              <div>
-                <span>EMAIL US</span>
-                <a href="mailto:info@mdeavercharityfoundation.org">
-                  info@mdeavercharityfoundation.org
-                </a>
-              </div>
-            </div> */}
-
             <div className="contact-detail">
               <div className="contact-detail-icon">
                 <i className="fa-solid fa-phone"></i>
@@ -233,7 +220,7 @@ const Contact = () => {
       {/* =================================================
           REASONS TO CONTACT
       ================================================= */}
-      <section className="contact-reasons">
+      <section className="contact-reasons" data-aos="fade-up">
         <div className="contact-reasons-header">
           <div className="contact-section-label">
             <span></span>
@@ -310,7 +297,7 @@ const Contact = () => {
       {/* =================================================
           FAQ / QUICK HELP
       ================================================= */}
-      <section className="contact-help">
+      <section className="contact-help" data-aos="fade-up">
         <div className="contact-help-content">
           <div className="contact-section-label">
             <span></span>
@@ -355,7 +342,7 @@ const Contact = () => {
       {/* =================================================
           FINAL CTA
       ================================================= */}
-      <section className="contact-cta">
+      <section className="contact-cta" data-aos="fade-up">
         <div className="contact-cta-overlay"></div>
 
         <div className="contact-cta-content">

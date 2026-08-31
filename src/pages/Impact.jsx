@@ -11,13 +11,13 @@ const Impact = () => {
       <section className="impact-hero">
         <div className="impact-hero-overlay"></div>
 
-        <div className="impact-hero-content">
+        <div className="impact-hero-content" data-aos="fade-down">
           <h1>Our Impact</h1>
         </div>
       </section>
 
       {/* Introduction */}
-      <section className="impact-intro section-padding">
+      <section className="impact-intro section-padding" data-aos="fade-up">
         <div className="impact-intro-image">
           <img
             src="/assets/children-support.jpg"
@@ -85,7 +85,7 @@ const Impact = () => {
       </section>
 
       {/* Impact Numbers */}
-      <section className="impact-numbers">
+      <section className="impact-numbers" data-aos="zoom-in">
         <div className="impact-number-header">
           <div className="section-label">
             <span></span>
@@ -135,7 +135,7 @@ const Impact = () => {
       </section>
 
       {/* Areas of Impact */}
-      <section className="impact-areas section-padding">
+      <section className="impact-areas section-padding" data-aos="fade-up">
         <div className="impact-areas-header">
           <div className="section-label">
             <span></span>
@@ -261,7 +261,7 @@ const Impact = () => {
       </section>
 
       {/* CTA Image Section */}
-      <section className="impact-cta">
+      <section className="impact-cta" data-aos="fade-up">
         <div className="impact-cta-overlay"></div>
 
         <div className="impact-cta-content">
@@ -289,7 +289,7 @@ const Impact = () => {
       </section>
 
       {/* Our Approach */}
-      <section className="impact-approach section-padding">
+      <section className="impact-approach section-padding" data-aos="fade-up">
         <div className="impact-approach-header">
           <div className="section-label">
             <span></span>
@@ -347,7 +347,7 @@ const Impact = () => {
       </section>
 
       {/* Closing */}
-      <section className="impact-closing">
+      <section className="impact-closing" data-aos="fade-up">
         <div className="impact-closing-content">
           <div className="section-label light">
             <span></span>A future with more hope

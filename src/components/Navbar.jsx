@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDonation } from "../context/DonationContext";
 import "./Navbar.css";
@@ -6,6 +6,23 @@ import "./Navbar.css";
 function Navbar() {
   const { openDonateModal } = useDonation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const topOffset =
+        window.scrollY ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0;
+      setScrolled(topOffset > 10);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const closeMenu = () => {
     setMenuOpen(false);
@@ -17,7 +34,8 @@ function Navbar() {
   };
 
   return (
-    <header className="site-header">
+    <header className={`site-header ${scrolled ? "scrolled" : ""}`}>
+
       {/* =================================================
           TOP INFORMATION BAR
       ================================================= */}

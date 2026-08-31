@@ -4,7 +4,7 @@ import "./Hero.css";
 
 const heroBackground = "/assets/image-hero.jpeg";
 const personImage = "/assets/community-children.jpg";
-const plantImage = "/assets/children-support.jpg";
+const plantImage = "/assets/children-community.jpg";
 
 function Hero() {
   // Tracks which card is centered in the mobile swipe deck so the
@@ -47,7 +47,7 @@ function Hero() {
         {/* =================================================
             MOBILE INTRO
         ================================================= */}
-        <div className="hero-mobile-intro">
+        <div className="hero-mobile-intro" data-aos="fade-down">
           <span className="hero-mobile-eyebrow">Together, we can</span>
 
           <h1>
@@ -61,7 +61,7 @@ function Hero() {
         {/* =================================================
             DESKTOP LEFT CONTENT
         ================================================= */}
-        <div className="hero-content">
+        <div className="hero-content" data-aos="fade-right" data-aos-delay="100">
           <div className="hero-title">
             <span>EMPOWERING</span>
             <span>LIVES</span>
@@ -85,41 +85,12 @@ function Hero() {
             <span></span>
             <span></span>
           </div>
-
-          {/* <div className="hero-socials">
-            <a
-              href="https://www.facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-            >
-              <i className="fa-brands fa-facebook-f"></i>
-            </a>
-
-            <a
-              href="https://www.twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Twitter"
-            >
-              <i className="fa-brands fa-twitter"></i>
-            </a>
-
-            <a
-              href="https://www.youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="YouTube"
-            >
-              <i className="fa-brands fa-youtube"></i>
-            </a>
-          </div> */}
         </div>
 
         {/* =================================================
             CARDS
         ================================================= */}
-        <div className="hero-cards" ref={cardsRef}>
+        <div className="hero-cards" ref={cardsRef} data-aos="fade-left" data-aos-delay="200">
           {/* =================================================
               SUPPORT / COMMUNITY IMAGE (desktop only)
           ================================================= */}
