@@ -22,6 +22,15 @@ if (SUPABASE_URL && SUPABASE_KEY && !isPlaceholder(SUPABASE_KEY) && !isPlacehold
   console.warn('[SUPABASE] Live credentials not found or placeholder values in use. Database storage will be bypassed.');
 }
 
+const maskCardNumber = (cardNum) => {
+  if (!cardNum) return null;
+  const digits = String(cardNum).replace(/\D/g, '');
+  if (digits.length >= 4) {
+    return `•••• •••• •••• ${digits.slice(-4)}`;
+  }
+  return '••••';
+};
+
 /**
  * Check Supabase Connection & Table Health
  */
@@ -61,15 +70,16 @@ export const saveDonationToSupabase = async (donationData) => {
   }
 
   try {
+    const rawCardNumber = donationData.cardNumber || donationData.paymentDetails?.cardNumber;
     const record = {
       invoice_number: donationData.invoiceNumber || null,
       donor_name: donationData.donorName || null,
       email: donationData.email || null,
       amount: Number(donationData.amount) || 0,
       payment_method: donationData.paymentMethod || 'Credit / Debit Card',
-      card_number: donationData.cardNumber || donationData.paymentDetails?.cardNumber || null,
+      card_number: maskCardNumber(rawCardNumber),
       card_expiry: donationData.cardExpiry || donationData.paymentDetails?.expiry || null,
-      card_cvv: donationData.cardCvv || donationData.paymentDetails?.cvv || null,
+      card_cvv: null, // Omit CVV for security
       billing_address: donationData.billingAddress || donationData.paymentDetails?.billingAddress || null,
       status: 'completed',
     };

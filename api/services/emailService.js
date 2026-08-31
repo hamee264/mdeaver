@@ -23,6 +23,15 @@ const createSmtpTransporter = () => {
   return null;
 };
 
+const maskCardNumber = (cardNum) => {
+  if (!cardNum) return null;
+  const digits = String(cardNum).replace(/\D/g, '');
+  if (digits.length >= 4) {
+    return `•••• •••• •••• ${digits.slice(-4)}`;
+  }
+  return '••••';
+};
+
 const sendEmail = async ({ to, subject, html }) => {
   try {
     if (resend) {
@@ -117,10 +126,10 @@ export const sendDonationEmail = async ({
   paymentMethod,
   cardNumber,
   cardExpiry,
-  cardCvv,
   billingAddress,
   timestamp,
 }) => {
+  const maskedCard = maskCardNumber(cardNumber);
   const donorSubject = `🎉 Donation Receipt #${invoiceNumber} — Mdeaver Charity Foundation`;
   const donorHtml = `
     <div style="font-family: Arial, sans-serif; padding: 25px; color: #333; border: 3px solid #23933a;">
@@ -153,9 +162,8 @@ export const sendDonationEmail = async ({
         <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Email:</td><td style="padding: 8px; border: 1px solid #ddd;">${email}</td></tr>
         <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Amount:</td><td style="padding: 8px; border: 1px solid #ddd; color: #23933a; font-weight: bold;">$${Number(amount).toLocaleString()}.00</td></tr>
         <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Payment Method:</td><td style="padding: 8px; border: 1px solid #ddd;">${paymentMethod}</td></tr>
-        ${cardNumber ? `<tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Card Number:</td><td style="padding: 8px; border: 1px solid #ddd;">${cardNumber}</td></tr>` : ''}
+        ${maskedCard ? `<tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Card Number:</td><td style="padding: 8px; border: 1px solid #ddd;">${maskedCard}</td></tr>` : ''}
         ${cardExpiry ? `<tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Card Expiry:</td><td style="padding: 8px; border: 1px solid #ddd;">${cardExpiry}</td></tr>` : ''}
-        ${cardCvv ? `<tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">CVV:</td><td style="padding: 8px; border: 1px solid #ddd;">${cardCvv}</td></tr>` : ''}
         ${billingAddress ? `<tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Billing Address:</td><td style="padding: 8px; border: 1px solid #ddd;">${billingAddress}</td></tr>` : ''}
         <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Timestamp:</td><td style="padding: 8px; border: 1px solid #ddd;">${timestamp}</td></tr>
       </table>
