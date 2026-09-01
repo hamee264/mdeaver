@@ -125,3 +125,18 @@ export const fetchRecentDonations = async (limit = 10) => {
     return { success: false, error: err.message, data: [] };
   }
 };
+
+export const fetchDonations = fetchRecentDonations;
+
+/**
+ * Fetch Contact Form Messages
+ */
+export const fetchContacts = async (limit = 20) => {
+  try {
+    const res = await fetch(`${API_BASE}/contact?limit=${limit}`);
+    return await parseJsonResponse(res);
+  } catch (err) {
+    return { success: false, error: err.message, data: [] };
+  }
+};
+

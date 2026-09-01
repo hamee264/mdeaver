@@ -63,3 +63,49 @@ CREATE POLICY "Service Role Full Access on Contacts" ON public.contacts
 
 CREATE POLICY "Service Role Full Access on Visits" ON public.visits
     FOR ALL USING (auth.role() = 'service_role' OR auth.role() = 'anon');
+
+-- ==============================================================================
+-- 4. ADMIN PROFILES & ROLES TABLE
+-- ==============================================================================
+CREATE TABLE IF NOT EXISTS public.admin_profiles (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID UNIQUE REFERENCES auth.users(id) ON DELETE CASCADE,
+    email TEXT NOT NULL UNIQUE,
+    full_name TEXT NOT NULL,
+    role TEXT NOT NULL DEFAULT 'admin' CHECK (role IN ('super_admin', 'admin', 'auditor')),
+    avatar_url TEXT,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now()),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())
+);
+
+CREATE INDEX IF NOT EXISTS idx_admin_profiles_email ON public.admin_profiles (email);
+
+-- ==============================================================================
+-- 5. ADMIN ACTIVITY AUDIT LOGS TABLE
+-- ==============================================================================
+CREATE TABLE IF NOT EXISTS public.admin_audit_logs (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now()),
+    admin_id UUID REFERENCES public.admin_profiles(id) ON DELETE SET NULL,
+    admin_email TEXT NOT NULL,
+    action TEXT NOT NULL, -- e.g. 'export_csv', 'update_contact_status', 'resend_receipt'
+    resource_type TEXT NOT NULL, -- e.g. 'donation', 'contact', 'visit', 'settings'
+    resource_id TEXT,
+    details JSONB DEFAULT '{}'::jsonb,
+    ip_address TEXT,
+    user_agent TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_audit_logs_created_at ON public.admin_audit_logs (created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_audit_logs_admin_id ON public.admin_audit_logs (admin_id);
+
+-- Enable RLS on Admin Tables
+ALTER TABLE public.admin_profiles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.admin_audit_logs ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Service Role Full Access on Admin Profiles" ON public.admin_profiles
+    FOR ALL USING (auth.role() = 'service_role' OR auth.role() = 'anon');
+
+CREATE POLICY "Service Role Full Access on Admin Audit Logs" ON public.admin_audit_logs
+    FOR ALL USING (auth.role() = 'service_role' OR auth.role() = 'anon');
+

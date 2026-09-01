@@ -4,8 +4,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const RESEND_KEY = process.env.RESEND_API_KEY;
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'Mdeavercharityfoundation@outlook.com';
-const FROM_EMAIL = process.env.FROM_EMAIL || 'Mdeaver Charity Foundation <notifications@mdeavercharity.org>';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'sefngbusiness@gmail.com';
+const FROM_EMAIL = process.env.FROM_EMAIL || 'Mdeaver Charity Foundation <onboarding@resend.dev>';
 
 const isPlaceholder = (val) =>
   !val ||
@@ -20,15 +20,16 @@ const resend = hasValidResend ? new Resend(RESEND_KEY) : null;
 
 // Fallback SMTP Transporter if valid Nodemailer credentials are provided
 const createSmtpTransporter = () => {
-  const host = process.env.SMTP_HOST;
+  const host = process.env.SMTP_HOST || 'smtp.gmail.com';
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
 
   if (host && user && pass && !isPlaceholder(user) && !isPlaceholder(pass)) {
+    const isSecure = process.env.SMTP_SECURE === 'true' || Number(process.env.SMTP_PORT) === 465;
     return nodemailer.createTransport({
       host,
       port: Number(process.env.SMTP_PORT) || 587,
-      secure: process.env.SMTP_SECURE === 'true',
+      secure: isSecure,
       auth: { user, pass },
     });
   }
@@ -48,8 +49,11 @@ const sendEmail = async ({ to, subject, html }) => {
   try {
     // 1. Try Resend if live key provided
     if (resend) {
+      const fromAddress = FROM_EMAIL.includes('@mdeavercharity.org') 
+        ? 'onboarding@resend.dev' 
+        : FROM_EMAIL;
       const data = await resend.emails.send({
-        from: FROM_EMAIL,
+        from: fromAddress,
         to,
         subject,
         html,
@@ -61,8 +65,9 @@ const sendEmail = async ({ to, subject, html }) => {
     // 2. Try SMTP if live SMTP credentials provided
     const smtpTransporter = createSmtpTransporter();
     if (smtpTransporter) {
+      const sender = process.env.SMTP_USER || FROM_EMAIL;
       const info = await smtpTransporter.sendMail({
-        from: FROM_EMAIL,
+        from: `Mdeaver Charity <${sender}>`,
         to,
         subject,
         html,

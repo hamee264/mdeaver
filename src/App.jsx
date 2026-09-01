@@ -16,6 +16,15 @@ import Impact from "./pages/Impact";
 import Donate from "./pages/Donate";
 import Contact from "./pages/Contact";
 
+import { AdminAuthProvider } from "./admin/context/AdminAuthContext";
+import AdminLayout from "./admin/AdminLayout";
+import AdminDashboard from "./admin/pages/AdminDashboard";
+import AdminDonations from "./admin/pages/AdminDonations";
+import AdminContacts from "./admin/pages/AdminContacts";
+import AdminVisits from "./admin/pages/AdminVisits";
+import AdminAuditLogs from "./admin/pages/AdminAuditLogs";
+import AdminLogin from "./admin/pages/AdminLogin";
+
 function ScrollAndAOSRefresh() {
   const location = useLocation();
 
@@ -30,7 +39,7 @@ function ScrollAndAOSRefresh() {
   return null;
 }
 
-function AppContent() {
+function MainWebsiteLayout() {
   useVisitTracker();
 
   useEffect(() => {
@@ -43,10 +52,8 @@ function AppContent() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <ScrollAndAOSRefresh />
+    <>
       <Navbar />
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -56,14 +63,34 @@ function AppContent() {
       </Routes>
       <Footer />
       <DonationModal />
-    </BrowserRouter>
+    </>
   );
 }
 
 function App() {
+  const isSubdomain = typeof window !== 'undefined' && window.location.hostname.startsWith('admin.');
+
   return (
     <DonationProvider>
-      <AppContent />
+      <AdminAuthProvider>
+        <BrowserRouter>
+          <ScrollAndAOSRefresh />
+          <Routes>
+            {/* Admin Subdomain / Route */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<AdminDashboard />} />
+              <Route path="donations" element={<AdminDonations />} />
+              <Route path="contacts" element={<AdminContacts />} />
+              <Route path="visits" element={<AdminVisits />} />
+              <Route path="logs" element={<AdminAuditLogs />} />
+            </Route>
+
+            {/* Public Donor Website */}
+            <Route path="*" element={isSubdomain ? <AdminLayout /> : <MainWebsiteLayout />} />
+          </Routes>
+        </BrowserRouter>
+      </AdminAuthProvider>
     </DonationProvider>
   );
 }
