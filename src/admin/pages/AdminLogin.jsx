@@ -7,9 +7,9 @@ const inputStyle = {
   width: '100%',
   padding: '14px 16px',
   borderRadius: '12px',
-  background: '#182a1f',
-  border: '1px solid rgba(255,255,255,0.12)',
-  color: '#fff',
+  background: '#f8fafc',
+  border: '1px solid #cbd5e1',
+  color: '#0f172a',
   fontSize: '15px',
   outline: 'none',
   boxSizing: 'border-box',
@@ -19,9 +19,9 @@ const inputStyle = {
 /* ── AlertBox ───────────────────────────────────────────────────── */
 function AlertBox({ type = 'error', children }) {
   const colors = {
-    error: { bg: 'rgba(239,68,68,0.12)', border: 'rgba(239,68,68,0.3)', text: '#fca5a5', icon: 'fa-triangle-exclamation' },
-    success: { bg: 'rgba(35,147,58,0.12)', border: 'rgba(57,207,88,0.3)', text: '#6ee7a0', icon: 'fa-circle-check' },
-    info: { bg: 'rgba(59,130,246,0.12)', border: 'rgba(59,130,246,0.3)', text: '#93c5fd', icon: 'fa-circle-info' },
+    error: { bg: 'rgba(239,68,68,0.1)', border: 'rgba(239,68,68,0.3)', text: '#b91c1c', icon: 'fa-triangle-exclamation' },
+    success: { bg: 'rgba(35,147,58,0.1)', border: 'rgba(22,163,74,0.3)', text: '#15803d', icon: 'fa-circle-check' },
+    info: { bg: 'rgba(59,130,246,0.1)', border: 'rgba(37,99,235,0.3)', text: '#1d4ed8', icon: 'fa-circle-info' },
   }[type];
 
   return (
@@ -76,13 +76,13 @@ function LoginForm({ onForgot }) {
             objectFit: 'contain',
             margin: '0 auto 16px',
             display: 'block',
-            filter: 'drop-shadow(0 4px 16px rgba(35,147,58,0.45))',
+            filter: 'drop-shadow(0 4px 12px rgba(35,147,58,0.25))',
           }}
         />
-        <h1 style={{ fontSize: '22px', fontWeight: 800, letterSpacing: '-0.5px', color: '#fff' }}>
+        <h1 style={{ fontSize: '22px', fontWeight: 800, letterSpacing: '-0.5px', color: '#0f172a' }}>
           Admin Control Center
         </h1>
-        <p style={{ fontSize: '13px', color: '#8ea895', marginTop: '6px' }}>
+        <p style={{ fontSize: '13px', color: '#64748b', marginTop: '6px' }}>
           Mdeaver Charity Foundation Portal
         </p>
       </div>
@@ -91,7 +91,7 @@ function LoginForm({ onForgot }) {
 
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
         <div>
-          <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: '#8ea895', letterSpacing: '0.6px', marginBottom: '8px' }}>
+          <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: '#475569', letterSpacing: '0.6px', marginBottom: '8px' }}>
             ADMINISTRATOR EMAIL
           </label>
           <input
@@ -101,13 +101,13 @@ function LoginForm({ onForgot }) {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="sefngbusiness@gmail.com"
             style={inputStyle}
-            onFocus={(e) => (e.target.style.borderColor = 'rgba(57,207,88,0.5)')}
-            onBlur={(e) => (e.target.style.borderColor = 'rgba(255,255,255,0.12)')}
+            onFocus={(e) => (e.target.style.borderColor = '#16a34a')}
+            onBlur={(e) => (e.target.style.borderColor = '#cbd5e1')}
           />
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: '#8ea895', letterSpacing: '0.6px', marginBottom: '8px' }}>
+          <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: '#475569', letterSpacing: '0.6px', marginBottom: '8px' }}>
             PASSWORD
           </label>
           <div style={{ position: 'relative' }}>
@@ -118,8 +118,8 @@ function LoginForm({ onForgot }) {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••••••"
               style={{ ...inputStyle, paddingRight: '46px' }}
-              onFocus={(e) => (e.target.style.borderColor = 'rgba(57,207,88,0.5)')}
-              onBlur={(e) => (e.target.style.borderColor = 'rgba(255,255,255,0.12)')}
+              onFocus={(e) => (e.target.style.borderColor = '#16a34a')}
+              onBlur={(e) => (e.target.style.borderColor = '#cbd5e1')}
             />
             <button
               type="button"
@@ -131,7 +131,7 @@ function LoginForm({ onForgot }) {
                 transform: 'translateY(-50%)',
                 background: 'none',
                 border: 'none',
-                color: '#8ea895',
+                color: '#64748b',
                 cursor: 'pointer',
                 fontSize: '14px',
                 padding: '4px',
@@ -146,7 +146,7 @@ function LoginForm({ onForgot }) {
           <button
             type="button"
             onClick={onForgot}
-            style={{ background: 'none', border: 'none', color: '#39cf58', fontSize: '13px', cursor: 'pointer', fontWeight: 600 }}
+            style={{ background: 'none', border: 'none', color: '#16a34a', fontSize: '13px', cursor: 'pointer', fontWeight: 600 }}
           >
             Forgot password?
           </button>
@@ -158,13 +158,13 @@ function LoginForm({ onForgot }) {
           style={{
             padding: '15px',
             borderRadius: '12px',
-            background: 'linear-gradient(135deg, #23933a, #1d7a30)',
+            background: 'linear-gradient(135deg, #23933a, #16a34a)',
             color: '#fff',
             fontWeight: 800,
             fontSize: '14px',
             border: 'none',
             cursor: loading ? 'not-allowed' : 'pointer',
-            boxShadow: '0 4px 16px rgba(35,147,58,0.4)',
+            boxShadow: '0 4px 16px rgba(35,147,58,0.3)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -212,20 +212,20 @@ function ForgotPasswordForm({ onBack }) {
             width: '56px',
             height: '56px',
             borderRadius: '16px',
-            background: 'rgba(35,147,58,0.15)',
-            border: '1px solid rgba(57,207,88,0.3)',
+            background: 'rgba(35,147,58,0.1)',
+            border: '1px solid rgba(22,163,74,0.25)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             margin: '0 auto 16px',
             fontSize: '22px',
-            color: '#39cf58',
+            color: '#16a34a',
           }}
         >
           <i className="fa-solid fa-key" />
         </div>
-        <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#fff', marginBottom: '6px' }}>Reset Password</h2>
-        <p style={{ fontSize: '13px', color: '#8ea895' }}>
+        <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#0f172a', marginBottom: '6px' }}>Reset Password</h2>
+        <p style={{ fontSize: '13px', color: '#64748b' }}>
           Enter your admin email to reset the password.
         </p>
       </div>
@@ -235,7 +235,7 @@ function ForgotPasswordForm({ onBack }) {
       {!status?.type || status.type !== 'success' ? (
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
           <div>
-            <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: '#8ea895', letterSpacing: '0.6px', marginBottom: '8px' }}>
+            <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: '#475569', letterSpacing: '0.6px', marginBottom: '8px' }}>
               ADMINISTRATOR EMAIL
             </label>
             <input
@@ -244,8 +244,8 @@ function ForgotPasswordForm({ onBack }) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               style={inputStyle}
-              onFocus={(e) => (e.target.style.borderColor = 'rgba(57,207,88,0.5)')}
-              onBlur={(e) => (e.target.style.borderColor = 'rgba(255,255,255,0.12)')}
+              onFocus={(e) => (e.target.style.borderColor = '#16a34a')}
+              onBlur={(e) => (e.target.style.borderColor = '#cbd5e1')}
             />
           </div>
           <button
@@ -254,7 +254,7 @@ function ForgotPasswordForm({ onBack }) {
             style={{
               padding: '15px',
               borderRadius: '12px',
-              background: 'linear-gradient(135deg, #23933a, #1d7a30)',
+              background: 'linear-gradient(135deg, #23933a, #16a34a)',
               color: '#fff',
               fontWeight: 800,
               fontSize: '14px',
@@ -281,8 +281,8 @@ function ForgotPasswordForm({ onBack }) {
           padding: '12px',
           borderRadius: '12px',
           background: 'transparent',
-          border: '1px solid rgba(255,255,255,0.1)',
-          color: '#8ea895',
+          border: '1px solid #cbd5e1',
+          color: '#64748b',
           fontSize: '13px',
           fontWeight: 600,
           cursor: 'pointer',
@@ -316,9 +316,9 @@ export default function AdminLogin() {
     <div
       style={{
         minHeight: '100vh',
-        backgroundColor: '#0b130e',
-        backgroundImage: 'radial-gradient(ellipse 80% 60% at 50% -20%, rgba(35,147,58,0.12) 0%, transparent 70%)',
-        color: '#fff',
+        backgroundColor: '#f6f9f7',
+        backgroundImage: 'radial-gradient(ellipse 80% 60% at 50% -20%, rgba(35,147,58,0.08) 0%, transparent 70%)',
+        color: '#0f172a',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -329,13 +329,11 @@ export default function AdminLogin() {
         style={{
           width: '100%',
           maxWidth: '420px',
-          background: 'rgba(18,31,23,0.85)',
-          backdropFilter: 'blur(24px)',
-          WebkitBackdropFilter: 'blur(24px)',
-          border: '1px solid rgba(255,255,255,0.1)',
+          background: '#ffffff',
+          border: '1px solid #e2e8f0',
           borderRadius: '24px',
           padding: '36px 28px',
-          boxShadow: '0 24px 48px rgba(0,0,0,0.5)',
+          boxShadow: '0 20px 45px rgba(0,0,0,0.06)',
         }}
       >
         {view === 'login' ? (

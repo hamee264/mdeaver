@@ -42,27 +42,29 @@ export default function AdminDashboard() {
       <div
         className="admin-card"
         style={{
-          background: 'linear-gradient(135deg, #173820 0%, #0e1e13 100%)',
-          border: '1px solid rgba(57, 207, 88, 0.25)',
+          background: 'linear-gradient(135deg, #1e7e34 0%, #145a25 100%)',
+          border: 'none',
           padding: '24px',
+          color: '#ffffff',
           display: 'flex',
           flexDirection: 'column',
           gap: '12px',
+          boxShadow: '0 8px 20px rgba(30, 126, 52, 0.25)',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--admin-gold)', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
+          <span style={{ fontSize: '11px', fontWeight: 800, color: '#fef08a', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
             EXECUTIVE DASHBOARD
           </span>
-          <span style={{ fontSize: '12px', color: '#8ea895', display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#39cf58', display: 'inline-block' }}></span>
+          <span style={{ fontSize: '12px', color: '#e2e8f0', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#4ade80', display: 'inline-block' }}></span>
             Realtime Sync
           </span>
         </div>
-        <h1 style={{ fontSize: '24px', fontWeight: 800, margin: 0, letterSpacing: '-0.5px' }}>
+        <h1 style={{ fontSize: '24px', fontWeight: 800, margin: 0, letterSpacing: '-0.5px', color: '#ffffff' }}>
           Overview & Live Metrics
         </h1>
-        <p style={{ fontSize: '13px', color: '#8ea895', margin: 0, maxWidth: '600px' }}>
+        <p style={{ fontSize: '13px', color: '#cbd5e1', margin: 0, maxWidth: '600px' }}>
           Real-time summary of donor contributions, community message inquiries, and website engagement traffic.
         </p>
       </div>
@@ -79,11 +81,11 @@ export default function AdminDashboard() {
         <div className="admin-card" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <span style={{ fontSize: '12px', color: 'var(--admin-text-muted)', fontWeight: 600 }}>TOTAL RAISED</span>
-            <div style={{ width: '32px', height: '32px', borderRadius: '10px', background: 'rgba(35, 147, 58, 0.2)', color: 'var(--admin-emerald-bright)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '10px', background: 'rgba(22, 163, 74, 0.1)', color: 'var(--admin-emerald-bright)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <i className="fa-solid fa-dollar-sign"></i>
             </div>
           </div>
-          <div style={{ fontSize: '24px', fontWeight: 800, color: '#ffffff' }}>
+          <div style={{ fontSize: '24px', fontWeight: 800, color: 'var(--admin-text-main)' }}>
             ${Number(stats.totalAmount || 0).toLocaleString()}
           </div>
           <span style={{ fontSize: '11px', color: 'var(--admin-emerald-bright)', fontWeight: 600 }}>
@@ -95,14 +97,14 @@ export default function AdminDashboard() {
         <div className="admin-card" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <span style={{ fontSize: '12px', color: 'var(--admin-text-muted)', fontWeight: 600 }}>DONATIONS</span>
-            <div style={{ width: '32px', height: '32px', borderRadius: '10px', background: 'rgba(245, 167, 25, 0.2)', color: 'var(--admin-gold)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '10px', background: 'rgba(217, 119, 6, 0.1)', color: 'var(--admin-gold)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <i className="fa-solid fa-heart"></i>
             </div>
           </div>
-          <div style={{ fontSize: '24px', fontWeight: 800, color: '#ffffff' }}>
+          <div style={{ fontSize: '24px', fontWeight: 800, color: 'var(--admin-text-main)' }}>
             {stats.donationCount || 0}
           </div>
-          <span style={{ fontSize: '11px', color: '#8ea895', fontWeight: 600 }}>
+          <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>
             Completed transactions
           </span>
         </div>
@@ -111,14 +113,14 @@ export default function AdminDashboard() {
         <div className="admin-card" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <span style={{ fontSize: '12px', color: 'var(--admin-text-muted)', fontWeight: 600 }}>INQUIRIES</span>
-            <div style={{ width: '32px', height: '32px', borderRadius: '10px', background: 'rgba(59, 130, 246, 0.2)', color: '#60a5fa', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '10px', background: 'rgba(37, 99, 235, 0.1)', color: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <i className="fa-solid fa-envelope"></i>
             </div>
           </div>
-          <div style={{ fontSize: '24px', fontWeight: 800, color: '#ffffff' }}>
+          <div style={{ fontSize: '24px', fontWeight: 800, color: 'var(--admin-text-main)' }}>
             {stats.contactCount || 0}
           </div>
-          <span style={{ fontSize: '11px', color: '#60a5fa', fontWeight: 600 }}>
+          <span style={{ fontSize: '11px', color: '#2563eb', fontWeight: 600 }}>
             Messages received
           </span>
         </div>
@@ -127,14 +129,14 @@ export default function AdminDashboard() {
         <div className="admin-card" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <span style={{ fontSize: '12px', color: 'var(--admin-text-muted)', fontWeight: 600 }}>VISITORS</span>
-            <div style={{ width: '32px', height: '32px', borderRadius: '10px', background: 'rgba(168, 85, 247, 0.2)', color: '#c084fc', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '10px', background: 'rgba(147, 51, 234, 0.1)', color: '#9333ea', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <i className="fa-solid fa-eye"></i>
             </div>
           </div>
-          <div style={{ fontSize: '24px', fontWeight: 800, color: '#ffffff' }}>
+          <div style={{ fontSize: '24px', fontWeight: 800, color: 'var(--admin-text-main)' }}>
             {stats.visitCount || 0}
           </div>
-          <span style={{ fontSize: '11px', color: '#c084fc', fontWeight: 600 }}>
+          <span style={{ fontSize: '11px', color: '#9333ea', fontWeight: 600 }}>
             Tracked site visits
           </span>
         </div>
@@ -145,16 +147,16 @@ export default function AdminDashboard() {
         {/* Recent Donations List */}
         <div className="admin-card">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-            <h3 style={{ fontSize: '16px', fontWeight: 700, margin: 0 }}>Recent Contributions</h3>
+            <h3 style={{ fontSize: '16px', fontWeight: 700, margin: 0, color: '#0f172a' }}>Recent Contributions</h3>
             <span style={{ fontSize: '12px', color: 'var(--admin-emerald-bright)', fontWeight: 600 }}>View All</span>
           </div>
 
           {loading ? (
-            <div style={{ padding: '20px', textAlign: 'center', color: '#8ea895' }}>
+            <div style={{ padding: '20px', textAlign: 'center', color: '#64748b' }}>
               <i className="fa-solid fa-spinner fa-spin"></i> Loading latest donations...
             </div>
           ) : recentDonations.length === 0 ? (
-            <div style={{ padding: '20px', textAlign: 'center', color: '#8ea895', fontSize: '13px' }}>
+            <div style={{ padding: '20px', textAlign: 'center', color: '#64748b', fontSize: '13px' }}>
               No recent donations recorded.
             </div>
           ) : (
@@ -168,19 +170,19 @@ export default function AdminDashboard() {
                     justifyContent: 'space-between',
                     padding: '10px 12px',
                     borderRadius: '10px',
-                    background: 'rgba(255,255,255,0.03)',
-                    border: '1px solid var(--admin-border-dark)',
+                    background: '#f8fafc',
+                    border: '1px solid #e2e8f0',
                   }}
                 >
                   <div>
-                    <div style={{ fontSize: '14px', fontWeight: 700 }}>{item.donor_name || item.donorName || 'Anonymous'}</div>
-                    <div style={{ fontSize: '11px', color: '#8ea895' }}>{item.email}</div>
+                    <div style={{ fontSize: '14px', fontWeight: 700, color: '#0f172a' }}>{item.donor_name || item.donorName || 'Anonymous'}</div>
+                    <div style={{ fontSize: '11px', color: '#64748b' }}>{item.email}</div>
                   </div>
                   <div style={{ textAlign: 'right' }}>
                     <div style={{ fontSize: '14px', fontWeight: 800, color: 'var(--admin-emerald-bright)' }}>
                       +${item.amount}
                     </div>
-                    <div style={{ fontSize: '10px', color: '#8ea895' }}>{item.payment_method || 'Card'}</div>
+                    <div style={{ fontSize: '10px', color: '#64748b' }}>{item.payment_method || 'Card'}</div>
                   </div>
                 </div>
               ))}
@@ -191,16 +193,16 @@ export default function AdminDashboard() {
         {/* Recent Inquiries List */}
         <div className="admin-card">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-            <h3 style={{ fontSize: '16px', fontWeight: 700, margin: 0 }}>Recent Contact Messages</h3>
-            <span style={{ fontSize: '12px', color: '#60a5fa', fontWeight: 600 }}>View Inbox</span>
+            <h3 style={{ fontSize: '16px', fontWeight: 700, margin: 0, color: '#0f172a' }}>Recent Contact Messages</h3>
+            <span style={{ fontSize: '12px', color: '#2563eb', fontWeight: 600 }}>View Inbox</span>
           </div>
 
           {loading ? (
-            <div style={{ padding: '20px', textAlign: 'center', color: '#8ea895' }}>
+            <div style={{ padding: '20px', textAlign: 'center', color: '#64748b' }}>
               <i className="fa-solid fa-spinner fa-spin"></i> Loading messages...
             </div>
           ) : recentContacts.length === 0 ? (
-            <div style={{ padding: '20px', textAlign: 'center', color: '#8ea895', fontSize: '13px' }}>
+            <div style={{ padding: '20px', textAlign: 'center', color: '#64748b', fontSize: '13px' }}>
               No messages received yet.
             </div>
           ) : (
@@ -214,15 +216,15 @@ export default function AdminDashboard() {
                     gap: '4px',
                     padding: '10px 12px',
                     borderRadius: '10px',
-                    background: 'rgba(255,255,255,0.03)',
-                    border: '1px solid var(--admin-border-dark)',
+                    background: '#f8fafc',
+                    border: '1px solid #e2e8f0',
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: '13px', fontWeight: 700 }}>{msg.name}</span>
-                    <span style={{ fontSize: '10px', color: '#8ea895' }}>{msg.email}</span>
+                    <span style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a' }}>{msg.name}</span>
+                    <span style={{ fontSize: '10px', color: '#64748b' }}>{msg.email}</span>
                   </div>
-                  <div style={{ fontSize: '12px', color: '#d1e3d5', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <div style={{ fontSize: '12px', color: '#334155', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     {msg.subject || msg.message}
                   </div>
                 </div>

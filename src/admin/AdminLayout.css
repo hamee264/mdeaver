@@ -1,21 +1,21 @@
 /* =========================================================
    ADMIN PORTAL MOBILE-FIRST DESIGN SYSTEM
-   Senior Developer Aesthetic: Dark Glassmorphism, HSL Tokens,
+   Senior Developer Aesthetic: Crisp Light Theme, HSL Tokens,
    Thumb-Zone Ergonomics, Micro-Animations
 ========================================================= */
 
 .admin-shell {
-  --admin-bg-dark: #0b130e;
-  --admin-surface-dark: #121f17;
-  --admin-surface-card: #182a1f;
-  --admin-border-dark: rgba(255, 255, 255, 0.1);
+  --admin-bg-dark: #f6f9f7;
+  --admin-surface-dark: #ffffff;
+  --admin-surface-card: #ffffff;
+  --admin-border-dark: #e2e8f0;
   --admin-emerald: #23933a;
-  --admin-emerald-bright: #39cf58;
-  --admin-gold: #f5a719;
-  --admin-text-main: #f0f7f2;
-  --admin-text-muted: #8ea895;
+  --admin-emerald-bright: #16a34a;
+  --admin-gold: #d97706;
+  --admin-text-main: #0f172a;
+  --admin-text-muted: #64748b;
 
-  /* Cover the full viewport — hides the white body underneath */
+  /* Cover the full viewport — hides the body underneath */
   min-height: 100vh;
   min-height: 100dvh;
   width: 100%;
@@ -30,8 +30,8 @@
 }
 
 /*
- * Navbar.css sets  body { padding-top: 142px }  globally to push content
- * below the fixed public navbar.  Admin pages have NO navbar, so we cancel
+ * Navbar.css sets body { padding-top: 142px } globally to push content
+ * below the fixed public navbar. Admin pages have NO navbar, so we cancel
  * that offset here — scoped to the admin shell so the public site is untouched.
  */
 .admin-shell ~ body,
@@ -39,15 +39,13 @@ body:has(.admin-shell) {
   padding-top: 0 !important;
 }
 
-
-
 /* ── Top Header ───────────────────────────────────────── */
 .admin-header {
   position: sticky;
   top: 0;
   z-index: 100;
   height: 64px;
-  background: rgba(18, 31, 23, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--admin-border-dark);
@@ -75,22 +73,22 @@ body:has(.admin-shell) {
   color: #fff;
   font-weight: 800;
   font-size: 18px;
-  box-shadow: 0 4px 12px rgba(35, 147, 58, 0.4);
+  box-shadow: 0 4px 12px rgba(35, 147, 58, 0.25);
 }
 
 .admin-header-title {
   font-size: 16px;
   font-weight: 700;
-  color: #fff;
+  color: var(--admin-text-main);
   letter-spacing: -0.3px;
 }
 
 .admin-header-badge {
   font-size: 10px;
   font-weight: 800;
-  background: rgba(245, 167, 25, 0.15);
+  background: rgba(217, 119, 6, 0.1);
   color: var(--admin-gold);
-  border: 1px solid rgba(245, 167, 25, 0.3);
+  border: 1px solid rgba(217, 119, 6, 0.25);
   padding: 2px 8px;
   border-radius: 20px;
   text-transform: uppercase;
@@ -106,7 +104,7 @@ body:has(.admin-shell) {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.03);
   border: 1px solid var(--admin-border-dark);
   padding: 4px 12px 4px 6px;
   border-radius: 30px;
@@ -115,7 +113,7 @@ body:has(.admin-shell) {
 }
 
 .admin-user-pill:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.06);
 }
 
 .admin-user-avatar {
@@ -128,6 +126,7 @@ body:has(.admin-shell) {
 .admin-user-name {
   font-size: 13px;
   font-weight: 600;
+  color: var(--admin-text-main);
 }
 
 /* ── Main Layout Body ─────────────────────────────────── */
@@ -146,6 +145,7 @@ body:has(.admin-shell) {
 .admin-sidebar {
   width: 250px;
   flex-shrink: 0;
+  background: var(--admin-surface-dark);
   border-right: 1px solid var(--admin-border-dark);
   padding: 24px 16px;
   display: flex;
@@ -188,6 +188,7 @@ body:has(.admin-shell) {
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
+  border: 1px solid transparent;
   transition: all 0.2s ease;
 }
 
@@ -195,13 +196,19 @@ body:has(.admin-shell) {
   font-size: 16px;
   width: 20px;
   text-align: center;
+  color: var(--admin-text-muted);
 }
 
-.admin-nav-item:hover,
+.admin-nav-item:hover {
+  color: var(--admin-text-main);
+  background: rgba(22, 163, 74, 0.06);
+  border-color: rgba(22, 163, 74, 0.15);
+}
+
 .admin-nav-item.active {
-  color: #ffffff;
-  background: rgba(35, 147, 58, 0.18);
-  border: 1px solid rgba(57, 207, 88, 0.25);
+  color: var(--admin-emerald-bright);
+  background: rgba(22, 163, 74, 0.1);
+  border-color: rgba(22, 163, 74, 0.25);
 }
 
 .admin-nav-item.active i {
@@ -234,7 +241,7 @@ body:has(.admin-shell) {
     left: 0;
     right: 0;
     height: 68px;
-    background: rgba(14, 25, 18, 0.94);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-top: 1px solid var(--admin-border-dark);
@@ -282,10 +289,11 @@ body:has(.admin-shell) {
   border: 1px solid var(--admin-border-dark);
   border-radius: 16px;
   padding: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .admin-card:hover {
-  border-color: rgba(57, 207, 88, 0.3);
+  border-color: rgba(22, 163, 74, 0.3);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
 }

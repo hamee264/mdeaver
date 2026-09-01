@@ -53,8 +53,8 @@ export default function AdminDonations() {
       {/* Header & Controls */}
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '14px' }}>
         <div>
-          <h1 style={{ fontSize: '22px', fontWeight: 800, margin: 0, letterSpacing: '-0.5px' }}>Donation Ledger</h1>
-          <p style={{ fontSize: '13px', color: '#8ea895', margin: '4px 0 0' }}>
+          <h1 style={{ fontSize: '22px', fontWeight: 800, margin: 0, letterSpacing: '-0.5px', color: '#0f172a' }}>Donation Ledger</h1>
+          <p style={{ fontSize: '13px', color: '#64748b', margin: '4px 0 0' }}>
             Manage financial records, inspect receipts, and export ledger.
           </p>
         </div>
@@ -73,7 +73,7 @@ export default function AdminDonations() {
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
-            boxShadow: '0 4px 12px rgba(35, 147, 58, 0.3)',
+            boxShadow: '0 4px 12px rgba(35, 147, 58, 0.25)',
           }}
         >
           <i className="fa-solid fa-file-csv"></i>
@@ -82,9 +82,9 @@ export default function AdminDonations() {
       </div>
 
       {/* Search Input */}
-      <div className="admin-card" style={{ padding: '12px 16px' }}>
+      <div className="admin-card" style={{ padding: '12px 16px', background: '#ffffff', border: '1px solid #e2e8f0' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <i className="fa-solid fa-magnifying-glass" style={{ color: '#8ea895' }}></i>
+          <i className="fa-solid fa-magnifying-glass" style={{ color: '#64748b' }}></i>
           <input
             type="text"
             value={search}
@@ -94,7 +94,7 @@ export default function AdminDonations() {
               width: '100%',
               background: 'transparent',
               border: 'none',
-              color: '#fff',
+              color: '#0f172a',
               outline: 'none',
               fontSize: '14px',
             }}
@@ -104,12 +104,12 @@ export default function AdminDonations() {
 
       {/* Touch Data Cards List */}
       {loading ? (
-        <div style={{ padding: '40px', textAlign: 'center', color: '#8ea895' }}>
+        <div style={{ padding: '40px', textAlign: 'center', color: '#64748b' }}>
           <i className="fa-solid fa-spinner fa-spin fa-2x"></i>
           <p style={{ marginTop: '10px', fontSize: '14px' }}>Loading donation records...</p>
         </div>
       ) : filtered.length === 0 ? (
-        <div className="admin-card" style={{ textAlign: 'center', padding: '40px', color: '#8ea895' }}>
+        <div className="admin-card" style={{ textAlign: 'center', padding: '40px', color: '#64748b' }}>
           No donations found matching your search.
         </div>
       ) : (
@@ -123,6 +123,8 @@ export default function AdminDonations() {
                 flexDirection: 'column',
                 gap: '12px',
                 padding: '16px',
+                background: '#ffffff',
+                border: '1px solid #e2e8f0',
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -131,8 +133,8 @@ export default function AdminDonations() {
                     fontSize: '11px',
                     fontWeight: 800,
                     color: 'var(--admin-gold)',
-                    background: 'rgba(245, 167, 25, 0.12)',
-                    border: '1px solid rgba(245, 167, 25, 0.25)',
+                    background: 'rgba(217, 119, 6, 0.1)',
+                    border: '1px solid rgba(217, 119, 6, 0.25)',
                     padding: '2px 8px',
                     borderRadius: '6px',
                   }}
@@ -145,8 +147,8 @@ export default function AdminDonations() {
               </div>
 
               <div>
-                <div style={{ fontSize: '15px', fontWeight: 700 }}>{item.donor_name || item.donorName || 'Anonymous Donor'}</div>
-                <div style={{ fontSize: '12px', color: '#8ea895', marginTop: '2px' }}>{item.email}</div>
+                <div style={{ fontSize: '15px', fontWeight: 700, color: '#0f172a' }}>{item.donor_name || item.donorName || 'Anonymous Donor'}</div>
+                <div style={{ fontSize: '12px', color: '#64748b', marginTop: '2px' }}>{item.email}</div>
               </div>
 
               <div
@@ -155,9 +157,9 @@ export default function AdminDonations() {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   paddingTop: '10px',
-                  borderTop: '1px solid var(--admin-border-dark)',
+                  borderTop: '1px solid #e2e8f0',
                   fontSize: '11px',
-                  color: '#8ea895',
+                  color: '#64748b',
                 }}
               >
                 <span>

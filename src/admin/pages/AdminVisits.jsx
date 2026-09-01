@@ -2,18 +2,18 @@ export default function AdminVisits() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <div>
-        <h1 style={{ fontSize: '22px', fontWeight: 800, margin: 0, letterSpacing: '-0.5px' }}>Live Visitor Traffic</h1>
-        <p style={{ fontSize: '13px', color: '#8ea895', margin: '4px 0 0' }}>
+        <h1 style={{ fontSize: '22px', fontWeight: 800, margin: 0, letterSpacing: '-0.5px', color: '#0f172a' }}>Live Visitor Traffic</h1>
+        <p style={{ fontSize: '13px', color: '#64748b', margin: '4px 0 0' }}>
           Real-time stream of site visitors, geolocation hits, and page ping telemetry.
         </p>
       </div>
 
-      <div className="admin-card" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div className="admin-card" style={{ display: 'flex', flexDirection: 'column', gap: '16px', background: '#ffffff', border: '1px solid #e2e8f0' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--admin-emerald-bright)' }}>
             <i className="fa-solid fa-signal" style={{ marginRight: '8px' }}></i> LIVE RADAR ACTIVE
           </span>
-          <span style={{ fontSize: '11px', color: '#8ea895' }}>Auto-updating</span>
+          <span style={{ fontSize: '11px', color: '#64748b' }}>Auto-updating</span>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -31,15 +31,15 @@ export default function AdminVisits() {
                 justifyContent: 'space-between',
                 padding: '12px 14px',
                 borderRadius: '10px',
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid var(--admin-border-dark)',
+                background: '#f8fafc',
+                border: '1px solid #e2e8f0',
               }}
             >
               <div>
-                <div style={{ fontSize: '13px', fontWeight: 700 }}>{v.page}</div>
-                <div style={{ fontSize: '11px', color: '#8ea895' }}>{v.ip} • {v.browser}</div>
+                <div style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a' }}>{v.page}</div>
+                <div style={{ fontSize: '11px', color: '#64748b' }}>{v.ip} • {v.browser}</div>
               </div>
-              <span style={{ fontSize: '11px', color: 'var(--admin-gold)' }}>{v.time}</span>
+              <span style={{ fontSize: '11px', color: 'var(--admin-gold)', fontWeight: 600 }}>{v.time}</span>
             </div>
           ))}
         </div>

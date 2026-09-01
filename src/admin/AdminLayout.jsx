@@ -17,7 +17,6 @@ export default function AdminLayout() {
     };
   }, []);
 
-
   const handleLogout = async () => {
     setLoggingOut(true);
     await new Promise((r) => setTimeout(r, 400));
@@ -30,8 +29,8 @@ export default function AdminLayout() {
       <div
         style={{
           minHeight: '100vh',
-          backgroundColor: '#0b130e',
-          color: '#fff',
+          backgroundColor: '#f6f9f7',
+          color: '#0f172a',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -42,11 +41,12 @@ export default function AdminLayout() {
           style={{
             width: '100%',
             maxWidth: '400px',
-            background: '#121f17',
-            border: '1px solid rgba(255,255,255,0.12)',
+            background: '#ffffff',
+            border: '1px solid #e2e8f0',
             borderRadius: '20px',
             padding: '32px 24px',
             textAlign: 'center',
+            boxShadow: '0 10px 25px rgba(0,0,0,0.05)',
           }}
         >
           <img
@@ -54,8 +54,8 @@ export default function AdminLayout() {
             alt="Mdeaver Charity Logo"
             style={{ height: '56px', objectFit: 'contain', margin: '0 auto 16px', display: 'block' }}
           />
-          <h2 style={{ fontSize: '20px', marginBottom: '8px' }}>Session Expired</h2>
-          <p style={{ fontSize: '14px', color: '#8ea895', marginBottom: '24px' }}>
+          <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>Session Expired</h2>
+          <p style={{ fontSize: '14px', color: '#64748b', marginBottom: '24px' }}>
             Please log in to access the Mdeaver Admin Control Center.
           </p>
           <button
@@ -70,6 +70,7 @@ export default function AdminLayout() {
               fontSize: '14px',
               border: 'none',
               cursor: 'pointer',
+              boxShadow: '0 4px 12px rgba(35, 147, 58, 0.25)',
             }}
           >
             Go to Admin Login
@@ -89,12 +90,12 @@ export default function AdminLayout() {
           <div>
             <Link
               to="/admin"
-              style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', marginBottom: '24px', paddingBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}
+              style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', marginBottom: '24px', paddingBottom: '16px', borderBottom: '1px solid #e2e8f0' }}
             >
               <img src="/image-nav.png" alt="Mdeaver Charity Logo" style={{ height: '36px', objectFit: 'contain' }} />
               <div>
-                <div style={{ fontSize: '14px', fontWeight: 700, color: '#fff', lineHeight: 1.2 }}>Mdeaver Admin</div>
-                <span style={{ fontSize: '9px', fontWeight: 800, background: 'rgba(245,167,25,0.15)', color: '#f5a719', border: '1px solid rgba(245,167,25,0.3)', padding: '1px 7px', borderRadius: '20px' }}>
+                <div style={{ fontSize: '14px', fontWeight: 700, color: '#0f172a', lineHeight: 1.2 }}>Mdeaver Admin</div>
+                <span style={{ fontSize: '9px', fontWeight: 800, background: 'rgba(217,119,6,0.1)', color: '#d97706', border: '1px solid rgba(217,119,6,0.25)', padding: '1px 7px', borderRadius: '20px' }}>
                   LIVE
                 </span>
               </div>
@@ -130,14 +131,14 @@ export default function AdminLayout() {
           </div>
 
           {/* Bottom: User info + Logout */}
-          <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '16px' }}>
+          <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
               <div
                 style={{
                   width: '34px',
                   height: '34px',
                   borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #23933a, #39cf58)',
+                  background: 'linear-gradient(135deg, #23933a, #16a34a)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -145,15 +146,16 @@ export default function AdminLayout() {
                   fontWeight: 800,
                   color: '#fff',
                   flexShrink: 0,
+                  boxShadow: '0 2px 6px rgba(35, 147, 58, 0.25)',
                 }}
               >
                 {(adminUser?.email?.[0] || 'A').toUpperCase()}
               </div>
               <div style={{ minWidth: 0 }}>
-                <div style={{ fontSize: '12px', fontWeight: 700, color: '#fff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <div style={{ fontSize: '12px', fontWeight: 700, color: '#0f172a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                   {adminUser?.fullName}
                 </div>
-                <div style={{ fontSize: '10px', color: '#8ea895', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <div style={{ fontSize: '10px', color: '#64748b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                   {adminUser?.email}
                 </div>
               </div>
@@ -169,21 +171,21 @@ export default function AdminLayout() {
                 gap: '8px',
                 padding: '10px 14px',
                 borderRadius: '10px',
-                background: 'rgba(239, 68, 68, 0.1)',
-                border: '1px solid rgba(239, 68, 68, 0.25)',
-                color: '#fca5a5',
+                background: 'rgba(239, 68, 68, 0.08)',
+                border: '1px solid rgba(239, 68, 68, 0.2)',
+                color: '#dc2626',
                 fontSize: '13px',
                 fontWeight: 700,
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(239,68,68,0.2)';
-                e.currentTarget.style.borderColor = 'rgba(239,68,68,0.4)';
+                e.currentTarget.style.background = 'rgba(239, 68, 68, 0.15)';
+                e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.35)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(239,68,68,0.1)';
-                e.currentTarget.style.borderColor = 'rgba(239,68,68,0.25)';
+                e.currentTarget.style.background = 'rgba(239, 68, 68, 0.08)';
+                e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.2)';
               }}
             >
               {loggingOut ? (
