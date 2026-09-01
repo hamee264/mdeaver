@@ -1,5 +1,8 @@
-// Robustly format API_BASE URL, eliminating trailing slashes and preventing double-slashes (//api)
+// Robustly format API_BASE URL, defaulting to local /api proxy when on localhost
 const getApiBase = () => {
+  if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+    return '/api';
+  }
   const envUrl = import.meta.env.VITE_API_URL;
   if (!envUrl) return '/api';
   // Strip trailing slashes

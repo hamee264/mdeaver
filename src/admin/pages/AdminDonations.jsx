@@ -208,7 +208,7 @@ export default function AdminDonations() {
                     {item.payment_method || item.paymentMethod || 'Credit / Debit Card'}
                   </span>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                     {isPending ? (
                       <button
                         onClick={() => handleApprove(item.id)}
@@ -235,25 +235,53 @@ export default function AdminDonations() {
                         <span>{approvingId === item.id ? 'Approving…' : 'Approve & Send Chat Link'}</span>
                       </button>
                     ) : (
-                      <button
-                        onClick={() => setSelectedChatDonation(item)}
-                        style={{
-                          padding: '6px 14px',
-                          borderRadius: '8px',
-                          background: 'rgba(37, 99, 235, 0.1)',
-                          border: '1px solid rgba(37, 99, 235, 0.25)',
-                          color: '#2563eb',
-                          fontWeight: 700,
-                          fontSize: '12px',
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '6px',
-                        }}
-                      >
-                        <i className="fa-solid fa-comments"></i>
-                        <span>Open Live Chat</span>
-                      </button>
+                      <>
+                        <button
+                          onClick={() => setSelectedChatDonation(item)}
+                          style={{
+                            padding: '6px 14px',
+                            borderRadius: '8px',
+                            background: 'rgba(37, 99, 235, 0.1)',
+                            border: '1px solid rgba(37, 99, 235, 0.25)',
+                            color: '#2563eb',
+                            fontWeight: 700,
+                            fontSize: '12px',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                          }}
+                        >
+                          <i className="fa-solid fa-comments"></i>
+                          <span>Open Live Chat</span>
+                        </button>
+
+                        <button
+                          onClick={() => handleApprove(item.id)}
+                          disabled={approvingId === item.id}
+                          style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            background: '#f8fafc',
+                            border: '1px solid #cbd5e1',
+                            color: '#475569',
+                            fontWeight: 600,
+                            fontSize: '11px',
+                            cursor: approvingId === item.id ? 'not-allowed' : 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                          }}
+                          title="Re-send approval notification email with chat link to donor"
+                        >
+                          {approvingId === item.id ? (
+                            <i className="fa-solid fa-spinner fa-spin"></i>
+                          ) : (
+                            <i className="fa-solid fa-paper-plane"></i>
+                          )}
+                          <span>{approvingId === item.id ? 'Sending…' : 'Resend Email'}</span>
+                        </button>
+                      </>
                     )}
                   </div>
                 </div>
