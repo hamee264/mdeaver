@@ -203,6 +203,11 @@ export const postChatMessage = async (donationId, messageData) => {
       body: JSON.stringify(messageData),
     });
     return await parseJsonResponse(res);
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+};
+
 /**
  * Reject Donation (Admin Action)
  */
