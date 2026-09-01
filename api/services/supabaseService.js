@@ -218,6 +218,30 @@ export const saveVisitToSupabase = async (visitData) => {
 };
 
 /**
+ * Get visits from Supabase
+ */
+export const getVisitsFromSupabase = async (limit = 20) => {
+  if (!supabase) return { success: false, reason: 'Supabase client not initialized.', data: [] };
+
+  try {
+    const { data, error } = await supabase
+      .from('visits')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(limit);
+
+    if (error) {
+      return { success: false, error: error.message, data: [] };
+    }
+
+    return { success: true, count: data?.length || 0, data };
+  } catch (err) {
+    return { success: false, error: err.message, data: [] };
+  }
+};
+
+
+/**
  * Calculate Aggregate Statistics from Supabase DB
  */
 export const getStatsFromSupabase = async () => {

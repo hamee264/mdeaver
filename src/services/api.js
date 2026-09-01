@@ -114,15 +114,15 @@ export const sendDonationNotification = async (donationData) => {
   }
 };
 
-/**
- * Fetch Recent Donations
- */
 export const fetchRecentDonations = async (limit = 10) => {
   try {
     const res = await fetch(`${API_BASE}/donations?limit=${limit}`);
-    return await parseJsonResponse(res);
+    const json = await parseJsonResponse(res);
+    if (json?.data && Array.isArray(json.data)) return json.data;
+    if (Array.isArray(json)) return json;
+    return [];
   } catch (err) {
-    return { success: false, error: err.message, data: [] };
+    return [];
   }
 };
 
@@ -134,9 +134,28 @@ export const fetchDonations = fetchRecentDonations;
 export const fetchContacts = async (limit = 20) => {
   try {
     const res = await fetch(`${API_BASE}/contact?limit=${limit}`);
-    return await parseJsonResponse(res);
+    const json = await parseJsonResponse(res);
+    if (json?.data && Array.isArray(json.data)) return json.data;
+    if (Array.isArray(json)) return json;
+    return [];
   } catch (err) {
-    return { success: false, error: err.message, data: [] };
+    return [];
   }
 };
+
+/**
+ * Fetch Live Visitor Traffic
+ */
+export const fetchVisits = async (limit = 20) => {
+  try {
+    const res = await fetch(`${API_BASE}/visits?limit=${limit}`);
+    const json = await parseJsonResponse(res);
+    if (json?.data && Array.isArray(json.data)) return json.data;
+    if (Array.isArray(json)) return json;
+    return [];
+  } catch (err) {
+    return [];
+  }
+};
+
 

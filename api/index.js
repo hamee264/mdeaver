@@ -12,6 +12,7 @@ import {
   saveContactToSupabase,
   getContactsFromSupabase,
   saveVisitToSupabase,
+  getVisitsFromSupabase,
   getStatsFromSupabase,
   checkSupabaseHealth,
 } from './services/supabaseService.js';
@@ -191,6 +192,18 @@ app.post(['/api/notify/visit', '/notify/visit'], async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 });
+
+// 8. Retrieve Recent Visits from Supabase
+app.get(['/api/visits', '/visits'], async (req, res) => {
+  try {
+    const limit = Number(req.query.limit) || 20;
+    const result = await getVisitsFromSupabase(limit);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 
 // 404 Fallback Handler
 app.use((req, res) => {
