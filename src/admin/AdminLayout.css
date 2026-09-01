@@ -137,6 +137,9 @@ body:has(.admin-shell) {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
+  /* Stretch so sidebar always reaches the bottom */
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* ── Desktop Sidebar (>= 768px) ────────────────────────── */
@@ -148,6 +151,19 @@ body:has(.admin-shell) {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  /* Lock sidebar to viewport — never scrolls with page content */
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  /* Hide scrollbar but keep it functional if nav grows */
+  scrollbar-width: none;
+}
+
+.admin-sidebar::-webkit-scrollbar {
+  display: none;
 }
 
 @media (max-width: 767px) {
