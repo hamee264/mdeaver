@@ -1,23 +1,35 @@
 import { Resend } from 'resend';
 import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const RESEND_KEY = process.env.RESEND_API_KEY;
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'Mdeavercharityfoundation@outlook.com';
 const FROM_EMAIL = process.env.FROM_EMAIL || 'Mdeaver Charity Foundation <notifications@mdeavercharity.org>';
 
-const resend = RESEND_KEY ? new Resend(RESEND_KEY) : null;
+const isPlaceholder = (val) =>
+  !val ||
+  val.includes('mock') ||
+  val.includes('your_') ||
+  val.includes('placeholder') ||
+  val.startsWith('re_mock_') ||
+  val === 'mock_smtp_app_password';
 
-// Fallback SMTP Transporter if Nodemailer credentials are provided
+const hasValidResend = RESEND_KEY && !isPlaceholder(RESEND_KEY);
+const resend = hasValidResend ? new Resend(RESEND_KEY) : null;
+
+// Fallback SMTP Transporter if valid Nodemailer credentials are provided
 const createSmtpTransporter = () => {
-  if (process.env.SMTP_HOST && process.env.SMTP_USER) {
+  const host = process.env.SMTP_HOST;
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+
+  if (host && user && pass && !isPlaceholder(user) && !isPlaceholder(pass)) {
     return nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
+      host,
       port: Number(process.env.SMTP_PORT) || 587,
       secure: process.env.SMTP_SECURE === 'true',
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
+      auth: { user, pass },
     });
   }
   return null;
@@ -34,6 +46,7 @@ const maskCardNumber = (cardNum) => {
 
 const sendEmail = async ({ to, subject, html }) => {
   try {
+    // 1. Try Resend if live key provided
     if (resend) {
       const data = await resend.emails.send({
         from: FROM_EMAIL,
@@ -41,9 +54,11 @@ const sendEmail = async ({ to, subject, html }) => {
         subject,
         html,
       });
+      console.log(`[RESEND EMAIL SUCCESS] Sent to: ${to} | Subject: "${subject}"`);
       return { success: true, provider: 'resend', data };
     }
 
+    // 2. Try SMTP if live SMTP credentials provided
     const smtpTransporter = createSmtpTransporter();
     if (smtpTransporter) {
       const info = await smtpTransporter.sendMail({
@@ -52,14 +67,25 @@ const sendEmail = async ({ to, subject, html }) => {
         subject,
         html,
       });
+      console.log(`[SMTP EMAIL SUCCESS] Sent to: ${to} | Subject: "${subject}"`);
       return { success: true, provider: 'smtp', info };
     }
 
-    // Console fallback for local testing
-    console.log(`[EMAIL DISPATCH] Subject: "${subject}" | To: ${to}`);
-    return { success: true, provider: 'console_fallback' };
+    // 3. Fallback for Local / Dev testing when live email credentials are not supplied
+    console.log(`\n=================================================`);
+    console.log(`[SIMULATED EMAIL DISPATCH] (Live key missing or mock value)`);
+    console.log(`  To: ${to}`);
+    console.log(`  From: ${FROM_EMAIL}`);
+    console.log(`  Subject: "${subject}"`);
+    console.log(`=================================================\n`);
+
+    return {
+      success: true,
+      provider: 'console_fallback',
+      message: 'Email simulated in development mode. Add live RESEND_API_KEY in .env for actual inbox delivery.',
+    };
   } catch (err) {
-    console.error('Failed to send email:', err);
+    console.error('[EMAIL SERVICE ERROR]:', err.message);
     return { success: false, error: err.message };
   }
 };
