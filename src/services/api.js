@@ -203,10 +203,21 @@ export const postChatMessage = async (donationId, messageData) => {
       body: JSON.stringify(messageData),
     });
     return await parseJsonResponse(res);
+/**
+ * Reject Donation (Admin Action)
+ */
+export const rejectDonation = async (donationId) => {
+  try {
+    const res = await fetch(`${API_BASE}/donations/${donationId}/reject`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    return await parseJsonResponse(res);
   } catch (err) {
     return { success: false, error: err.message };
   }
 };
+
 
 
 
