@@ -259,11 +259,13 @@ function DonationModal() {
           ===================================================== */
           <div className="receipt-container">
             <div className="receipt-status-header">
-              <div className="receipt-success-icon" style={{ background: "rgba(217, 119, 6, 0.15)", color: "#d97706" }}>
+              <div className="receipt-success-icon pending">
                 <i className="fa-solid fa-clock-rotate-left"></i>
               </div>
-              <h3 style={{ color: "#0f172a" }}>Submission Pending Admin Approval</h3>
-              <p style={{ color: "#64748b" }}>Your donation details have been recorded and sent to our administration team for approval.</p>
+              <h3 className="receipt-status-title">Submission Pending Admin Approval</h3>
+              <p className="receipt-status-subtitle">
+                Your donation details have been recorded and sent to our administration team for approval.
+              </p>
             </div>
 
             <div className="receipt-card">
@@ -276,40 +278,41 @@ function DonationModal() {
 
               <div className="receipt-details-list">
                 <div className="receipt-detail-item">
-                  <span>Donor Name:</span>
-                  <span>{receipt.donorName}</span>
+                  <span className="detail-label">Donor Name</span>
+                  <span className="detail-val">{receipt.donorName}</span>
                 </div>
                 <div className="receipt-detail-item">
-                  <span>Email Address:</span>
-                  <span>{receipt.email}</span>
+                  <span className="detail-label">Email Address</span>
+                  <span className="detail-val email-val">{receipt.email}</span>
                 </div>
                 <div className="receipt-detail-item">
-                  <span>Payment Gateway:</span>
-                  <span>{receipt.paymentMethod}</span>
+                  <span className="detail-label">Payment Gateway</span>
+                  <span className="detail-val">{receipt.paymentMethod}</span>
                 </div>
                 <div className="receipt-detail-item">
-                  <span>Status:</span>
-                  <span style={{ color: "#d97706", fontWeight: 700 }}>Awaiting Admin Approval</span>
+                  <span className="detail-label">Status</span>
+                  <span className="detail-val status-pending">Awaiting Admin Approval</span>
                 </div>
               </div>
 
               <div className="receipt-total-row">
-                <span>Amount Submitted:</span>
-                <span>${receipt.amount.toLocaleString()}.00</span>
+                <span className="total-label">Amount Submitted</span>
+                <span className="total-val">${receipt.amount.toLocaleString()}.00</span>
               </div>
             </div>
 
-            <div style={{ background: "rgba(217, 119, 6, 0.08)", border: "1px solid rgba(217, 119, 6, 0.25)", borderRadius: "12px", padding: "14px", fontSize: "12px", color: "#334155", marginTop: "16px", textAlign: "left", lineHeight: "1.5" }}>
-              <div style={{ fontWeight: 700, color: "#d97706", marginBottom: "4px", display: "flex", alignItems: "center", gap: "6px" }}>
+            <div className="receipt-next-info">
+              <div className="next-info-title">
                 <i className="fa-solid fa-circle-info"></i> What happens next?
               </div>
-              Once our foundation administrator reviews and approves your submission, an email will be sent to <strong>{receipt.email}</strong> containing your official confirmation and a direct <strong>Live Chat Link</strong> to connect with our team.
+              Once our foundation administrator reviews and approves your submission, an email will be sent to <strong className="info-email">{receipt.email}</strong> containing your official confirmation and a direct <strong>Live Chat Link</strong> to connect with our team.
             </div>
 
-            <button className="receipt-ok-btn" onClick={handleModalClose} style={{ marginTop: "16px" }}>
+            <button className="receipt-ok-btn" onClick={handleModalClose}>
               OK / BACK TO HOME
             </button>
           </div>
+
 
         ) : (
           /* =====================================================
