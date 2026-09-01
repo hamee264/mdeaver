@@ -112,7 +112,7 @@ export const saveDonationToSupabase = async (donationData) => {
     return { success: true, data: data?.[0] || record };
   } catch (err) {
     console.error('[SUPABASE DONATION SERVICE EXCEPTION]:', err);
-    return { success: false, error: error.message };
+    return { success: false, error: err.message };
   }
 };
 
