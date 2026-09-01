@@ -29,6 +29,17 @@
   padding: 0;
 }
 
+/*
+ * Navbar.css sets  body { padding-top: 142px }  globally to push content
+ * below the fixed public navbar.  Admin pages have NO navbar, so we cancel
+ * that offset here — scoped to the admin shell so the public site is untouched.
+ */
+.admin-shell ~ body,
+body:has(.admin-shell) {
+  padding-top: 0 !important;
+}
+
+
 
 /* ── Top Header ───────────────────────────────────────── */
 .admin-header {

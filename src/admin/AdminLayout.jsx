@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAdminAuth } from './context/AdminAuthContext';
 import './AdminLayout.css';
@@ -7,6 +7,16 @@ export default function AdminLayout() {
   const { adminUser, logout, isAuthenticated } = useAdminAuth();
   const navigate = useNavigate();
   const [loggingOut, setLoggingOut] = useState(false);
+
+  /* Cancel the 142px body padding-top that Navbar.css sets globally */
+  useEffect(() => {
+    const prev = document.body.style.paddingTop;
+    document.body.style.paddingTop = '0px';
+    return () => {
+      document.body.style.paddingTop = prev;
+    };
+  }, []);
+
 
   const handleLogout = async () => {
     setLoggingOut(true);

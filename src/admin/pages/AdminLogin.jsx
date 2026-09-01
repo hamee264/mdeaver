@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAdminAuth } from '../context/AdminAuthContext';
 
@@ -302,6 +302,15 @@ function ForgotPasswordForm({ onBack }) {
 /* ── Page Shell ─────────────────────────────────────────────────── */
 export default function AdminLogin() {
   const [view, setView] = useState('login'); // 'login' | 'forgot'
+
+  /* Cancel the 142px body padding-top that Navbar.css sets globally */
+  useEffect(() => {
+    const prev = document.body.style.paddingTop;
+    document.body.style.paddingTop = '0px';
+    return () => {
+      document.body.style.paddingTop = prev;
+    };
+  }, []);
 
   return (
     <div
