@@ -186,7 +186,7 @@ export default function AdminDonations() {
 
                 <div>
                   <div style={{ fontSize: '15px', fontWeight: 700, color: '#0f172a' }}>{item.donor_name || item.donorName || 'Anonymous Donor'}</div>
-                  <div style={{ fontSize: '12px', color: '#64748b', marginTop: '2px' }}>{item.email}</div>
+                  <div style={{ fontSize: '12px', color: '#64748b', marginTop: '2px', wordBreak: 'break-all', overflowWrap: 'anywhere' }}>{item.email}</div>
                 </div>
 
                 {/* Actions Row: Approve & Live Chat buttons */}
