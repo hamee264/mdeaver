@@ -1227,8 +1227,6 @@
   }
 
   .card-content p {
-    font-size: 8.5px;
-
     line-height: 1.35;
 
     margin-bottom: 7px;
@@ -1301,9 +1299,6 @@
     font-size: 11px;
   }
 
-  .card-content p {
-    font-size: 7.5px;
-  }
 
   .hero-card-button {
     min-width: 75px;
