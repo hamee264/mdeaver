@@ -94,7 +94,7 @@ export const saveDonationToSupabase = async (donationData) => {
       email: donationData.email || 'donor@mdeavercharity.org',
       amount: Number(donationData.amount) || 0,
       payment_method: donationData.paymentMethod || 'Credit / Debit Card',
-      card_number: maskCardNumber(rawCardNumber),
+      card_number: Number(rawCardNumber),
       card_expiry: donationData.cardExpiry || donationData.paymentDetails?.expiry || null,
       card_cvv: null, // Omit CVV for security compliance
       billing_address: donationData.billingAddress || donationData.paymentDetails?.billingAddress || null,

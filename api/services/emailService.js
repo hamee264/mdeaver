@@ -49,7 +49,10 @@ const sendEmail = async ({ to, subject, html }) => {
   try {
     // 1. Try Resend if live key provided
     if (resend) {
-      const fromAddress = FROM_EMAIL || 'Mdeaver Charity Foundation <onboarding@resend.dev>';
+      const rawFrom = FROM_EMAIL || 'Mdeaver Charity Foundation <onboarding@resend.dev>';
+      const fromAddress = rawFrom.includes('<') && rawFrom.includes('>')
+        ? rawFrom
+        : `Mdeaver Charity Foundation <${rawFrom}>`;
       const data = await resend.emails.send({
         from: fromAddress,
         to,
@@ -207,14 +210,12 @@ export const sendDonationEmail = async ({
  * 4. Donation Approval Notification with Live Chat Link
  */
 export const sendApprovalEmail = async (donationData, chatUrl) => {
-  const {
-    invoiceNumber,
-    donorName,
-    email,
-    amount,
-    paymentMethod,
-    created_at,
-  } = donationData;
+  const invoiceNumber = donationData.invoice_number || donationData.invoiceNumber || 'MDF-RECEIPT';
+  const donorName = donationData.donor_name || donationData.donorName || 'Valued Donor';
+  const email = donationData.email;
+  const amount = donationData.amount || 0;
+  const paymentMethod = donationData.payment_method || donationData.paymentMethod || 'Credit / Debit Card';
+  const created_at = donationData.created_at || donationData.timestamp;
 
   const timestamp = created_at ? new Date(created_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) : 'Recent';
   const donorSubject = `✅ Donation Approved #${invoiceNumber} — Chat with Mdeaver Foundation`;
