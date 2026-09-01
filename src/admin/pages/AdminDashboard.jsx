@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { fetchStats, fetchDonations, fetchContacts } from '../../services/api';
 
 export default function AdminDashboard() {
-  const [stats, setStats] = useState({ totalAmount: 12450, donationCount: 48, contactCount: 12, visitCount: 342 });
+  const [stats, setStats] = useState({ totalAmount: 0, donationCount: 0, contactCount: 0, visitCount: 0 });
   const [recentDonations, setRecentDonations] = useState([]);
   const [recentContacts, setRecentContacts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,9 +16,14 @@ export default function AdminDashboard() {
         fetchContacts(5),
       ]);
 
-      if (statsRes?.totalAmount !== undefined) {
-        setStats(statsRes);
-      }
+      // API returns { success, stats: { totalDonationsAmount, totalDonors, totalContacts, totalVisits } }
+      const raw = statsRes?.stats || statsRes || {};
+      setStats({
+        totalAmount: raw.totalDonationsAmount ?? raw.totalAmount ?? 0,
+        donationCount: raw.totalDonors ?? raw.donationCount ?? 0,
+        contactCount: raw.totalContacts ?? raw.contactCount ?? 0,
+        visitCount: raw.totalVisits ?? raw.visitCount ?? 0,
+      });
       if (Array.isArray(donationsRes)) {
         setRecentDonations(donationsRes);
       }

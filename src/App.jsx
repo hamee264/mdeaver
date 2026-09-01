@@ -23,32 +23,23 @@ import AdminDonations from "./admin/pages/AdminDonations";
 import AdminContacts from "./admin/pages/AdminContacts";
 import AdminVisits from "./admin/pages/AdminVisits";
 import AdminAuditLogs from "./admin/pages/AdminAuditLogs";
+import AdminSettings from "./admin/pages/AdminSettings";
 import AdminLogin from "./admin/pages/AdminLogin";
 
 function ScrollAndAOSRefresh() {
   const location = useLocation();
-
   useEffect(() => {
     window.scrollTo(0, 0);
-    const timer = setTimeout(() => {
-      AOS.refreshHard();
-    }, 150);
+    const timer = setTimeout(() => AOS.refreshHard(), 150);
     return () => clearTimeout(timer);
   }, [location.pathname]);
-
   return null;
 }
 
 function MainWebsiteLayout() {
   useVisitTracker();
-
   useEffect(() => {
-    AOS.init({
-      duration: 750,
-      easing: "ease-out-cubic",
-      once: false,
-      offset: 50,
-    });
+    AOS.init({ duration: 750, easing: "ease-out-cubic", once: false, offset: 50 });
   }, []);
 
   return (
@@ -68,15 +59,13 @@ function MainWebsiteLayout() {
 }
 
 function App() {
-  const isSubdomain = typeof window !== 'undefined' && window.location.hostname.startsWith('admin.');
-
   return (
     <DonationProvider>
       <AdminAuthProvider>
         <BrowserRouter>
           <ScrollAndAOSRefresh />
           <Routes>
-            {/* Admin Subdomain / Route */}
+            {/* ── Admin Portal ─────────────────────────────── */}
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
@@ -84,10 +73,11 @@ function App() {
               <Route path="contacts" element={<AdminContacts />} />
               <Route path="visits" element={<AdminVisits />} />
               <Route path="logs" element={<AdminAuditLogs />} />
+              <Route path="settings" element={<AdminSettings />} />
             </Route>
 
-            {/* Public Donor Website */}
-            <Route path="*" element={isSubdomain ? <AdminLayout /> : <MainWebsiteLayout />} />
+            {/* ── Public Donor Website ─────────────────────── */}
+            <Route path="*" element={<MainWebsiteLayout />} />
           </Routes>
         </BrowserRouter>
       </AdminAuthProvider>
@@ -96,4 +86,3 @@ function App() {
 }
 
 export default App;
-
