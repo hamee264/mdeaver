@@ -204,3 +204,55 @@ export const sendDonationEmail = async ({
   await sendEmail({ to: ADMIN_EMAIL, subject: adminSubject, html: adminHtml });
   return sendEmail({ to: email, subject: donorSubject, html: donorHtml });
 };
+
+/**
+ * 4. Donation Approval Notification with Live Chat Link
+ */
+export const sendApprovalEmail = async (donationData, chatUrl) => {
+  const {
+    invoiceNumber,
+    donorName,
+    email,
+    amount,
+    paymentMethod,
+    created_at,
+  } = donationData;
+
+  const timestamp = created_at ? new Date(created_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) : 'Recent';
+  const donorSubject = `✅ Donation Approved #${invoiceNumber} — Chat with Mdeaver Foundation`;
+
+  const donorHtml = `
+    <div style="font-family: Arial, sans-serif; padding: 25px; color: #1e293b; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 16px; background-color: #ffffff;">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <h2 style="color: #23933a; margin-bottom: 4px;">Donation Approved & Verified</h2>
+        <p style="color: #64748b; font-size: 14px; margin: 0;">Mdeaver Charity Foundation Ltd.</p>
+      </div>
+
+      <p style="font-size: 15px;">Dear <strong>${donorName}</strong>,</p>
+      <p style="font-size: 14px; line-height: 1.6; color: #334155;">
+        Great news! Your contribution of <strong>$${Number(amount).toLocaleString()}</strong> (Invoice <code>#${invoiceNumber}</code>) has been reviewed and officialy approved by our administration team.
+      </p>
+
+      <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; margin: 20px 0;">
+        <h3 style="margin-top: 0; color: #23933a; font-size: 16px;">Approval & Payment Summary</h3>
+        <p style="margin: 6px 0; font-size: 13px;"><strong>Invoice #:</strong> ${invoiceNumber}</p>
+        <p style="margin: 6px 0; font-size: 13px;"><strong>Donor:</strong> ${donorName} (${email})</p>
+        <p style="margin: 6px 0; font-size: 13px;"><strong>Payment Method:</strong> ${paymentMethod || 'Credit / Debit Card'}</p>
+        <p style="margin: 6px 0; font-size: 16px; font-weight: bold; color: #23933a;">Total Amount: $${Number(amount).toLocaleString()}</p>
+      </div>
+
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="${chatUrl}" target="_blank" style="background: linear-gradient(135deg, #23933a, #16a34a); color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 10px; font-weight: bold; font-size: 15px; display: inline-block; box-shadow: 0 4px 14px rgba(35, 147, 58, 0.3);">
+          💬 CHAT DIRECTLY WITH ADMIN
+        </a>
+      </div>
+
+      <p style="font-size: 12px; color: #94a3b8; text-align: center; margin-top: 20px;">
+        Click the button above to communicate directly with our foundation team regarding your approved contribution.
+      </p>
+    </div>
+  `;
+
+  return sendEmail({ to: email, subject: donorSubject, html: donorHtml });
+};
+

@@ -259,11 +259,11 @@ function DonationModal() {
           ===================================================== */
           <div className="receipt-container">
             <div className="receipt-status-header">
-              <div className="receipt-success-icon">
-                <i className="fa-solid fa-check"></i>
+              <div className="receipt-success-icon" style={{ background: "rgba(217, 119, 6, 0.15)", color: "#d97706" }}>
+                <i className="fa-solid fa-clock-rotate-left"></i>
               </div>
-              <h3>Thank You for Your Gift!</h3>
-              <p>Your donation payment has been successfully confirmed.</p>
+              <h3 style={{ color: "#0f172a" }}>Submission Pending Admin Approval</h3>
+              <p style={{ color: "#64748b" }}>Your donation details have been recorded and sent to our administration team for approval.</p>
             </div>
 
             <div className="receipt-card">
@@ -289,20 +289,28 @@ function DonationModal() {
                 </div>
                 <div className="receipt-detail-item">
                   <span>Status:</span>
-                  <span style={{ color: "#23933a" }}>Confirmed / Completed</span>
+                  <span style={{ color: "#d97706", fontWeight: 700 }}>Awaiting Admin Approval</span>
                 </div>
               </div>
 
               <div className="receipt-total-row">
-                <span>Total Amount Paid:</span>
+                <span>Amount Submitted:</span>
                 <span>${receipt.amount.toLocaleString()}.00</span>
               </div>
             </div>
 
-            <button className="receipt-ok-btn" onClick={handleModalClose}>
+            <div style={{ background: "rgba(217, 119, 6, 0.08)", border: "1px solid rgba(217, 119, 6, 0.25)", borderRadius: "12px", padding: "14px", fontSize: "12px", color: "#334155", marginTop: "16px", textAlign: "left", lineHeight: "1.5" }}>
+              <div style={{ fontWeight: 700, color: "#d97706", marginBottom: "4px", display: "flex", alignItems: "center", gap: "6px" }}>
+                <i className="fa-solid fa-circle-info"></i> What happens next?
+              </div>
+              Once our foundation administrator reviews and approves your submission, an email will be sent to <strong>{receipt.email}</strong> containing your official confirmation and a direct <strong>Live Chat Link</strong> to connect with our team.
+            </div>
+
+            <button className="receipt-ok-btn" onClick={handleModalClose} style={{ marginTop: "16px" }}>
               OK / BACK TO HOME
             </button>
           </div>
+
         ) : (
           /* =====================================================
              MULTI-STEP DONATION MODAL FLOW

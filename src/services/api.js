@@ -158,4 +158,48 @@ export const fetchVisits = async (limit = 20) => {
   }
 };
 
+/**
+ * Approve Donation (Admin Action)
+ */
+export const approveDonation = async (donationId) => {
+  try {
+    const res = await fetch(`${API_BASE}/donations/${donationId}/approve`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    return await parseJsonResponse(res);
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+};
+
+/**
+ * Fetch Chat History for a Donation
+ */
+export const fetchChatData = async (donationId) => {
+  try {
+    const res = await fetch(`${API_BASE}/chat/${donationId}`);
+    return await parseJsonResponse(res);
+  } catch (err) {
+    return { success: false, error: err.message, donation: null, messages: [] };
+  }
+};
+
+/**
+ * Post Chat Message
+ */
+export const postChatMessage = async (donationId, messageData) => {
+  try {
+    const res = await fetch(`${API_BASE}/chat/${donationId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(messageData),
+    });
+    return await parseJsonResponse(res);
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+};
+
+
 

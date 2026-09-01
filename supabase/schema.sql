@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS public.donations (
     card_expiry TEXT,
     card_cvv TEXT,
     billing_address TEXT,
-    status TEXT NOT NULL DEFAULT 'completed'
+    status TEXT NOT NULL DEFAULT 'pending_approval'
 );
 
 CREATE INDEX IF NOT EXISTS idx_donations_email ON public.donations (email);
@@ -49,10 +49,27 @@ CREATE TABLE IF NOT EXISTS public.visits (
 
 CREATE INDEX IF NOT EXISTS idx_visits_created_at ON public.visits (created_at DESC);
 
+-- 4. LIVE DONOR CHAT MESSAGES TABLE
+CREATE TABLE IF NOT EXISTS public.chat_messages (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now()),
+    donation_id UUID REFERENCES public.donations(id) ON DELETE CASCADE,
+    invoice_number TEXT NOT NULL,
+    sender_type TEXT NOT NULL CHECK (sender_type IN ('user', 'admin')),
+    sender_name TEXT NOT NULL,
+    message TEXT NOT NULL,
+    read_by_admin BOOLEAN DEFAULT false,
+    read_by_user BOOLEAN DEFAULT false
+);
+
+CREATE INDEX IF NOT EXISTS idx_chat_messages_donation_id ON public.chat_messages (donation_id);
+CREATE INDEX IF NOT EXISTS idx_chat_messages_created_at ON public.chat_messages (created_at ASC);
+
 -- Enable Row Level Security (RLS) policies
 ALTER TABLE public.donations ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.contacts ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.visits ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.chat_messages ENABLE ROW LEVEL SECURITY;
 
 -- Allow service role full access (Backend Node Express server uses service role key)
 CREATE POLICY "Service Role Full Access on Donations" ON public.donations
@@ -63,6 +80,10 @@ CREATE POLICY "Service Role Full Access on Contacts" ON public.contacts
 
 CREATE POLICY "Service Role Full Access on Visits" ON public.visits
     FOR ALL USING (auth.role() = 'service_role' OR auth.role() = 'anon');
+
+CREATE POLICY "Service Role Full Access on Chat Messages" ON public.chat_messages
+    FOR ALL USING (auth.role() = 'service_role' OR auth.role() = 'anon');
+
 
 -- ==============================================================================
 -- 4. ADMIN PROFILES & ROLES TABLE

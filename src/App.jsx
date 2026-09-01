@@ -15,6 +15,7 @@ import About from "./pages/About";
 import Impact from "./pages/Impact";
 import Donate from "./pages/Donate";
 import Contact from "./pages/Contact";
+import LiveChat from "./pages/LiveChat";
 
 import { AdminAuthProvider } from "./admin/context/AdminAuthContext";
 import AdminLayout from "./admin/AdminLayout";
@@ -65,6 +66,9 @@ function App() {
         <BrowserRouter>
           <ScrollAndAOSRefresh />
           <Routes>
+            {/* ── Donor Live Chat Route ───────────────────── */}
+            <Route path="/chat" element={<LiveChat />} />
+
             {/* ── Admin Portal ─────────────────────────────── */}
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminLayout />}>
