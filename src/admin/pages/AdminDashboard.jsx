@@ -42,14 +42,16 @@ export default function AdminDashboard() {
       <div
         className="admin-card"
         style={{
-          background: 'linear-gradient(135deg, #1e7e34 0%, #145a25 100%)',
+          background: 'linear-gradient(135deg, rgba(20, 90, 37, 0.88) 0%, rgba(10, 38, 17, 0.94) 100%), url("/assets/children-community.jpg") center/cover no-repeat',
           border: 'none',
           padding: '24px',
           color: '#ffffff',
           display: 'flex',
           flexDirection: 'column',
           gap: '12px',
-          boxShadow: '0 8px 20px rgba(30, 126, 52, 0.25)',
+          boxShadow: '0 8px 24px rgba(20, 90, 37, 0.3)',
+          position: 'relative',
+          overflow: 'hidden',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
