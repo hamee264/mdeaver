@@ -136,6 +136,20 @@ export const fetchRecentDonations = async (limit = 10) => {
 export const fetchDonations = fetchRecentDonations;
 
 /**
+ * Fetch Single Donation Details by ID or Invoice Number
+ */
+export const fetchDonationById = async (donationId) => {
+  try {
+    const res = await fetch(`${API_BASE}/chat/${donationId}`);
+    const json = await parseJsonResponse(res);
+    if (json?.donation) return json.donation;
+    return json;
+  } catch (err) {
+    return null;
+  }
+};
+
+/**
  * Fetch Contact Form Messages
  */
 export const fetchContacts = async (limit = 20) => {

@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { fetchDonations, approveDonation, rejectDonation } from '../../services/api';
 import AdminChatModal from '../components/AdminChatModal';
+import AdminDonationDetailsModal from '../components/AdminDonationDetailsModal';
 
 export default function AdminDonations() {
   const [donations, setDonations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [actionLoadingId, setActionLoadingId] = useState(null);
   const [selectedChatDonation, setSelectedChatDonation] = useState(null);
+  const [selectedDetailDonation, setSelectedDetailDonation] = useState(null);
 
   const loadDonations = async () => {
     setLoading(true);
@@ -186,52 +190,176 @@ export default function AdminDonations() {
 
       {/* ── Filter Tabs & Search Bar ──────────────────────────────── */}
       <div className="admin-card" style={{ padding: '16px', background: '#ffffff', border: '1px solid #e2e8f0', display: 'flex', flexDirection: 'column', gap: '14px' }}>
-        {/* Status Tabs */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflowX: 'auto', paddingBottom: '4px' }}>
-          {[
-            { id: 'all', label: 'All Donations', count: donations.length, color: '#475569', bg: '#f1f5f9' },
-            { id: 'pending_approval', label: 'Pending Approval', count: pendingCount, color: '#d97706', bg: 'rgba(217, 119, 6, 0.12)' },
-            { id: 'approved', label: 'Approved', count: approvedCount, color: '#16a34a', bg: 'rgba(22, 163, 74, 0.12)' },
-            { id: 'rejected', label: 'Rejected', count: rejectedCount, color: '#dc2626', bg: 'rgba(239, 68, 68, 0.12)' },
-          ].map((tab) => {
-            const isActive = statusFilter === tab.id;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setStatusFilter(tab.id)}
-                style={{
-                  padding: '8px 14px',
-                  borderRadius: '10px',
-                  border: isActive ? `2px solid ${tab.color}` : '1px solid #e2e8f0',
-                  background: isActive ? tab.bg : '#ffffff',
-                  color: isActive ? tab.color : '#64748b',
-                  fontWeight: isActive ? 800 : 600,
-                  fontSize: '13px',
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  transition: 'all 0.2s ease',
-                }}
-              >
-                <span>{tab.label}</span>
-                <span
+        {/* Filter Options Array */}
+        {(() => {
+          const filterOptions = [
+            { id: 'all', label: 'All Donations', count: donations.length, color: '#475569', bg: '#f1f5f9', icon: 'fa-layer-group' },
+            { id: 'pending_approval', label: 'Pending Approval', count: pendingCount, color: '#d97706', bg: 'rgba(217, 119, 6, 0.12)', icon: 'fa-clock' },
+            { id: 'approved', label: 'Approved', count: approvedCount, color: '#16a34a', bg: 'rgba(22, 163, 74, 0.12)', icon: 'fa-circle-check' },
+            { id: 'rejected', label: 'Rejected', count: rejectedCount, color: '#dc2626', bg: 'rgba(239, 68, 68, 0.12)', icon: 'fa-circle-xmark' },
+          ];
+          const selectedOption = filterOptions.find((o) => o.id === statusFilter) || filterOptions[0];
+
+          return (
+            <>
+              {/* Desktop Status Tabs */}
+              <div className="admin-filter-tabs-desktop">
+                {filterOptions.map((tab) => {
+                  const isActive = statusFilter === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => setStatusFilter(tab.id)}
+                      style={{
+                        padding: '8px 14px',
+                        borderRadius: '10px',
+                        border: isActive ? `2px solid ${tab.color}` : '1px solid #e2e8f0',
+                        background: isActive ? tab.bg : '#ffffff',
+                        color: isActive ? tab.color : '#64748b',
+                        fontWeight: isActive ? 800 : 600,
+                        fontSize: '13px',
+                        cursor: 'pointer',
+                        whiteSpace: 'nowrap',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      <span>{tab.label}</span>
+                      <span
+                        style={{
+                          fontSize: '11px',
+                          padding: '1px 7px',
+                          borderRadius: '12px',
+                          background: isActive ? tab.color : '#e2e8f0',
+                          color: isActive ? '#ffffff' : '#475569',
+                          fontWeight: 800,
+                        }}
+                      >
+                        {tab.count}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Mobile Custom Dropdown Component */}
+              <div className="admin-filter-dropdown-mobile">
+                <button
+                  type="button"
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
                   style={{
-                    fontSize: '11px',
-                    padding: '1px 7px',
+                    width: '100%',
+                    padding: '10px 14px',
                     borderRadius: '12px',
-                    background: isActive ? tab.color : '#e2e8f0',
-                    color: isActive ? '#ffffff' : '#475569',
+                    border: `2px solid ${selectedOption.color}`,
+                    background: selectedOption.bg,
+                    color: selectedOption.color,
                     fontWeight: 800,
+                    fontSize: '13px',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
                   }}
                 >
-                  {tab.count}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <i className={`fa-solid ${selectedOption.icon}`}></i>
+                    <span>{selectedOption.label}</span>
+                    <span
+                      style={{
+                        fontSize: '11px',
+                        padding: '2px 8px',
+                        borderRadius: '12px',
+                        background: selectedOption.color,
+                        color: '#ffffff',
+                        fontWeight: 800,
+                      }}
+                    >
+                      {selectedOption.count}
+                    </span>
+                  </div>
+                  <i
+                    className="fa-solid fa-chevron-down"
+                    style={{ transition: 'transform 0.2s ease', transform: dropdownOpen ? 'rotate(180deg)' : 'none' }}
+                  ></i>
+                </button>
+
+                {dropdownOpen && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '100%',
+                      left: 0,
+                      right: 0,
+                      marginTop: '6px',
+                      background: '#ffffff',
+                      border: '1px solid #e2e8f0',
+                      borderRadius: '14px',
+                      boxShadow: '0 12px 32px rgba(15, 23, 42, 0.15)',
+                      padding: '6px',
+                      zIndex: 50,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '4px',
+                    }}
+                  >
+                    {filterOptions.map((opt) => {
+                      const isSel = statusFilter === opt.id;
+                      return (
+                        <button
+                          key={opt.id}
+                          type="button"
+                          onClick={() => {
+                            setStatusFilter(opt.id);
+                            setDropdownOpen(false);
+                          }}
+                          style={{
+                            padding: '10px 14px',
+                            borderRadius: '10px',
+                            border: 'none',
+                            background: isSel ? opt.bg : 'transparent',
+                            color: isSel ? opt.color : '#334155',
+                            fontWeight: isSel ? 800 : 600,
+                            fontSize: '13px',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            width: '100%',
+                            textAlign: 'left',
+                          }}
+                        >
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <i className={`fa-solid ${opt.icon}`} style={{ color: opt.color }}></i>
+                            <span>{opt.label}</span>
+                          </div>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span
+                              style={{
+                                fontSize: '11px',
+                                padding: '2px 8px',
+                                borderRadius: '12px',
+                                background: isSel ? opt.color : '#e2e8f0',
+                                color: isSel ? '#ffffff' : '#475569',
+                                fontWeight: 800,
+                              }}
+                            >
+                              {opt.count}
+                            </span>
+                            {isSel && <i className="fa-solid fa-check" style={{ fontSize: '12px', color: opt.color }}></i>}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </>
+          );
+        })()}
 
         {/* Search Input */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', background: '#f8fafc', padding: '10px 14px', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
@@ -353,10 +481,32 @@ export default function AdminDonations() {
                     color: '#64748b',
                   }}
                 >
-                  <span>
-                    <i className="fa-solid fa-credit-card" style={{ marginRight: '6px' }}></i>
-                    {item.payment_method || item.paymentMethod || 'Credit / Debit Card'}
-                  </span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <span>
+                      <i className="fa-solid fa-credit-card" style={{ marginRight: '6px' }}></i>
+                      {item.payment_method || item.paymentMethod || 'Credit / Debit Card'}
+                    </span>
+                    <button
+                      onClick={() => setSelectedDetailDonation(item)}
+                      style={{
+                        background: '#f1f5f9',
+                        border: '1px solid #cbd5e1',
+                        borderRadius: '6px',
+                        padding: '3px 8px',
+                        fontSize: '11px',
+                        fontWeight: 700,
+                        color: '#334155',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                      }}
+                      title="View all input fields submitted by donor"
+                    >
+                      <i className="fa-solid fa-eye"></i>
+                      <span>Full Inputs</span>
+                    </button>
+                  </div>
 
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                     {isPending && (
@@ -494,6 +644,16 @@ export default function AdminDonations() {
         <AdminChatModal
           donation={selectedChatDonation}
           onClose={() => setSelectedChatDonation(null)}
+        />
+      )}
+
+      {/* Admin Donation Details Modal */}
+      {selectedDetailDonation && (
+        <AdminDonationDetailsModal
+          donation={selectedDetailDonation}
+          onClose={() => setSelectedDetailDonation(null)}
+          onRefresh={loadDonations}
+          onOpenChat={(d) => setSelectedChatDonation(d)}
         />
       )}
     </div>

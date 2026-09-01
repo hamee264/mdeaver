@@ -21,6 +21,7 @@ import { AdminAuthProvider } from "./admin/context/AdminAuthContext";
 import AdminLayout from "./admin/AdminLayout";
 import AdminDashboard from "./admin/pages/AdminDashboard";
 import AdminDonations from "./admin/pages/AdminDonations";
+import AdminDonationDetails from "./admin/pages/AdminDonationDetails";
 import AdminContacts from "./admin/pages/AdminContacts";
 import AdminVisits from "./admin/pages/AdminVisits";
 import AdminAuditLogs from "./admin/pages/AdminAuditLogs";
@@ -74,6 +75,7 @@ function App() {
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
               <Route path="donations" element={<AdminDonations />} />
+              <Route path="donations/:id" element={<AdminDonationDetails />} />
               <Route path="contacts" element={<AdminContacts />} />
               <Route path="visits" element={<AdminVisits />} />
               <Route path="logs" element={<AdminAuditLogs />} />

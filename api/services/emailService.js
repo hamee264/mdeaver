@@ -49,9 +49,7 @@ const sendEmail = async ({ to, subject, html }) => {
   try {
     // 1. Try Resend if live key provided
     if (resend) {
-      const fromAddress = FROM_EMAIL.includes('@mdeavercharity.org') 
-        ? 'onboarding@resend.dev' 
-        : FROM_EMAIL;
+      const fromAddress = FROM_EMAIL || 'Mdeaver Charity Foundation <onboarding@resend.dev>';
       const data = await resend.emails.send({
         from: fromAddress,
         to,

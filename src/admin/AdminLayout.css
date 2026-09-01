@@ -297,3 +297,28 @@ body:has(.admin-shell) {
   border-color: rgba(22, 163, 74, 0.3);
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
 }
+
+/* ── Admin Filter Responsive Controls ─────────────────── */
+.admin-filter-tabs-desktop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.admin-filter-dropdown-mobile {
+  display: none;
+  position: relative;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .admin-filter-tabs-desktop {
+    display: none !important;
+  }
+  .admin-filter-dropdown-mobile {
+    display: block !important;
+  }
+}
+

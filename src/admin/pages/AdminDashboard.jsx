@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { fetchStats, fetchDonations, fetchContacts } from '../../services/api';
 
 export default function AdminDashboard() {
@@ -150,7 +151,21 @@ export default function AdminDashboard() {
         <div className="admin-card">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
             <h3 style={{ fontSize: '16px', fontWeight: 700, margin: 0, color: '#0f172a' }}>Recent Contributions</h3>
-            <span style={{ fontSize: '12px', color: 'var(--admin-emerald-bright)', fontWeight: 600 }}>View All</span>
+            <Link
+              to="/admin/donations"
+              style={{
+                fontSize: '12px',
+                color: 'var(--admin-emerald-bright)',
+                fontWeight: 600,
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+                cursor: 'pointer',
+              }}
+            >
+              View All <i className="fa-solid fa-arrow-right" style={{ fontSize: '10px' }}></i>
+            </Link>
           </div>
 
           {loading ? (
@@ -196,7 +211,21 @@ export default function AdminDashboard() {
         <div className="admin-card">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
             <h3 style={{ fontSize: '16px', fontWeight: 700, margin: 0, color: '#0f172a' }}>Recent Contact Messages</h3>
-            <span style={{ fontSize: '12px', color: '#2563eb', fontWeight: 600 }}>View Inbox</span>
+            <Link
+              to="/admin/contacts"
+              style={{
+                fontSize: '12px',
+                color: '#2563eb',
+                fontWeight: 600,
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+                cursor: 'pointer',
+              }}
+            >
+              View Inbox <i className="fa-solid fa-arrow-right" style={{ fontSize: '10px' }}></i>
+            </Link>
           </div>
 
           {loading ? (
