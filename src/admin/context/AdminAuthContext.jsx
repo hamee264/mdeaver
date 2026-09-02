@@ -13,6 +13,7 @@ const DEFAULT_PASSWORD = 'Admin@2024';
 const ALLOWED_EMAILS = [
   'sefngbusiness@gmail.com',
   'admin@mdeavercharity.org',
+  'mdeavercharityfoundation@outlook.com',
 ];
 
 function getStoredPassword() {
