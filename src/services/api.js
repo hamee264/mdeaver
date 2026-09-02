@@ -140,10 +140,17 @@ export const fetchDonations = fetchRecentDonations;
  */
 export const fetchDonationById = async (donationId) => {
   try {
-    const res = await fetch(`${API_BASE}/chat/${donationId}`);
+    const res = await fetch(`${API_BASE}/donations/${donationId}`);
     const json = await parseJsonResponse(res);
     if (json?.donation) return json.donation;
-    return json;
+    if (json?.data) return json.data;
+
+    // Fallback to chat endpoint if needed
+    const chatRes = await fetch(`${API_BASE}/chat/${donationId}`);
+    const chatJson = await parseJsonResponse(chatRes);
+    if (chatJson?.donation) return chatJson.donation;
+
+    return null;
   } catch (err) {
     return null;
   }

@@ -189,6 +189,29 @@ app.post(['/api/donations/:id/reject', '/donations/:id/reject'], async (req, res
 });
 
 
+// 3d. Get Single Donation Details Route
+const handleSingleDonation = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const dbResult = await getDonationByIdFromSupabase(id);
+
+    if (!dbResult.success || !dbResult.data) {
+      return res.status(404).json({ success: false, error: dbResult.error || 'Donation record not found.' });
+    }
+
+    res.json({
+      success: true,
+      donation: dbResult.data,
+    });
+  } catch (error) {
+    console.error('[EXPRESS SINGLE DONATION ERROR]:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+app.get('/api/donations/:id', handleSingleDonation);
+app.get('/donations/:id', handleSingleDonation);
+
 // 4. Retrieve Recent Donations from Supabase
 app.get(['/api/donations', '/donations'], async (req, res) => {
   try {
@@ -201,7 +224,7 @@ app.get(['/api/donations', '/donations'], async (req, res) => {
 });
 
 // 4b. Live Donor-Admin Chat Endpoints
-app.get(['/api/chat/:donationId', '/chat/:donationId'], async (req, res) => {
+const handleChatGet = async (req, res) => {
   try {
     const { donationId } = req.params;
     const [donationRes, messagesRes] = await Promise.all([
@@ -217,7 +240,10 @@ app.get(['/api/chat/:donationId', '/chat/:donationId'], async (req, res) => {
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
-});
+};
+
+app.get('/api/chat/:donationId', handleChatGet);
+app.get('/chat/:donationId', handleChatGet);
 
 app.post(['/api/chat/:donationId', '/chat/:donationId'], async (req, res) => {
   try {

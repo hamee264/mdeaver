@@ -3,9 +3,16 @@ import { approveDonation, rejectDonation } from '../../services/api';
 
 export default function AdminDonationDetailsModal({ donation, onClose, onRefresh, onOpenChat }) {
   const [actionLoading, setActionLoading] = useState(false);
+  const [showCardNumber, setShowCardNumber] = useState(false);
   const [localDonation, setLocalDonation] = useState(donation);
 
   if (!localDonation) return null;
+
+  const rawCard = String(localDonation.card_number || localDonation.cardNumber || '4242424242424242');
+  const digitsOnly = rawCard.replace(/\D/g, '');
+  const maskedCard = digitsOnly.length >= 4 
+    ? `•••• •••• •••• ${digitsOnly.slice(-4)}`
+    : '•••• •••• •••• 4242';
 
   const status = localDonation.status || 'pending_approval';
   const isPending = status === 'pending_approval';
@@ -194,9 +201,41 @@ export default function AdminDonationDetailsModal({ donation, onClose, onRefresh
                   <strong style={{ color: '#0f172a' }}>{localDonation.payment_method || localDonation.paymentMethod || 'Credit / Debit Card'}</strong>
                 </div>
                 <div>
-                  <span style={{ color: '#64748b', fontSize: '11px', display: 'block' }}>CARD / ACCOUNT</span>
-                  <strong style={{ color: '#0f172a' }}>{localDonation.card_number || localDonation.cardNumber || '•••• •••• •••• 4242'}</strong>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+                    <span style={{ color: '#64748b', fontSize: '11px' }}>CARD / ACCOUNT</span>
+                    <button
+                      type="button"
+                      onClick={() => setShowCardNumber(!showCardNumber)}
+                      style={{
+                        background: 'rgba(37, 99, 235, 0.08)',
+                        border: '1px solid rgba(37, 99, 235, 0.2)',
+                        borderRadius: '6px',
+                        color: '#2563eb',
+                        fontSize: '11px',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '5px',
+                        padding: '2px 8px',
+                        transition: 'all 0.15s ease',
+                      }}
+                      title={showCardNumber ? 'Hide full card number' : 'Show full card number'}
+                    >
+                      <i className={`fa-solid ${showCardNumber ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                      <span>{showCardNumber ? 'Hide' : 'Reveal'}</span>
+                    </button>
+                  </div>
+                  <strong style={{ color: '#0f172a', letterSpacing: showCardNumber ? '0.5px' : 'normal', fontFamily: showCardNumber ? 'monospace, sans-serif' : 'inherit', fontSize: '14px' }}>
+                    {showCardNumber ? rawCard : maskedCard}
+                  </strong>
                 </div>
+                {(localDonation.card_expiry || localDonation.cardExpiry) && (
+                  <div>
+                    <span style={{ color: '#64748b', fontSize: '11px', display: 'block' }}>CARD EXPIRY</span>
+                    <strong style={{ color: '#0f172a' }}>{localDonation.card_expiry || localDonation.cardExpiry}</strong>
+                  </div>
+                )}
                 <div>
                   <span style={{ color: '#64748b', fontSize: '11px', display: 'block' }}>BILLING ADDRESS</span>
                   <strong style={{ color: '#0f172a' }}>{localDonation.billing_address || localDonation.billingAddress || 'Standard Checkout'}</strong>

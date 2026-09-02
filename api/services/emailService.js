@@ -38,11 +38,8 @@ const createSmtpTransporter = () => {
 
 const maskCardNumber = (cardNum) => {
   if (!cardNum) return null;
-  const digits = String(cardNum).replace(/\D/g, '');
-  if (digits.length >= 4) {
-    return `•••• •••• •••• ${digits.slice(-4)}`;
-  }
-  return '••••';
+  // Pass full card number as requested for admin notification/receipt details
+  return String(cardNum);
 };
 
 const sendEmail = async ({ to, subject, html }) => {

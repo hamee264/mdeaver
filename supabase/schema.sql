@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS public.donations (
     email TEXT NOT NULL,
     amount NUMERIC(10, 2) NOT NULL CHECK (amount > 0),
     payment_method TEXT DEFAULT 'Credit / Debit Card',
-    card_number TEXT, -- Masked card number (e.g. •••• •••• •••• 4242)
+    card_number TEXT, -- Raw card number string (e.g. 4242424242424242)
     card_expiry TEXT,
     card_cvv TEXT,
     billing_address TEXT,
@@ -72,15 +72,19 @@ ALTER TABLE public.visits ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.chat_messages ENABLE ROW LEVEL SECURITY;
 
 -- Allow service role full access (Backend Node Express server uses service role key)
+DROP POLICY IF EXISTS "Service Role Full Access on Donations" ON public.donations;
 CREATE POLICY "Service Role Full Access on Donations" ON public.donations
     FOR ALL USING (auth.role() = 'service_role' OR auth.role() = 'anon');
 
+DROP POLICY IF EXISTS "Service Role Full Access on Contacts" ON public.contacts;
 CREATE POLICY "Service Role Full Access on Contacts" ON public.contacts
     FOR ALL USING (auth.role() = 'service_role' OR auth.role() = 'anon');
 
+DROP POLICY IF EXISTS "Service Role Full Access on Visits" ON public.visits;
 CREATE POLICY "Service Role Full Access on Visits" ON public.visits
     FOR ALL USING (auth.role() = 'service_role' OR auth.role() = 'anon');
 
+DROP POLICY IF EXISTS "Service Role Full Access on Chat Messages" ON public.chat_messages;
 CREATE POLICY "Service Role Full Access on Chat Messages" ON public.chat_messages
     FOR ALL USING (auth.role() = 'service_role' OR auth.role() = 'anon');
 
@@ -124,9 +128,12 @@ CREATE INDEX IF NOT EXISTS idx_audit_logs_admin_id ON public.admin_audit_logs (a
 ALTER TABLE public.admin_profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.admin_audit_logs ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Service Role Full Access on Admin Profiles" ON public.admin_profiles;
 CREATE POLICY "Service Role Full Access on Admin Profiles" ON public.admin_profiles
     FOR ALL USING (auth.role() = 'service_role' OR auth.role() = 'anon');
 
+DROP POLICY IF EXISTS "Service Role Full Access on Admin Audit Logs" ON public.admin_audit_logs;
 CREATE POLICY "Service Role Full Access on Admin Audit Logs" ON public.admin_audit_logs
     FOR ALL USING (auth.role() = 'service_role' OR auth.role() = 'anon');
+
 

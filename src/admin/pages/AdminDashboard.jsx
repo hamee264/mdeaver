@@ -178,31 +178,38 @@ export default function AdminDashboard() {
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {recentDonations.slice(0, 5).map((item, i) => (
-                <div
-                  key={i}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '10px 12px',
-                    borderRadius: '10px',
-                    background: '#f8fafc',
-                    border: '1px solid #e2e8f0',
-                  }}
-                >
-                  <div>
-                    <div style={{ fontSize: '14px', fontWeight: 700, color: '#0f172a' }}>{item.donor_name || item.donorName || 'Anonymous'}</div>
-                    <div style={{ fontSize: '11px', color: '#64748b' }}>{item.email}</div>
-                  </div>
-                  <div style={{ textAlign: 'right' }}>
-                    <div style={{ fontSize: '14px', fontWeight: 800, color: 'var(--admin-emerald-bright)' }}>
-                      +${item.amount}
+              {recentDonations.slice(0, 5).map((item, i) => {
+                const targetId = item.id || item.invoice_number || item.invoiceNumber;
+                return (
+                  <Link
+                    key={item.id || i}
+                    to={`/admin/donations/${targetId}`}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '10px 12px',
+                      borderRadius: '10px',
+                      background: '#f8fafc',
+                      border: '1px solid #e2e8f0',
+                      textDecoration: 'none',
+                      transition: 'all 0.15s ease',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <div>
+                      <div style={{ fontSize: '14px', fontWeight: 700, color: '#0f172a' }}>{item.donor_name || item.donorName || 'Anonymous'}</div>
+                      <div style={{ fontSize: '11px', color: '#64748b' }}>{item.email}</div>
                     </div>
-                    <div style={{ fontSize: '10px', color: '#64748b' }}>{item.payment_method || 'Card'}</div>
-                  </div>
-                </div>
-              ))}
+                    <div style={{ textAlign: 'right' }}>
+                      <div style={{ fontSize: '14px', fontWeight: 800, color: 'var(--admin-emerald-bright)' }}>
+                        +${item.amount}
+                      </div>
+                      <div style={{ fontSize: '10px', color: '#64748b' }}>{item.payment_method || 'Card'}</div>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           )}
         </div>

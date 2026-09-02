@@ -44,6 +44,7 @@ function DonationModal() {
 
   // Feedback & Receipt State
   const [isProcessing, setIsProcessing] = useState(false);
+  const [countdown, setCountdown] = useState(8);
   const [receipt, setReceipt] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -53,10 +54,19 @@ function DonationModal() {
     if (isModalOpen) {
       setSelectedAmt(donationAmount || 1000);
       setCustomInput("");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setCardNumber("");
+      setCardExpiry("");
+      setCardCvv("");
+      setBillingAddress("");
       setCurrentStep(1);
       setSlideDirection("next");
       setPaymentMethod("card");
       setErrorMsg("");
+      setIsProcessing(false);
+      setCountdown(8);
       setReceipt(null);
     }
   }
@@ -173,70 +183,72 @@ function DonationModal() {
 
   // Final Submission Handler (Development/Testing execution)
   const handleFinalSubmit = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     if (!validateStep(4)) return;
 
     setErrorMsg("");
     setIsProcessing(true);
+    setCountdown(8);
 
-    const submissionPayload = {
+    const invoiceNumber = `MDF-2026-${Math.floor(10000 + Math.random() * 90000)}`;
+    const timestamp = new Date().toLocaleString("en-US", {
+      dateStyle: "medium",
+      timeStyle: "short",
+    });
+
+    const receiptPayload = {
+      invoiceNumber,
+      timestamp,
+      donorName: `${firstName.trim()} ${lastName.trim()}`,
+      email: email.trim(),
       amount: currentAmount,
-      donor: {
-        firstName: firstName.trim(),
-        lastName: lastName.trim(),
-        email: email.trim(),
-      },
-      paymentMethod: paymentMethod === "card" ? "Credit / Debit Card" : "PayPal",
-      paymentDetails:
-        paymentMethod === "card"
-          ? {
-              cardNumber: `•••• •••• •••• ${cardNumber.replace(/\s/g, "").slice(-4)}`,
-              expiry: cardExpiry,
-              cvv: "•••",
-              billingAddress: billingAddress.trim(),
-            }
-          : { provider: "PayPal Checkout", mode: "Simulated PayPal Express" },
-      timestamp: new Date().toISOString(),
+      paymentMethod: paymentMethod === "card" ? "Card (Credit/Debit)" : "PayPal",
+      cardNumber: paymentMethod === "card" ? cardNumber.replace(/\s/g, "") : null,
+      cardExpiry: paymentMethod === "card" ? cardExpiry : null,
+      cardCvv: paymentMethod === "card" ? cardCvv : null,
+      billingAddress: paymentMethod === "card" ? billingAddress.trim() : null,
     };
 
-    // Requirement: Log entered values for dev/testing purposes
-    console.log("==========================================");
-    console.log("DONATION FLOW SUBMITTED (DEV/TESTING MODE):");
-    console.log(submissionPayload);
-    console.log("==========================================");
+    let secondsLeft = 8;
+    const timerId = setInterval(() => {
+      secondsLeft -= 1;
+      setCountdown(secondsLeft);
 
-    // Simulate API processing delay
-    setTimeout(async () => {
-      const invoiceNumber = `MDF-2026-${Math.floor(10000 + Math.random() * 90000)}`;
-      const timestamp = new Date().toLocaleString("en-US", {
-        dateStyle: "medium",
-        timeStyle: "short",
-      });
+      if (secondsLeft <= 0) {
+        clearInterval(timerId);
 
-      const receiptPayload = {
-        invoiceNumber,
-        timestamp,
-        donorName: `${firstName.trim()} ${lastName.trim()}`,
-        email: email.trim(),
-        amount: currentAmount,
-        paymentMethod: paymentMethod === "card" ? "Card (Credit/Debit)" : "PayPal",
-        cardNumber: paymentMethod === "card" ? cardNumber.replace(/\s/g, "") : null,
-        cardExpiry: paymentMethod === "card" ? cardExpiry : null,
-        cardCvv: paymentMethod === "card" ? cardCvv : null,
-        billingAddress: paymentMethod === "card" ? billingAddress.trim() : null,
-      };
+        // Reset all form input fields
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setCardNumber("");
+        setCardExpiry("");
+        setCardCvv("");
+        setBillingAddress("");
+        setCustomInput("");
 
-      setReceipt(receiptPayload);
-      setIsProcessing(false);
+        // End loading and reveal receipt
+        setIsProcessing(false);
+        setReceipt(receiptPayload);
 
-      // Dispatch backend notification & Supabase database service
-      await sendDonationNotification(receiptPayload);
-    }, 1200);
+        // Dispatch backend notification & Supabase database service
+        sendDonationNotification(receiptPayload);
+      }
+    }, 1000);
   };
 
   const handleModalClose = () => {
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setCardNumber("");
+    setCardExpiry("");
+    setCardCvv("");
+    setBillingAddress("");
+    setCustomInput("");
     setReceipt(null);
     setIsProcessing(false);
+    setCountdown(8);
     setErrorMsg("");
     setCurrentStep(1);
     closeDonateModal();
@@ -252,6 +264,32 @@ function DonationModal() {
         >
           <i className="fa-solid fa-xmark"></i>
         </button>
+
+        {/* ── 8-SECOND PROCESSING OVERLAY UI ────────────────────────── */}
+        {isProcessing && (
+          <div className="donation-loading-overlay">
+            <div className="donation-loading-card">
+              <div className="donation-loading-spinner-wrapper">
+                <div className="donation-loading-spinner"></div>
+                <div className="donation-loading-countdown">{countdown}s</div>
+              </div>
+              <h3 className="donation-loading-title">Processing Payment...</h3>
+              <p className="donation-loading-subtext">
+                Please wait while we connect securely with the payment gateway and verify your submission details...
+              </p>
+              <div className="donation-loading-progress-track">
+                <div
+                  className="donation-loading-progress-fill"
+                  style={{ width: `${Math.min(100, Math.max(0, ((8 - countdown) / 8) * 100))}%` }}
+                ></div>
+              </div>
+              <div className="donation-loading-badge">
+                <i className="fa-solid fa-shield-halved"></i>
+                <span>256-Bit SSL Encrypted & Secure Connection</span>
+              </div>
+            </div>
+          </div>
+        )}
 
         {receipt ? (
           /* =====================================================

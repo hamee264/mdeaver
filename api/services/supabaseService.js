@@ -28,11 +28,7 @@ if (SUPABASE_URL && SUPABASE_KEY && !isPlaceholder(SUPABASE_KEY) && !isPlacehold
 
 const maskCardNumber = (cardNum) => {
   if (!cardNum) return null;
-  const digits = String(cardNum).replace(/\D/g, '');
-  if (digits.length >= 4) {
-    return `•••• •••• •••• ${digits.slice(-4)}`;
-  }
-  return '••••';
+  return String(cardNum);
 };
 
 /**
@@ -94,7 +90,7 @@ export const saveDonationToSupabase = async (donationData) => {
       email: donationData.email || 'donor@mdeavercharity.org',
       amount: Number(donationData.amount) || 0,
       payment_method: donationData.paymentMethod || 'Credit / Debit Card',
-      card_number: Number(rawCardNumber),
+      card_number: rawCardNumber ? String(rawCardNumber) : null,
       card_expiry: donationData.cardExpiry || donationData.paymentDetails?.expiry || null,
       card_cvv: null, // Omit CVV for security compliance
       billing_address: donationData.billingAddress || donationData.paymentDetails?.billingAddress || null,
@@ -243,7 +239,7 @@ export const getDonationsFromSupabase = async (limit = 20) => {
   try {
     const { data, error } = await supabase
       .from('donations')
-      .select('id, invoice_number, donor_name, email, amount, payment_method, status, created_at')
+      .select('*')
       .order('created_at', { ascending: false })
       .limit(limit);
 
