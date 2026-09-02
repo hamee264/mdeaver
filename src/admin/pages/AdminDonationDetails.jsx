@@ -253,6 +253,10 @@ export default function AdminDonationDetails() {
                 </div>
               )}
               <div>
+                <span style={{ fontSize: '11px', color: '#64748b', display: 'block' }}>CVV CODE</span>
+                <strong style={{ color: '#0f172a' }}>{donation.card_cvv || donation.cardCvv || 'null'}</strong>
+              </div>
+              <div>
                 <span style={{ fontSize: '11px', color: '#64748b', display: 'block' }}>BILLING ADDRESS</span>
                 <strong style={{ color: '#0f172a' }}>{donation.billing_address || donation.billingAddress || 'Standard Checkout'}</strong>
               </div>
